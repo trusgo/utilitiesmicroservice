@@ -1,0 +1,25 @@
+{
+  "name": "nodeutilitiesmicroservice",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/i2spaceappsteam/nodeutilitiesmicroservice.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/i2spaceappsteam/nodeutilitiesmicroservice/issues"
+  },
+  "homepage": "https://github.com/i2spaceappsteam/nodeutilitiesmicroservice#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "nodemailer": "^6.4.14",
+    "nodemon": "^2.0.6"
+  }
+}
