@@ -1,4 +1,24 @@
 const nodemailer = require("nodemailer");
+const { cancelRequestTemplate } = require("../Templates/CancelRequest");
+const { changePasswordTemplate } = require("../Templates/Changepassword");
+const { changeTxnPasswordTemplate } = require("../Templates/ChangeTxnPassword");
+const { registerTemplate } = require("../Templates/RegisterTemplate");
+const {
+  feedbackAndComplaintsTemplate,
+} = require("../Templates/FeedbackandComplaints");
+const { flightSegmentTemplate } = require("../Templates/FlightSegment");
+const { flightTicketTemplate } = require("../Templates/FlightTicket");
+const { forgotPasswordTemplate } = require("../Templates/ForgotPassword");
+const {
+  groupEnquiryRequestTemplate,
+} = require("../Templates/GroupEnquiryRequest");
+const { hotelInoviceTemplate } = require("../Templates/HotelInovice");
+const { hotelRoomBookingTemplate } = require("../Templates/HotelRoomBooking");
+const { inoviceTemplate } = require("../Templates/Inovice");
+const { paymentCancelMailTemplate } = require("../Templates/PaymentCancelMail");
+const { printTicketTemplate } = require("../Templates/PrintTicket");
+const { ticketingSystemtemplate } = require("../Templates/TicketingSystem");
+const { userActivationTemplate } = require("../Templates/UserActivation");
 
 const transporter = nodemailer.createTransport({
   host: "smtp.gmail.com",
@@ -7,319 +27,209 @@ const transporter = nodemailer.createTransport({
   auth: {
     // user: "bookingsnotification@gmail.com",
     // pass: "Bookings@123",
-    user: "nikhilneo8@uiit.ac.in",
-    pass: "yoi.blendnk8",
+    user: process.env.TESTAUTH,
+    pass: process.env.TESTPASS,
   },
 });
 
-const sendMail = async (req, res) => {
+const from = "bookingsnotification@gmail.com";
+
+const sendEmail = async (req, res, to, subject, html) => {
   try {
     const mailOptions = {
-      from: "bookingsnotification@gmail.com",
-      to: req.body.reciever,
-      subject: req.body.subject,
-      text: req.body.message,
-      html: `<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-      <html xmlns="http://www.w3.org/1999/xhtml">
-      <head>
-          <title></title>
-      </head>
-      <body>
-          <table align="center" style="border-collapse:collapse;border:1px solid #d7dadb;width:90%">
-              <tr>
-                  <td>
-                      <table style="width:100%;border-collapse:collapse;border:0;border-bottom:1px solid #D7DADB;" border="1">
-                          <tr>
-                              <td style="text-align:left;border:0;padding: 10px">
-                                  <b>
-                                      Invoice No:
-                                  </b>
-                              </td>
-                              <td style="text-align:left;border:0;">
-                                  <invoicenumber />
-                              </td>
-                              <td style="text-align:left;border:0;">
-                                  <b>
-                                      Invoice Date:
-      
-                                  </b>
-                              </td>
-                              <td style="text-align:left;border:0;">
-                                  <userinvoicedate />
-                              </td>
-                              <td style="text-align:left;border:0;">
-                                  <b>
-                                      PNR:${req.body.html}
-                                  </b>
-                              </td>
-                              <td style="text-align:left;border:0;">
-                                  <pnr />
-                                  
-                                  <b><bookingStatus /></b>
-                                  
-                              </td>
-                          </tr>
-                      </table>
-                  </td>
-              </tr>
-              <tr style="padding:0px;margin:0px">
-                  <td style="padding:10px;margin:0px">
-                      <table style="width:100%;margin:0;padding:0;">
-                          <tr>
-                              <td style="padding: 0;margin: 0;float: left; text-align: left;">
-                                  <p style="font-weight: bold;line-height: 24px;padding: 0;margin: 0;">
-                                      <parentname /> <br />
-                                      <parentaddress /><br />
-                                      Mobile:<parentISD /> <parentmobile /><br />
-                                      Email: <parentemail /><br />
-                                  </p>
-      
-                              </td>
-                              <td align="right">
-                                  <p style="font-weight: bold;line-height: 24px;padding: 0;margin: 0;">
-                                      <psaname /><br />
-                                      <address /><br />
-                                      Mobile: <psaISD /> <mobile /><br />
-                                      Email: <email /><br />
-                                  </p>
-                              </td>
-                          </tr>
-                      </table>
-                  </td>
-              </tr>
-              <tr style="padding:0px;margin:0px">
-                  <td style="padding:10px;margin:0px">
-                      <table align="center" cellspacing="1" style="width:100%;border:1px solid #D7DADB;border-collapse:collapse" border="1">
-                          <tr bgcolor="#c6e9fd">
-                              <th bgcolor="#cce6ff" style="border:1px solid #D7DADB;font-size:14px;font-family:Corbel;">Ticket No</th>
-                              <th bgcolor="#cce6ff" style="border:1px solid #D7DADB;font-size:14px;font-family:Corbel;">Sectors</th>
-                              <th bgcolor="#cce6ff" style="border:1px solid #D7DADB;font-size:14px;font-family:Corbel;">Bus</th>
-                              <th bgcolor="#cce6ff" style="border:1px solid #D7DADB;font-size:14px;font-family:Corbel;">Pax Name</th>
-                              <th bgcolor="#cce6ff" style="border:1px solid #D7DADB;font-size:14px;font-family:Corbel;">Fare</th>
-                              <th bgcolor="#cce6ff" style="border:1px solid #D7DADB;font-size:14px;font-family:Corbel;">Tax</th>
-                              <th bgcolor="#cce6ff" style="border:1px solid #D7DADB;font-size:14px;font-family:Corbel">Service.Ch</th>
-                          </tr>
-                          <tr>
-                              <td style="border:1px solid #D7DADB" align="center">
-                                  <ticketnumber />
-                              </td>
-                              <td style="border:1px solid #D7DADB" align="center">
-                                  <sources />
-                                  -
-                                  <destination />
-                              </td>
-                              <td style="border:1px solid #D7DADB" align="center">
-                                  <opname />
-                              </td>
-                              <td style="border:1px solid #D7DADB" align="center">
-                                  <paxname />
-                              </td>
-                              <td style="border:1px solid #D7DADB" align="center">
-                                  <actualfare />
-                              </td>
-                              <td style="border:1px solid #D7DADB" align="center">
-                                  <tax />
-                              </td>
-                              <td style="border:1px solid #D7DADB" align="center">
-                                  <invoicetaxes />
-                              </td>
-                              
-                          </tr>
-                      </table>
-                  </td>
-              </tr>
-              <tr style="padding:0px;margin:0px">
-                  <td style="padding:10px;margin:0px">
-                      <table align="center" cellspacing="1" style="width:100%">
-                          <tr>
-                              <td width="55%" align="left" style="padding-top:0px">
-                                  <b style="font-family:Corbel;font-size:13px">
-      
-                                      Note:  * Voidation and refund as per fare rules
-                                  </b>
-                              </td>
-                              <td width="35%" align="right">
-                                  <table style="background-color:#cce6ff; width:100%">
-                                      <tr>
-                                          <td width="30%"></td>
-                                          <td width="30%" align="left">
-                                              <b style="font-family:Corbel;font-size:13px">
-                                                  Gross:
-                                              </b>
-                                          </td>
-                                          <td width="30%" align="right">
-                                              <netfare />
-                                          </td>
-                                      </tr>
-                                  </table>
-                                  <table style="background-color:#cce6ff; width:100%">
-                                      <agentBreakUp />
-                                  </table>
-                              </td>
-                          </tr>
-                      </table>
-                  </td>
-              </tr>
-              <tr style="padding:0px;margin:0px">
-                  <td style="padding:10px;margin:0px">
-                      <table align="center" cellspacing="1" style="width:100%;">
-      
-                          <tr>
-                              <td>
-                                  <h4 style="font-family:Corbel;font-size:15px">
-                                      GST Details:
-                                  </h4>
-                              </td>
-      
-                          </tr>
-                      </table>
-                      <table align="center" cellspacing="1" style="width:100%;border:1px solid #D7DADB;border-collapse:collapse" border="1">
-                          <tr>
-                              <th bgcolor="#cce6ff" style="border:1px solid #D7DADB;font-size:14px;font-family:Corbel;">
-                                  Service Description
-                              </th>
-                              <th bgcolor="#cce6ff" style="border:1px solid #D7DADB;font-size:14px;font-family:Corbel;">
-                                  SAC
-                              </th>
-                              <th bgcolor="#cce6ff" style="border:1px solid #D7DADB;font-size:14px;font-family:Corbel;">
-                                  Taxable Value
-                              </th>
-                              <th bgcolor="#cce6ff" style="border:1px solid #D7DADB;font-size:14px;font-family:Corbel;">
-                                  CGST@
-                              </th>
-                              <th bgcolor="#cce6ff" style="border:1px solid #D7DADB;font-size:14px;font-family:Corbel;">
-                                  SGST@
-                              </th>
-                              <th bgcolor="#cce6ff" style="border:1px solid #D7DADB;font-size:14px;font-family:Corbel;">
-                                  IGST@
-                              </th>
-                              <th bgcolor="#cce6ff" style="border:1px solid #D7DADB;font-size:14px;font-family:Corbel;">
-                                  Total
-                              </th>
-                          </tr>
-                          <tr>
-                              <td style="border:1px solid #D7DADB" align="center">
-                                  Transaction Fees
-                              </td>
-                              <td style="border:1px solid #D7DADB" align="center">
-                                  0
-                              </td>
-                              <td style="border:1px solid #D7DADB" align="center">
-                                  0
-                              </td>
-                              <td style="border:1px solid #D7DADB" align="center">
-                                  0
-                              </td>
-                              <td style="border:1px solid #D7DADB" align="center">
-                                  0
-                              </td>
-                              <td style="border:1px solid #D7DADB" align="center">
-                                  0
-                              </td>
-                              <td style="border:1px solid #D7DADB" align="center">
-                                  0
-                              </td>
-                          </tr>
-      
-                      </table>
-                  </td>
-              </tr>
-              <tr style="padding:0px;margin:0px">
-                  <td style="padding:10px;margin:0px">
-                      <table style="width: 100%;float: left;text-align: left;padding:0px;margin:0px;">
-                          <tr>
-                              <td colspan="2">
-                                  <h4 style="color:Red;font-family:Corbel;padding:0px;margin:0px;">
-                                      Terms and Conditions:
-                                  </h4>
-                              </td>
-                          </tr>
-                          <tr>
-                              <td>
-                                  <b style="font-family:Corbel;font-size:13px;padding:0px;margin:0px;">
-                                      *IMP:
-                                  </b>
-                              </td>
-                              <td>
-                                  <i style="font-family:Corbel;font-size:13px;padding:0px;margin:0px;">
-                                      All Cases & Disputes are subject to India Jurisdiction.
-                                  </i>
-                              </td>
-                          </tr>
-                          <tr>
-                              <td>
-                                  <b style="font-family:Corbel;font-size:13px;padding:0px;margin:0px;">
-                                      *IMP:
-                                  </b>
-                              </td>
-                              <td>
-                                  <i style="font-family:Corbel;font-size:13px;padding:0px;margin:0px;">
-                                      Refunds & Cancellations are subject to Bus provider approval.
-                                  </i>
-                              </td>
-                          </tr>
-                          <tr>
-                              <td>
-                                  <b style="font-family:Corbel;font-size:13px;padding:0px;margin:0px;">
-                                      *IMP:
-                                  </b>
-                              </td>
-                              <td>
-                                  <i style="font-family:Corbel;font-size:13px;padding:0px;margin:0px;">
-                                      Service charges as included above are to be collected from the customers on our behalf.
-                                  </i>
-                              </td>
-                          </tr>
-                          <tr>
-                              <td>
-                                  <b style="font-family:Corbel;font-size:13px;padding:0px;margin:0px;">
-                                      CHEQUE:
-                                  </b>
-                              </td>
-                              <td>
-                                  <i style="font-family:Corbel;font-size:13px;padding:0px;margin:0px;">
-                                      Must be drawn in favour of '<siteAdmin />'.
-                                  </i>
-                              </td>
-                          </tr>
-                          <tr>
-                              <td>
-                                  <b style="font-family:Corbel;font-size:13px;padding:0px;margin:0px;">
-                                      LATE PAYMENT:
-                                  </b>
-                              </td>
-                              <td>
-                                  <i style="font-family:Corbel;font-size:13px;padding:0px;margin:0px;">
-                                      Interest @ 24% per annum will be charged on all outstanding bills after due date.
-                                  </i>
-                              </td>
-                          </tr>
-                          <tr>
-                              <td>
-                                  <b style="font-family:Corbel;font-size:13px;padding:0px;margin:0px;">
-                                      VERY IMP:
-                                  </b>
-                              </td>
-                              <td>
-                                  <i style="font-family:Corbel;font-size:13px;padding:0px;margin:0px;">
-                                      Kindly check all details carefully to avoid unnecessary complications.
-                                  </i>
-                              </td>
-                          </tr>
-                      </table>
-                  </td>
-              </tr>
-          </table>
-      </body>
-      </html>`,
+      from: from,
+      to: to,
+      subject: subject,
+      html: html,
     };
-
     const response = await transporter.sendMail(mailOptions);
-    console.log("response->", response);
+    res.status(200).send(response);
   } catch (error) {
     console.log(error.message);
     res.status(400).send("Something went wrong !");
   }
 };
 
-module.exports = { sendMail };
+const registerMail = async (req, res) => {
+  sendEmail(
+    req,
+    res,
+    req.body.to,
+    req.body.subject,
+    registerTemplate(req.body)
+  );
+};
+
+const busInovice = async (req, res) => {
+  sendEmail(req, res, req.body.to, req.body.subject, busInovice());
+};
+
+const cancelRequest = async (req, res) => {
+  sendEmail(
+    req,
+    res,
+    req.body.to,
+    req.body.subject,
+    cancelRequestTemplate(req.body)
+  );
+};
+const cancelRequestRefNo = async (req, res) => {
+  sendEmail(
+    req,
+    res,
+    req.body.to,
+    req.body.subject,
+    cancelRequestrefNoTemplate(req.body)
+  );
+};
+const cancelTicket = async (req, res) => {
+  sendEmail(
+    req,
+    res,
+    req.body.to,
+    req.body.subject,
+    cancelTicketTemplate(req.body)
+  );
+};
+const changePassword = async (req, res) => {
+  sendEmail(
+    req,
+    res,
+    req.body.to,
+    req.body.subject,
+    changePasswordTemplate(req.body)
+  );
+};
+const changeTxnPassword = async (req, res) => {
+  sendEmail(
+    req,
+    res,
+    req.body.to,
+    req.body.subject,
+    changeTxnPasswordTemplate(req.body)
+  );
+};
+const feedbackAndComplain = async (req, res) => {
+  sendEmail(
+    req,
+    res,
+    req.body.to,
+    req.body.subject,
+    feedbackAndComplaintsTemplate(req.body)
+  );
+};
+const flightSegment = async (req, res) => {
+  sendEmail(
+    req,
+    res,
+    req.body.to,
+    req.body.subject,
+    flightSegmentTemplate(req.body)
+  );
+};
+const flightTicket = async (req, res) => {
+  sendEmail(
+    req,
+    res,
+    req.body.to,
+    req.body.subject,
+    flightTicketTemplate(req.body)
+  );
+};
+const forgotPassword = async (req, res) => {
+  sendEmail(
+    req,
+    res,
+    req.body.to,
+    req.body.subject,
+    forgotPasswordTemplate(req.body)
+  );
+};
+const groupEnquiryRequest = async (req, res) => {
+  sendEmail(
+    req,
+    res,
+    req.body.to,
+    req.body.subject,
+    groupEnquiryRequestTemplate(req.body)
+  );
+};
+const hotelInovice = async (req, res) => {
+  sendEmail(
+    req,
+    res,
+    req.body.to,
+    req.body.subject,
+    hotelInoviceTemplate(req.body)
+  );
+};
+const hotelRoomBooking = async (req, res) => {
+  sendEmail(
+    req,
+    res,
+    req.body.to,
+    req.body.subject,
+    hotelRoomBookingTemplate(req.body)
+  );
+};
+const inovice = async (req, res) => {
+  sendEmail(req, res, req.body.to, req.body.subject, inoviceTemplate(req.body));
+};
+const paymentCancelMail = async (req, res) => {
+  sendEmail(
+    req,
+    res,
+    req.body.to,
+    req.body.subject,
+    paymentCancelMailTemplate(req.body)
+  );
+};
+const printTicket = async (req, res) => {
+  sendEmail(
+    req,
+    res,
+    req.body.to,
+    req.body.subject,
+    printTicketTemplate(req.body)
+  );
+};
+const ticketingSystem = async (req, res) => {
+  sendEmail(
+    req,
+    res,
+    req.body.to,
+    req.body.subject,
+    ticketingSystemtemplate(req.body)
+  );
+};
+const userActivation = async (req, res) => {
+  sendEmail(
+    req,
+    res,
+    req.body.to,
+    req.body.subject,
+    userActivationTemplate(req.body)
+  );
+};
+
+module.exports = {
+  registerMail,
+  busInovice,
+  cancelRequest,
+  cancelRequestRefNo,
+  cancelTicket,
+  changePassword,
+  changeTxnPassword,
+  feedbackAndComplain,
+  flightSegment,
+  flightTicket,
+  forgotPassword,
+  groupEnquiryRequest,
+  hotelInovice,
+  hotelRoomBooking,
+  inovice,
+  paymentCancelMail,
+  printTicket,
+  ticketingSystem,
+  userActivation,
+};
