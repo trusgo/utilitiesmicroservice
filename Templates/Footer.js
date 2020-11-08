@@ -1,6 +1,6 @@
 const footer = () => {
   let footerHtml = `this is footer content.`;
-  return footerHtml;
+  return footerHtml.toString();
 };
 
 module.exports = { footer };

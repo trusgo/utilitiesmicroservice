@@ -3,6 +3,7 @@ const { cancelRequestTemplate } = require("../Templates/CancelRequest");
 const { changePasswordTemplate } = require("../Templates/Changepassword");
 const { changeTxnPasswordTemplate } = require("../Templates/ChangeTxnPassword");
 const { registerTemplate } = require("../Templates/RegisterTemplate");
+const { AirTicketTemplate } = require("../Templates/AirTicket");
 const {
   feedbackAndComplaintsTemplate,
 } = require("../Templates/FeedbackandComplaints");
@@ -23,7 +24,7 @@ const { userActivationTemplate } = require("../Templates/UserActivation");
 const transporter = nodemailer.createTransport({
   host: "smtp.gmail.com",
   port: 587,
-  //   secure: true,
+  // secure: true,
   auth: {
     // user: "bookingsnotification@gmail.com",
     // pass: "Bookings@123",
@@ -43,11 +44,22 @@ const sendEmail = async (req, res, to, subject, html) => {
       html: html,
     };
     const response = await transporter.sendMail(mailOptions);
-    res.status(200).send(response);
+    console.log("sent mail");
+    res.json({ status: 200, message: "Sent" });
   } catch (error) {
     console.log(error.message);
-    res.status(400).send("Something went wrong !");
+    res.json({ status: 400, message: error.message });
   }
+};
+
+const AirTicketMail = async (req, res) => {
+  sendEmail(
+    req,
+    res,
+    req.body.to,
+    req.body.subject,
+    AirTicketTemplate(req.body)
+  );
 };
 
 const registerMail = async (req, res) => {
@@ -232,4 +244,5 @@ module.exports = {
   printTicket,
   ticketingSystem,
   userActivation,
+  AirTicketMail,
 };

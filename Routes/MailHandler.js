@@ -19,6 +19,7 @@ const {
   userActivation,
   cancelRequest,
   flightSegment,
+  AirTicketMail,
 } = require("../Controllers/MailHandlerControllers");
 const router = express.Router();
 
@@ -41,5 +42,6 @@ router.post("/paymentCancelMail", paymentCancelMail);
 router.post("/printTicket", printTicket);
 router.post("/ticketingSystem", ticketingSystem);
 router.post("/userActivation", userActivation);
+router.post("/airTicket", AirTicketMail);
 
 module.exports = router;
