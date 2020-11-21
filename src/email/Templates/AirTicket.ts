@@ -1,8 +1,11 @@
-const { footer } = require("./Footer");
-const { header } = require("./Header");
+//const { footer } = require("./Footer");
+//const { header } = require("./Header");
+import { Injectable } from '@nestjs/common'
 
-const AirTicketTemplate = () => {
-  return `${header()}
+@Injectable()
+export class AirTicket{
+ Template = () => {
+  return `
      <div
            style="
              border: 1px solid #d9d9d9;
@@ -153,7 +156,6 @@ const AirTicketTemplate = () => {
                <td style="text-align: right; padding: 10px">N/A</td>
              </tr>
            </table>
-         </div> ${footer()}`;
+         </div> `;
 };
-
-module.exports = { AirTicketTemplate };
+}

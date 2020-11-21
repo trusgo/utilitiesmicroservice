@@ -1,16 +1,15 @@
 import { Injectable, HttpStatus } from '@nestjs/common'
-import { ApiService } from 'src/_common/api.service'
+import  { AirTicket } from './Templates/AirTicket'
 
 @Injectable()
 export class EmailService {
-    private readonly apiService: ApiService
-    ) { }
+  constructor(private readonly airTicket: AirTicket){}
   
 
   async sendMail(keyword: string): Promise<any> {
     try {
-
-      return 'Helo!'
+      const result = this.airTicket.Template();
+      return result
     } catch (error) {
       return {
         statusCode: HttpStatus.INTERNAL_SERVER_ERROR,

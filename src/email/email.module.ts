@@ -1,6 +1,7 @@
 import { Module, HttpModule } from '@nestjs/common'
 import { EmailController } from './email.controller'
 import { EmailService } from './email.service'
+import { AirTicket } from './Templates/AirTicket'
 
 
 @Module({
@@ -10,10 +11,10 @@ import { EmailService } from './email.service'
         timeout: 50000,
         maxRedirects: 5
       })
-    }),
+    }),AirTicket
   ],
   controllers: [EmailController],
-  providers: [ EmailService]
+  providers: [ EmailService,AirTicket]
 })
 export class EmailModule { }
 
