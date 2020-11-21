@@ -1,25 +1,25 @@
 const nodemailer = require("nodemailer");
-const { cancelRequestTemplate } = require("../Templates/CancelRequest");
-const { changePasswordTemplate } = require("../Templates/Changepassword");
-const { changeTxnPasswordTemplate } = require("../Templates/ChangeTxnPassword");
-const { registerTemplate } = require("../Templates/RegisterTemplate");
-const { AirTicketTemplate } = require("../Templates/AirTicket");
+const { cancelRequestTemplate } = require("./Templates/CancelRequest");
+const { changePasswordTemplate } = require("./Templates/Changepassword");
+const { changeTxnPasswordTemplate } = require("./Templates/ChangeTxnPassword");
+const { registerTemplate } = require("./Templates/RegisterTemplate");
+const { AirTicketTemplate } = require("./Templates/AirTicket");
 const {
   feedbackAndComplaintsTemplate,
-} = require("../Templates/FeedbackandComplaints");
-const { flightSegmentTemplate } = require("../Templates/FlightSegment");
-const { flightTicketTemplate } = require("../Templates/FlightTicket");
-const { forgotPasswordTemplate } = require("../Templates/ForgotPassword");
+} = require("./Templates/FeedbackandComplaints");
+const { flightSegmentTemplate } = require("./Templates/FlightSegment");
+const { flightTicketTemplate } = require("./Templates/FlightTicket");
+const { forgotPasswordTemplate } = require("./Templates/ForgotPassword");
 const {
   groupEnquiryRequestTemplate,
-} = require("../Templates/GroupEnquiryRequest");
-const { hotelInoviceTemplate } = require("../Templates/HotelInovice");
-const { hotelRoomBookingTemplate } = require("../Templates/HotelRoomBooking");
-const { inoviceTemplate } = require("../Templates/Inovice");
-const { paymentCancelMailTemplate } = require("../Templates/PaymentCancelMail");
-const { printTicketTemplate } = require("../Templates/PrintTicket");
-const { ticketingSystemtemplate } = require("../Templates/TicketingSystem");
-const { userActivationTemplate } = require("../Templates/UserActivation");
+} = require("./Templates/GroupEnquiryRequest");
+const { hotelInoviceTemplate } = require("./Templates/HotelInovice");
+const { hotelRoomBookingTemplate } = require("./Templates/HotelRoomBooking");
+const { inoviceTemplate } = require("./Templates/Inovice");
+const { paymentCancelMailTemplate } = require("./Templates/PaymentCancelMail");
+const { printTicketTemplate } = require("./Templates/PrintTicket");
+const { ticketingSystemtemplate } = require("./Templates/TicketingSystem");
+const { userActivationTemplate } = require("./Templates/UserActivation");
 
 const transporter = nodemailer.createTransport({
   host: "smtp.gmail.com",
