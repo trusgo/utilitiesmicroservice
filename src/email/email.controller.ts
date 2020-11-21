@@ -12,7 +12,32 @@ export class EmailController {
 
     return await this.emailService.flightTicket(keyword)
   }
-  
+
+  @MessagePattern({ cmd: 'hotelTicket' })
+  async hotelTicket(keyword: string) {
+
+    return await this.emailService.hotelTicket(keyword)
+  }
+  @MessagePattern({ cmd: 'busTicket' })
+  async busTicket(keyword: string) {
+
+    return await this.emailService.busTicket(keyword)
+  }
+  @MessagePattern({ cmd: 'forgetPassword' })
+  async forgetPassword(keyword: string) {
+
+    return await this.emailService.forgetPassword(keyword)
+  }
+  @MessagePattern({ cmd: 'registration' })
+  async registration(keyword: string) {
+
+    return await this.emailService.registration(keyword)
+  }
+  @MessagePattern({ cmd: 'paymentInvoice' })
+  async paymentInvoice(keyword: string) {
+
+    return await this.emailService.paymentInvoice(keyword)
+  }
 
 
 }
