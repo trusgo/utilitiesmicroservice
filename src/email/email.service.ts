@@ -6,19 +6,14 @@ export class EmailService {
   constructor(private readonly airTicket: AirTicket){}
   
 
-  async sendMail(keyword: string): Promise<any> {
-    try {
+  async flightTicket(keyword: string): Promise<any> {
+  
       const result = this.airTicket.Template();
       return result
-    } catch (error) {
-      return {
-        statusCode: HttpStatus.INTERNAL_SERVER_ERROR,
-        message: error.message,
-        data: []
-      }
+    
     }
   } 
 
  
 
-}
+

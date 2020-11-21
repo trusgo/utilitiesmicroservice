@@ -7,10 +7,10 @@ export class EmailController {
   constructor(private readonly emailService: EmailService) { }
 
 
-  @MessagePattern({ cmd: 'sendMail' })
-  async sendMail(keyword: string) {
+  @MessagePattern({ cmd: 'flightTicket' })
+  async flightTicket(keyword: string) {
 
-    return await this.emailService.sendMail(keyword)
+    return await this.emailService.flightTicket(keyword)
   }
   
 
