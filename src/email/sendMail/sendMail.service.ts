@@ -1,13 +1,12 @@
-import { Injectable } from "@nestjs/common";
+import { Injectable } from '@nestjs/common';
 import { MailerService } from '@nestjs-modules/mailer';
 
 @Injectable()
 export class sendMailService {
-    constructor(
-            private readonly mailerService: MailerService){}
-sendEmail(to: string, subject: string, data: any){
-    try{ const mail = this
-        .mailerService
+  constructor(private readonly mailerService: MailerService) {}
+  sendEmail(to: string, subject: string, data: any) {
+    try {
+      const mail = this.mailerService
         .sendMail({
           to: to, // list of receivers
           from: 'trickytop945@gmail.com', // sender address
@@ -15,10 +14,11 @@ sendEmail(to: string, subject: string, data: any){
           text: '', // plaintext body
           html: data, // HTML body content
         })
-      }
-      catch(e){
-        console.log(e);
-        
-      }
-}
+        .then((res) => {
+          console.log('res', res);
+        });
+    } catch (e) {
+      console.log('sendMail error', e);
+    }
+  }
 }
