@@ -1,6 +1,7 @@
 import { Controller, Get } from '@nestjs/common'
 import { EmailService } from './email.service'
 import { MessagePattern } from '@nestjs/microservices'
+import { MailReq } from './dto/mailreq.dto'
 
 @Controller('email')
 export class EmailController {
@@ -8,35 +9,35 @@ export class EmailController {
 
 
   @MessagePattern({ cmd: 'flightTicket' })
-  async flightTicket(keyword: string) {
+  async flightTicket(reqBody: MailReq) {
 
-    return await this.emailService.flightTicket(keyword)
+    return await this.emailService.flightTicket(reqBody)
   }
 
   @MessagePattern({ cmd: 'hotelTicket' })
-  async hotelTicket(keyword: string) {
+  async hotelTicket(reqBody: MailReq) {
 
-    return await this.emailService.hotelTicket(keyword)
+    return await this.emailService.hotelTicket(reqBody)
   }
   @MessagePattern({ cmd: 'busTicket' })
-  async busTicket(keyword: string) {
+  async busTicket(reqBody: MailReq) {
 
-    return await this.emailService.busTicket(keyword)
+    return await this.emailService.busTicket(reqBody)
   }
   @MessagePattern({ cmd: 'forgetPassword' })
-  async forgetPassword(keyword: string) {
+  async forgetPassword(reqBody: MailReq) {
 
-    return await this.emailService.forgetPassword(keyword)
+    return await this.emailService.forgetPassword(reqBody)
   }
   @MessagePattern({ cmd: 'registration' })
-  async registration(keyword: string) {
+  async registration(reqBody: MailReq) {
 
-    return await this.emailService.registration(keyword)
+    return await this.emailService.registration(reqBody)
   }
   @MessagePattern({ cmd: 'paymentInvoice' })
-  async paymentInvoice(keyword: string) {
+  async paymentInvoice(reqBody: MailReq) {
 
-    return await this.emailService.paymentInvoice(keyword)
+    return await this.emailService.paymentInvoice(reqBody)
   }
 
 

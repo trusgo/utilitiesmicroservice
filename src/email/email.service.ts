@@ -5,6 +5,10 @@ import { ForgetPassword } from './Templates/ForgotPassword';
 import  { HotelTicket } from './Templates/HotelTicket'
 import { PaymentInvoice } from './Templates/Inovice';
 import { RegisterTemplate } from './Templates/RegisterTemplate';
+import { MailerService } from '@nestjs-modules/mailer';
+import { MailReq } from './dto/mailreq.dto';
+import { sendMailService } from './sendMail/sendMail.service'
+import { from } from 'rxjs';
 
 @Injectable()
 export class EmailService {
@@ -13,33 +17,34 @@ export class EmailService {
               private readonly busTickets: BusTicket,
               private readonly forgetPasswordTem: ForgetPassword,
               private readonly registerTem: RegisterTemplate,
-              private readonly paymentInvoiceTem: PaymentInvoice){}
+              private readonly paymentInvoiceTem: PaymentInvoice,
+              private readonly mailerService: sendMailService){}
   
 
-  async flightTicket(keyword: string): Promise<any> { 
+  async flightTicket(reqBody: MailReq) { 
       const result = this.airTicket.Template();
-      return result
+      const mail = this.mailerService.sendEmail(reqBody.to,reqBody.subject,result);  
     }
 
-    async hotelTicket(keyword: string): Promise<any> {
+    async hotelTicket(reqBody: MailReq) {
       const result = this.hotelTickets.Template();
-      return result
+      const mail = this.mailerService.sendEmail(reqBody.to,reqBody.subject,result);
     }
-    async busTicket(keyword: string): Promise<any> {
+    async busTicket(reqBody: MailReq) {
       const result = this.busTickets.Template();
-      return result
+      const mail = this.mailerService.sendEmail(reqBody.to,reqBody.subject,result);
     }
-    async forgetPassword(keyword: string): Promise<any> {
+    async forgetPassword(reqBody: MailReq) {
       const result = this.forgetPasswordTem.Template();
-      return result
+      const mail = this.mailerService.sendEmail(reqBody.to,reqBody.subject,result);
     }
-    async registration(keyword: string): Promise<any> {
+    async registration(reqBody: MailReq) {
       const result = this.registerTem.Template();
-      return result
+      const mail = this.mailerService.sendEmail(reqBody.to,reqBody.subject,result);
     }
-    async paymentInvoice(keyword: string): Promise<any> {
+    async paymentInvoice(reqBody: MailReq) {
       const result = this.paymentInvoiceTem.Template();
-      return result
+      const mail = this.mailerService.sendEmail(reqBody.to,reqBody.subject,result);
     }
   } 
 
