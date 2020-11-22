@@ -4,7 +4,7 @@ import { Injectable } from '@nestjs/common'
 
 @Injectable()
 export class HotelTicket{
- Template = () => {
+ Template (data){
   return `
      <div
            style="

@@ -22,28 +22,28 @@ export class EmailService {
   
 
   async flightTicket(reqBody: MailReq) { 
-      const result = this.airTicket.Template();
+      const result = this.airTicket.Template(reqBody.data);
       const mail = this.mailerService.sendEmail(reqBody.to,reqBody.subject,result);  
     }
 
     async hotelTicket(reqBody: MailReq) {
-      const result = this.hotelTickets.Template();
+      const result = this.hotelTickets.Template(reqBody.data);
       const mail = this.mailerService.sendEmail(reqBody.to,reqBody.subject,result);
     }
     async busTicket(reqBody: MailReq) {
-      const result = this.busTickets.Template();
+      const result = this.busTickets.Template(reqBody.data);
       const mail = this.mailerService.sendEmail(reqBody.to,reqBody.subject,result);
     }
     async forgetPassword(reqBody: MailReq) {
-      const result = this.forgetPasswordTem.Template();
+      const result = this.forgetPasswordTem.Template(reqBody.data);
       const mail = this.mailerService.sendEmail(reqBody.to,reqBody.subject,result);
     }
     async registration(reqBody: MailReq) {
-      const result = this.registerTem.Template();
+      const result = this.registerTem.Template(reqBody.data)
       const mail = this.mailerService.sendEmail(reqBody.to,reqBody.subject,result);
     }
     async paymentInvoice(reqBody: MailReq) {
-      const result = this.paymentInvoiceTem.Template();
+      const result = this.paymentInvoiceTem.Template(reqBody.data);
       const mail = this.mailerService.sendEmail(reqBody.to,reqBody.subject,result);
     }
   } 
