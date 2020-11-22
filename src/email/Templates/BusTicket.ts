@@ -3,7 +3,7 @@ import { Injectable } from '@nestjs/common'
 
 @Injectable()
 export class BusTicket{
- Template = () => {
+ Template (data) {
   return `
      <div
            style="

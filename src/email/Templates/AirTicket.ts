@@ -4,7 +4,7 @@ import { Injectable } from '@nestjs/common';
 
 @Injectable()
 export class AirTicket {
-  Template = () => {
+  Template = (data) => {
     return `
     <div
     style="
