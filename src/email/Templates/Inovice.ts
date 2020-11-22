@@ -1,10 +1,10 @@
-const { footer } = require("./Footer");
-const { header } = require("./Header");
 
-const inoviceTemplate = () => {
-  let inovice =
-    header() +
-    `<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+import { Injectable } from '@nestjs/common'
+
+@Injectable()
+export class PaymentInvoice{
+ Template = () => {
+  return `<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
     <html xmlns="http://www.w3.org/1999/xhtml">
     <head>
         <title></title>
@@ -341,8 +341,6 @@ const inoviceTemplate = () => {
         </table>
     </body>
     </html>
-    ` +
-    footer();
-  return inovice;
+    ` 
 };
-module.exports = { inoviceTemplate };
+}
