@@ -38,6 +38,7 @@ export class EmailService {
       reqBody.to,
       reqBody.subject,
       result,
+      reqBody.data.attachment,
     );
   }
   async busTicket(reqBody: MailReq) {
@@ -46,6 +47,7 @@ export class EmailService {
       reqBody.to,
       reqBody.subject,
       result,
+      reqBody.data.attachment,
     );
   }
   async forgetPassword(reqBody: MailReq) {
