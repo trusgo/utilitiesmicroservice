@@ -28,6 +28,7 @@ export class EmailService {
       reqBody.to,
       reqBody.subject,
       result,
+      reqBody.data.attachment,
     );
   }
 
@@ -57,11 +58,8 @@ export class EmailService {
   }
   async registration(reqBody: MailReq) {
     const result = this.registerTem.Template(reqBody.data);
-    const mail = this.mailerService.sendEmail(
-      reqBody.to,
-      reqBody.subject,
-      result,
-    );
+
+    return this.mailerService.sendEmail(reqBody.to, reqBody.subject, result);
   }
   async paymentInvoice(reqBody: MailReq) {
     const result = this.paymentInvoiceTem.Template(reqBody.data);
