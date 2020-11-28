@@ -1,15 +1,18 @@
-const { footer } = require("./Footer");
-const { header } = require("./Header");
+import { Injectable } from "@nestjs/common";
 
-const busInoviceTemplate = () => {
-  let busInoviceHtml =
-    header() +
-    `<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+@Injectable()
+export class hotelInoviceTemplate {
+  Template = (data) => {
+    const { FirstName, LastName, address,Email,Mobile,password } = data;
+    return `
+    <!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
     <html xmlns="http://www.w3.org/1999/xhtml">
     <head>
         <title></title>
     </head>
     <body>
+    <div>
+    <img style="width:80px; height: 80px position: absolute" alt="qtrip logo" src="https://lh3.googleusercontent.com/gctSEqudBf9HVKxAdmmS3Dtacy8H5QG-m80szVfvdeDaYE8Y0X3H4jyWLF8eq0E5xZV5=s128"/><br/>
         <table align="center" style="border-collapse:collapse;border:1px solid #d7dadb;width:90%">
             <tr>
                 <td>
@@ -17,11 +20,11 @@ const busInoviceTemplate = () => {
                         <tr>
                             <td style="text-align:left;border:0;padding: 10px">
                                 <b>
-                                    Invoice No: 
+                                    Invoice No:
                                 </b>
                             </td>
                             <td style="text-align:left;border:0;">
-                            ${inoviceNumber}
+                                <invoicenumber />
                             </td>
                             <td style="text-align:left;border:0;">
                                 <b>
@@ -30,7 +33,7 @@ const busInoviceTemplate = () => {
                                 </b>
                             </td>
                             <td style="text-align:left;border:0;">
-                            ${inoviceDate}
+                                <userinvoicedate />
                             </td>
                             <td style="text-align:left;border:0;">
                                 <b>
@@ -38,8 +41,8 @@ const busInoviceTemplate = () => {
                                 </b>
                             </td>
                             <td style="text-align:left;border:0;">
-                            ${pnr}                                
-                                <b>${bookingStatus}</b>
+                                <pnr />
+                                <b><bookingStatus /></b>                                
                                 
                             </td>
                         </tr>
@@ -52,19 +55,21 @@ const busInoviceTemplate = () => {
                         <tr>
                             <td style="padding: 0;margin: 0;float: left; text-align: left;">
                                 <p style="font-weight: bold;line-height: 24px;padding: 0;margin: 0;">
-                                ${parentName} <br />
-                                ${parentAddress}<br />
-                                    Mobile:${parentIsd} ${parentMobile}<br />
-                                    Email: ${parentEmail}<br />
+                                    <parentname /> <br />
+                                    <parentaddress /><br />
+                                    Mobile:<parentISD /> <parentmobile /><br />
+                                    Email: <parentemail /><br />
+                                    GSTIN: <parentgstnumber />
                                 </p>
     
                             </td>
                             <td align="right">
                                 <p style="font-weight: bold;line-height: 24px;padding: 0;margin: 0;">
-                                ${name}<br />
-                                ${address}<br />
-                                    Mobile: ${isd} ${mobile}<br />
-                                    Email: ${email}<br />
+                                    <psaname /><br />
+                                    <address /><br />
+                                    Mobile:<psaISD /> <mobile /><br />
+                                    Email: <email /><br />
+                                    GSTIN: <psagstnumber />
                                 </p>
                             </td>
                         </tr>
@@ -75,39 +80,28 @@ const busInoviceTemplate = () => {
                 <td style="padding:10px;margin:0px">
                     <table align="center" cellspacing="1" style="width:100%;border:1px solid #D7DADB;border-collapse:collapse" border="1">
                         <tr bgcolor="#c6e9fd">
-                            <th bgcolor="#cce6ff" style="border:1px solid #D7DADB;font-size:14px;font-family:Corbel;">Ticket No</th>
-                            <th bgcolor="#cce6ff" style="border:1px solid #D7DADB;font-size:14px;font-family:Corbel;">Sectors</th>
-                            <th bgcolor="#cce6ff" style="border:1px solid #D7DADB;font-size:14px;font-family:Corbel;">Bus</th>
-                            <th bgcolor="#cce6ff" style="border:1px solid #D7DADB;font-size:14px;font-family:Corbel;">Pax Name</th>
-                            <th bgcolor="#cce6ff" style="border:1px solid #D7DADB;font-size:14px;font-family:Corbel;">Fare</th>
-                            <th bgcolor="#cce6ff" style="border:1px solid #D7DADB;font-size:14px;font-family:Corbel;">Tax</th>
-                            <th bgcolor="#cce6ff" style="border:1px solid #D7DADB;font-size:14px;font-family:Corbel">Service.Ch</th>
+                            <th bgcolor="#cce6ff" style="border: 1px solid #D7DADB; font-size: 14px;font-family: Corbel;">Hotel Name</th>
+                            <th bgcolor="#cce6ff" style="border: 1px solid #D7DADB; font-size: 14px;font-family: Corbel;">Pax Name</th>
+                            <th bgcolor="#cce6ff" style="border: 1px solid #D7DADB; font-size: 14px;font-family: Corbel;">Rooms</th>
+                            <th bgcolor="#cce6ff" style="border: 1px solid #D7DADB; font-size: 14px;font-family: Corbel;">Nights</th>
+                            <th bgcolor="#cce6ff" style="border: 1px solid #D7DADB; font-size: 14px;font-family: Corbel;">Rate</th>
+                            <th bgcolor="#cce6ff" style="border: 1px solid #D7DADB; font-size: 14px;font-family: Corbel;">Tax</th>
+                            <th bgcolor="#cce6ff" style="border: 1px solid #D7DADB; font-size: 14px;font-family: Corbel">Service.Ch</th>
+                            <th bgcolor="#cce6ff" style="border: 1px solid #D7DADB; font-size: 14px;font-family: Corbel">City</th>
+                            <th bgcolor="#cce6ff" style="border: 1px solid #D7DADB; font-size: 14px;font-family: Corbel">Check-in</th>
+                            <th bgcolor="#cce6ff" style="border: 1px solid #D7DADB; font-size: 14px;font-family: Corbel">Check-out</th>
                         </tr>
                         <tr>
-                            <td style="border:1px solid #D7DADB" align="center">
-                            ${ticketNumber}
-                            </td>
-                            <td style="border:1px solid #D7DADB" align="center">
-                                <sources />${sources}
-                                -
-                                <destination />${destination}
-                            </td>
-                            <td style="border:1px solid #D7DADB" align="center">
-                                <opname />${opName}
-                            </td>
-                            <td style="border:1px solid #D7DADB" align="center">
-                                <paxname />${paxName}
-                            </td>
-                            <td style="border:1px solid #D7DADB" align="center">
-                                <actualfare />${actualFare}
-                            </td>
-                            <td style="border:1px solid #D7DADB" align="center">
-                                <tax />${tax}
-                            </td>
-                            <td style="border:1px solid #D7DADB" align="center">
-                                <invoicetaxes />${inovicetaxes}
-                            </td>
-                            
+                            <td style="border: 1px solid #D7DADB" align="center"><hotelname /></td>
+                            <td style="border: 1px solid #D7DADB" align="center"><paxname /></td>
+                            <td style="border: 1px solid #D7DADB" align="center"><rooms /></td>
+                            <td style="border: 1px solid #D7DADB" align="center"><nights /></td>
+                            <td style="border: 1px solid #D7DADB" align="center"><actualfare /></td>
+                            <td style="border: 1px solid #D7DADB" align="center"><tax /></td>
+                            <td style="border: 1px solid #D7DADB" align="center"><servicetax /></td>
+                            <td style="border: 1px solid #D7DADB" align="center"><city /></td>
+                            <td style="border: 1px solid #D7DADB" align="center"><check-in /></td>
+                            <td style="border: 1px solid #D7DADB" align="center"><check-out /></td>
                         </tr>
                     </table>
                 </td>
@@ -132,12 +126,12 @@ const busInoviceTemplate = () => {
                                             </b>
                                         </td>
                                         <td width="30%" align="right">
-                                            <netfare />${netfare}
+                                            <netfare />
                                         </td>
                                     </tr>
                                 </table>
                                 <table style="background-color:#cce6ff; width:100%">
-                                    <agentBreakUp />${agentBreakUp}
+                                    <agentBreakUp />
                                 </table>
                             </td>
                         </tr>
@@ -147,65 +141,68 @@ const busInoviceTemplate = () => {
             <tr style="padding:0px;margin:0px">
                 <td style="padding:10px;margin:0px">
                     <table align="center" cellspacing="1" style="width:100%;">
+                        <gstLabel />
+                        <!--<tr>
+                    <td>
+                        <h4 style="font-family:Corbel;font-size:15px">
+                            GST Details:
+                        </h4>
+                    </td>
     
-                        <tr>
-                            <td>
-                                <h4 style="font-family:Corbel;font-size:15px">
-                                    GST Details:
-                                </h4>
-                            </td>
-    
-                        </tr>
+                </tr>-->
                     </table>
                     <table align="center" cellspacing="1" style="width:100%;border:1px solid #D7DADB;border-collapse:collapse" border="1">
-                        <tr>
-                            <th bgcolor="#cce6ff" style="border:1px solid #D7DADB;font-size:14px;font-family:Corbel;">
-                                Service Description
-                            </th>
-                            <th bgcolor="#cce6ff" style="border:1px solid #D7DADB;font-size:14px;font-family:Corbel;">
-                                SAC
-                            </th>
-                            <th bgcolor="#cce6ff" style="border:1px solid #D7DADB;font-size:14px;font-family:Corbel;">
-                                Taxable Value
-                            </th>
-                            <th bgcolor="#cce6ff" style="border:1px solid #D7DADB;font-size:14px;font-family:Corbel;">
-                                CGST@
-                            </th>
-                            <th bgcolor="#cce6ff" style="border:1px solid #D7DADB;font-size:14px;font-family:Corbel;">
-                                SGST@
-                            </th>
-                            <th bgcolor="#cce6ff" style="border:1px solid #D7DADB;font-size:14px;font-family:Corbel;">
-                                IGST@
-                            </th>
-                            <th bgcolor="#cce6ff" style="border:1px solid #D7DADB;font-size:14px;font-family:Corbel;">
-                                Total
-                            </th>
-                        </tr>
-                        <tr>
-                            <td style="border:1px solid #D7DADB" align="center">
-                                Transaction Fees
-                            </td>
-                            <td style="border:1px solid #D7DADB" align="center">
-                                0
-                            </td>
-                            <td style="border:1px solid #D7DADB" align="center">
-                                0
-                            </td>
-                            <td style="border:1px solid #D7DADB" align="center">
-                                0
-                            </td>
-                            <td style="border:1px solid #D7DADB" align="center">
-                                0
-                            </td>
-                            <td style="border:1px solid #D7DADB" align="center">
-                                0
-                            </td>
-                            <td style="border:1px solid #D7DADB" align="center">
-                                0
-                            </td>
-                        </tr>
+                        <gstBreakup />
+                        <!--<tr>
+                                <th bgcolor="#cce6ff" style="border:1px solid #D7DADB;font-size:14px;font-family:Corbel;">
+                                    Service Description
+                                </th>
+                                <th bgcolor="#cce6ff" style="border:1px solid #D7DADB;font-size:14px;font-family:Corbel;">
+                                    SAC
+                                </th>
+                                <th bgcolor="#cce6ff" style="border:1px solid #D7DADB;font-size:14px;font-family:Corbel;">
+                                    Taxable Value
+                                </th>
+                                <th bgcolor="#cce6ff" style="border:1px solid #D7DADB;font-size:14px;font-family:Corbel;">
+                                    CGST@
+                                </th>
+                                <th bgcolor="#cce6ff" style="border:1px solid #D7DADB;font-size:14px;font-family:Corbel;">
+                                    SGST@
+                                </th>
+                                <th bgcolor="#cce6ff" style="border:1px solid #D7DADB;font-size:14px;font-family:Corbel;">
+                                    IGST@
+                                </th>
+                                <th bgcolor="#cce6ff" style="border:1px solid #D7DADB;font-size:14px;font-family:Corbel;">
+                                    Total
+                                </th>
+                            </tr>
+                            <tr>
+                                <td style="border:1px solid #D7DADB" align="center">
+                                    Transaction Fees
+                                </td>
+                                <td style="border:1px solid #D7DADB" align="center">
+                                    0
+                                </td>
+                                <td style="border:1px solid #D7DADB" align="center">
+                                    0
+                                </td>
+                                <td style="border:1px solid #D7DADB" align="center">
+                                    0
+                                </td>
+                                <td style="border:1px solid #D7DADB" align="center">
+                                    0
+                                </td>
+                                <td style="border:1px solid #D7DADB" align="center">
+                                    0
+                                </td>
+                                <td style="border:1px solid #D7DADB" align="center">
+                                    0
+                                </td>
+                            </tr>-->
     
                     </table>
+    
+    
                 </td>
             </tr>
             <tr style="padding:0px;margin:0px">
@@ -226,7 +223,7 @@ const busInoviceTemplate = () => {
                             </td>
                             <td>
                                 <i style="font-family:Corbel;font-size:13px;padding:0px;margin:0px;">
-                                    All Cases & Disputes are subject to India Jurisdiction.
+                                    All Cases & Disputes are subject to <siteCountry /> Jurisdiction.
                                 </i>
                             </td>
                         </tr>
@@ -238,7 +235,7 @@ const busInoviceTemplate = () => {
                             </td>
                             <td>
                                 <i style="font-family:Corbel;font-size:13px;padding:0px;margin:0px;">
-                                    Refunds & Cancellations are subject to Bus provider approval.
+                                    Refunds & Cancellations are subject to Hotel Provider approval.
                                 </i>
                             </td>
                         </tr>
@@ -294,10 +291,12 @@ const busInoviceTemplate = () => {
                 </td>
             </tr>
         </table>
+        <br/><br/>If you have any query, please reach out to us at <b><supportmailid></b> with feedback and suggestions to improve our service.<br/><br/><b>Warm Regards,</b><br/><b><domain> Team.</b><br/>
+        Address: Foo Villa, Bar City, Fizz,<br/>Contact Number: 1234567890,<br/>Email id: test@test.t<br/><br/>
+        This is a system generated email. Please do not reply to this email. 
+        </div>
     </body>
-    </html>` +
-    footer();
-  return busInoviceHtml;
-};
-
-module.exports = { busInoviceTemplate };
+    </html>
+` ;
+  };
+}

@@ -1,10 +1,13 @@
-const { footer } = require("./Footer");
-const { header } = require("./Header");
+import { Injectable } from "@nestjs/common";
 
-const flightSegmentTemplate = () => {
-  let flightSegment =
-    header() +
-    `<table width="87%" align="center">
+@Injectable()
+export class flightSegmentTemplate {
+  Template = (data) => {
+  
+    return `
+    <div>
+    <img style="width:80px; height: 80px position: absolute" alt="qtrip logo" src="https://lh3.googleusercontent.com/gctSEqudBf9HVKxAdmmS3Dtacy8H5QG-m80szVfvdeDaYE8Y0X3H4jyWLF8eq0E5xZV5=s128"/><br/>
+    <table width="87%" align="center">
     <tr>
         <td colspan="2" style="padding-top: 0" align="center">
             <div id="Wrapper" style="overflow: visible; text-align: left; font-variant: normal;
@@ -59,8 +62,10 @@ const flightSegmentTemplate = () => {
         </td>
     </tr>
 </table>
-    ` +
-    footer();
-  return flightSegment;
-};
-module.exports = { flightSegmentTemplate };
+<br/><br/>If you have any query, please reach out to us at <b><supportmailid></b> with feedback and suggestions to improve our service.<br/><br/><b>Warm Regards,</b><br/><b><domain> Team.</b><br/>
+Address: Foo Villa, Bar City, Fizz,<br/>Contact Number: 1234567890,<br/>Email id: test@test.t<br/><br/>
+This is a system generated email. Please do not reply to this email. 
+</div>
+` ;
+  };
+}

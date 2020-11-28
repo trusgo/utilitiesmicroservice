@@ -1,10 +1,13 @@
-const { footer } = require("./Footer");
-const { header } = require("./Header");
+import { Injectable } from "@nestjs/common";
 
-const printTicketTemplate = () => {
-  let printTicket =
-    header() +
-    `<table>
+@Injectable()
+export class printTicketTemplate {
+  Template = (data) => {
+    const { FirstName, LastName, address,Email,Mobile,password } = data;
+    return `
+    <div>
+    <img style="width:80px; height: 80px position: absolute" alt="qtrip logo" src="https://lh3.googleusercontent.com/gctSEqudBf9HVKxAdmmS3Dtacy8H5QG-m80szVfvdeDaYE8Y0X3H4jyWLF8eq0E5xZV5=s128"/><br/>
+    <table>
     <tr>
         <td style="padding-top: 0px" align="center" valign="top">
             <div style="margin: 0; padding: 0; max-width: 87%; min-width: 966px;">
@@ -202,10 +205,10 @@ const printTicketTemplate = () => {
         </td>
     </tr>
 </table>
-
-
-    ` +
-    footer();
-  return printTicket;
-};
-module.exports = { printTicketTemplate };
+<br/><br/>If you have any query, please reach out to us at <b><supportmailid></b> with feedback and suggestions to improve our service.<br/><br/><b>Warm Regards,</b><br/><b><domain> Team.</b><br/>
+Address: Foo Villa, Bar City, Fizz,<br/>Contact Number: 1234567890,<br/>Email id: test@test.t<br/><br/>
+This is a system generated email. Please do not reply to this email. 
+</div>
+` ;
+  };
+}

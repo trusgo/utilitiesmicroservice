@@ -5,7 +5,7 @@ import { MailerService } from '@nestjs-modules/mailer';
 export class sendMailService {
   constructor(private readonly mailerService: MailerService) {}
 
-  async sendEmail(to: string, subject: string, html: any, attach: any = false) {
+  async sendEmail(to: string, subject: string, html: any, cc?:string, bcc?:string, attach: any = false) {
     let attachedFile = {
       filename: 'attachement.png',
       path: attach,
@@ -14,7 +14,11 @@ export class sendMailService {
     try {
       const respone = await this.mailerService.sendMail({
         to: to, // list of receivers
-        from: 'trickytop945@gmail.com', // sender address
+        // from: 'trickytop945@gmail.com', // sender address
+        from:'care@qktrip.com',
+        cc: cc,
+        bcc:bcc,
+        // from:'contact@trusgo.com',
         subject: subject, // Subject line
         text: '', // plaintext body
         html: html, // HTML body content
