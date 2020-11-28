@@ -1,8 +1,11 @@
 
 import { Injectable } from '@nestjs/common'
+import { footer } from './Footer'
+import { header } from './Header'
 
 @Injectable()
 export class PaymentInvoice{
+    constructor( private header:header, private footer:footer){}
  Template (data) {
   return `<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
     <html xmlns="http://www.w3.org/1999/xhtml">
@@ -11,7 +14,7 @@ export class PaymentInvoice{
     </head>
     <body>
     <div>
-    <img style="width:80px; height: 80px position: absolute" alt="qtrip logo" src="https://lh3.googleusercontent.com/gctSEqudBf9HVKxAdmmS3Dtacy8H5QG-m80szVfvdeDaYE8Y0X3H4jyWLF8eq0E5xZV5=s128"/><br/>
+    ${this.header.Template()}
         <table align="center" style="border-collapse:collapse;border:1px solid #d7dadb;width:100%">
             <tr>
                 <td>
@@ -341,9 +344,7 @@ export class PaymentInvoice{
                 </td>
             </tr>
         </table>
-        <br/><br/>If you have any query, please reach out to us at <b><supportmailid></b> with feedback and suggestions to improve our service.<br/><br/><b>Warm Regards,</b><br/><b><domain> Team.</b><br/>
-        Address: Foo Villa, Bar City, Fizz,<br/>Contact Number: 1234567890,<br/>Email id: test@test.t<br/><br/>
-        This is a system generated email. Please do not reply to this email. 
+        ${this.footer.Template()}
         </div>
     </body>
     </html>

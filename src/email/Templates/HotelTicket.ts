@@ -1,9 +1,12 @@
 //const { footer } = require("./Footer");
 //const { header } = require("./Header");
 import { Injectable } from '@nestjs/common'
+import { footer } from './Footer';
+import { header } from './Header';
 
 @Injectable()
 export class HotelTicket{
+  constructor( private header:header, private footer:footer){}
  Template (data){
   return `
      <div
@@ -15,7 +18,7 @@ export class HotelTicket{
            "
          >
            <!-- start -->
-           <img style="width:80px; height: 80px position: absolute" alt="qtrip logo" src="https://lh3.googleusercontent.com/gctSEqudBf9HVKxAdmmS3Dtacy8H5QG-m80szVfvdeDaYE8Y0X3H4jyWLF8eq0E5xZV5=s128"/><br/>
+           ${this.header.Template()}
            <div>
              <p><b>Passenger Contact: </b><span>9492542988</span></p>
              <p><b>Passenger Email: </b><span>mc@gmail.com</span></p>
@@ -157,9 +160,7 @@ export class HotelTicket{
                <td style="text-align: right; padding: 10px">N/A</td>
              </tr>
            </table>
-           <br/><br/>If you have any query, please reach out to us at <b><supportmailid></b> with feedback and suggestions to improve our service.<br/><br/><b>Warm Regards,</b><br/><b><domain> Team.</b><br/>
-           Address: Foo Villa, Bar City, Fizz,<br/>Contact Number: 1234567890,<br/>Email id: test@test.t<br/><br/>
-           This is a system generated email. Please do not reply to this email. 
+           ${this.footer.Template()} 
          </div> `;
 };
 }

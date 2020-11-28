@@ -5,7 +5,7 @@ import { EmailModule } from './email/email.module';
 import { AirTicket } from './email/Templates/AirTicket';
 
 @Module({
-  imports: [EmailModule,AirTicket,
+  imports: [EmailModule
   ],
   controllers: [AppController],
   providers: [AppService],

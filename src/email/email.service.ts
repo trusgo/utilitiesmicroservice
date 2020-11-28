@@ -26,6 +26,7 @@ import {userActivationTemplate} from './Templates/UserActivation';
 import {ResheduleRequestTemplete} from './Templates/ResheduleRequest';
 import {ContactUsTemplete} from './Templates/ContactUs';
 import {flightEnquiryTemplate} from './Templates/FlightEnquiry';
+import {FlightDetailsTemplete} from './Templates/FlightDetails'
 import { from } from 'rxjs';
 
 @Injectable()
@@ -55,7 +56,8 @@ export class EmailService {
     private readonly userActivationTemp:userActivationTemplate,
     private readonly ResheduleRequestTemp:ResheduleRequestTemplete,
     private readonly ContactUsTemp:ContactUsTemplete,
-    private readonly flightEnquiryTemp:flightEnquiryTemplate
+    private readonly flightEnquiryTemp:flightEnquiryTemplate,
+    private readonly FlightDetailsTemp:FlightDetailsTemplete
   ) {}
 
   async flightTicket(reqBody: MailReq) {
@@ -67,6 +69,7 @@ export class EmailService {
       reqBody.cc,reqBody.bcc,
       reqBody.data.attachment,
     );
+    return mail;
   }
 
   async hotelTicket(reqBody: MailReq) {
@@ -78,6 +81,7 @@ export class EmailService {
       reqBody.cc,reqBody.bcc,
       reqBody.data.attachment,
     );
+    return mail;
   }
   async busTicket(reqBody: MailReq) {
     const result = this.busTickets.Template(reqBody.data);
@@ -88,6 +92,7 @@ export class EmailService {
       reqBody.cc,reqBody.bcc,
       reqBody.data.attachment,
     );
+    return mail;
   }
   async forgetPassword(reqBody: MailReq) {
     const result = this.forgetPasswordTem.Template(reqBody.data);
@@ -97,6 +102,7 @@ export class EmailService {
       result,
       reqBody.cc,reqBody.bcc
     );
+    return mail;
   }
   async registration(reqBody: MailReq) {
     const result = this.registerTem.Template(reqBody.data);
@@ -111,6 +117,7 @@ export class EmailService {
       result,
       reqBody.cc,reqBody.bcc
     );
+    return mail;
   }
   async cancelRequest(reqBody: MailReq) {
     const result = this.cancelRequestRefNoTem.Template(reqBody.data);
@@ -120,6 +127,7 @@ export class EmailService {
       result,
       reqBody.cc,reqBody.bcc
     );
+    return mail;
   }
   async cancelRequestrefNo(reqBody: MailReq) {
     const result = this.cancelRequestTem.Template(reqBody.data);
@@ -129,6 +137,7 @@ export class EmailService {
       result,
       reqBody.cc,reqBody.bcc
     );
+    return mail;
   }
   async cancelTicket(reqBody: MailReq) {
     const result = this.cancelTicketTemplate.Template(reqBody.data);
@@ -138,6 +147,7 @@ export class EmailService {
       result,
       reqBody.cc,reqBody.bcc
     );
+    return mail;
   }
   async changePassword(reqBody: MailReq) {
     const result = this.changePasswordTemp.Template(reqBody.data);
@@ -147,6 +157,7 @@ export class EmailService {
       result,
       reqBody.cc,reqBody.bcc
     );
+    return mail;
   }
   async changeTxnPassword(reqBody: MailReq) {
     const result = this.changeTxnPasswordTemp.Template(reqBody.data);
@@ -156,6 +167,7 @@ export class EmailService {
       result,
       reqBody.cc,reqBody.bcc
     );
+    return mail;
   }
   async busInvoice(reqBody: MailReq) {
     const result = this.busInvoiceTemp.Template(reqBody.data);
@@ -165,6 +177,7 @@ export class EmailService {
       result,
       reqBody.cc,reqBody.bcc
     );
+    return mail;
   }
   async feedbackAndComplaints(reqBody: MailReq) {
     const result = this.feedbackandCompliantsTemp.Template(reqBody.data);
@@ -174,6 +187,7 @@ export class EmailService {
       result,
       reqBody.cc,reqBody.bcc
     );
+    return mail;
   }
   async flightSegment(reqBody: MailReq) {
     const result = this.flightSegmentTemp.Template(reqBody.data);
@@ -183,6 +197,7 @@ export class EmailService {
       result,
       reqBody.cc,reqBody.bcc
     );
+    return mail;
   }
   async groupEnquiryRequest(reqBody: MailReq) {
     const result = this.groupEnquiryRequestTemp.Template(reqBody.data);
@@ -192,6 +207,7 @@ export class EmailService {
       result,
       reqBody.cc,reqBody.bcc
     );
+    return mail;
   }
   async hotelInovice(reqBody: MailReq) {
     const result = this.hotelInoviceTemp.Template(reqBody.data);
@@ -201,6 +217,7 @@ export class EmailService {
       result,
       reqBody.cc,reqBody.bcc
     );
+    return mail;
   }
   async hotelRoomBooking(reqBody: MailReq) {
     const result = this.hotelRoomBookingTemp.Template(reqBody.data);
@@ -210,6 +227,7 @@ export class EmailService {
       result,
       reqBody.cc,reqBody.bcc
     );
+    return mail;
   }
   async paymentCancelMail(reqBody: MailReq) {
     const result = this.paymentCancelMailTemp.Template(reqBody.data);
@@ -219,6 +237,7 @@ export class EmailService {
       result,
       reqBody.cc,reqBody.bcc
     );
+    return mail;
   }
   async printTicket(reqBody: MailReq) {
     const result = this.printTicketTemp.Template(reqBody.data);
@@ -228,6 +247,7 @@ export class EmailService {
       result,
       reqBody.cc,reqBody.bcc
     );
+    return mail;
   }
   async ticketingSystem(reqBody: MailReq) {
     const result = this.ticketingSystemtemp.Template(reqBody.data);
@@ -237,6 +257,7 @@ export class EmailService {
       result,
       reqBody.cc,reqBody.bcc
     );
+    return mail;
   }
   async userActivation(reqBody: MailReq) {
     const result = this.userActivationTemp.Template(reqBody.data);
@@ -246,6 +267,7 @@ export class EmailService {
       result,
       reqBody.cc,reqBody.bcc
     );
+    return mail;
   }
   async ResheduleRequest(reqBody: MailReq) {
     const result = this.ResheduleRequestTemp.Template(reqBody.data);
@@ -255,6 +277,7 @@ export class EmailService {
       result,
       reqBody.cc,reqBody.bcc
     );
+    return mail;
   }
   async contactUs(reqBody: MailReq) {
     const result = this.ContactUsTemp.Template(reqBody.data);
@@ -264,6 +287,7 @@ export class EmailService {
       result,
       reqBody.cc,reqBody.bcc
     );
+    return mail;
   }
 
   async flightEnquiry(reqBody: MailReq) {
@@ -274,5 +298,16 @@ export class EmailService {
       result,
       reqBody.cc,reqBody.bcc
     );
+    return mail;
+  }
+  async flightDetails(reqBody: MailReq) {
+    const result = this.FlightDetailsTemp.Template(reqBody.data);
+    const mail = this.mailerService.sendEmail(
+      reqBody.to,
+      reqBody.subject,
+      result,
+      reqBody.cc,reqBody.bcc
+    );
+    return mail;
   }
 }

@@ -1,7 +1,10 @@
 import { Injectable } from "@nestjs/common";
+import { footer } from "./Footer";
+import { header } from "./Header";
 
 @Injectable()
 export class busInoviceTemplate {
+    constructor( private header:header, private footer:footer){}
   Template = (data) => {
     const { inoviceNumber, inoviceDate, bookingStatus,pnr,parentName,parentAddress,parentIsd,
         parentMobile,parentEmail,address, isd,mobile,email,ticketNumber,sources,destination,
@@ -14,7 +17,7 @@ export class busInoviceTemplate {
     </head>
     <body>
     <div>
-    <img style="width:80px; height: 80px position: absolute" alt="qtrip logo" src="https://lh3.googleusercontent.com/gctSEqudBf9HVKxAdmmS3Dtacy8H5QG-m80szVfvdeDaYE8Y0X3H4jyWLF8eq0E5xZV5=s128"/><br/>
+    ${this.header.Template()}
         <table align="center" style="border-collapse:collapse;border:1px solid #d7dadb;width:90%">
             <tr>
                 <td>
@@ -299,9 +302,7 @@ export class busInoviceTemplate {
                 </td>
             </tr>
         </table>
-        <br/><br/>If you have any query, please reach out to us at <b><supportmailid></b> with feedback and suggestions to improve our service.<br/><br/><b>Warm Regards,</b><br/><b><domain> Team.</b><br/>
-     Address: Foo Villa, Bar City, Fizz,<br/>Contact Number: 1234567890,<br/>Email id: test@test.t<br/><br/>
-     This is a system generated email. Please do not reply to this email. 
+        ${this.footer.Template()}
     </div>
     </body>
     </html>

@@ -30,6 +30,7 @@ import {userActivationTemplate} from './Templates/UserActivation';
 import {ResheduleRequestTemplete} from './Templates/ResheduleRequest';
 import {ContactUsTemplete} from './Templates/ContactUs';
 import {flightEnquiryTemplate} from './Templates/FlightEnquiry';
+import {FlightDetailsTemplete} from './Templates/FlightDetails';
 import { header } from './Templates/Header'
 import { footer } from './Templates/Footer'
 @Module({
@@ -39,7 +40,7 @@ import { footer } from './Templates/Footer'
         timeout: 50000,
         maxRedirects: 5
       })
-    }),AirTicket,
+    }),
     MailerModule.forRoot({
       transport: {
         // host: 'smtp.gmail.com',
@@ -73,7 +74,7 @@ import { footer } from './Templates/Footer'
     cancelRequestrefNoTemplate,cancelTicketTemplate,changePasswordTemplate,changeTxnPasswordTemplate,
     busInoviceTemplate,feedbackAndComplaintsTemplate,flightSegmentTemplate,groupEnquiryRequestTemplate,hotelInoviceTemplate,
     hotelRoomBookingTemplate,paymentCancelMailTemplate,printTicketTemplate,ticketingSystemtemplate,userActivationTemplate,ResheduleRequestTemplete,
-    ContactUsTemplete,flightEnquiryTemplate,sendMailService,header,footer]
+    ContactUsTemplete,flightEnquiryTemplate,sendMailService,header,footer,FlightDetailsTemplete]
 })
 export class EmailModule { }
 

@@ -1,12 +1,15 @@
 import { Injectable } from "@nestjs/common";
+import { footer } from "./Footer";
+import { header } from "./Header";
 
 @Injectable()
 export class paymentCancelMailTemplate {
+    constructor( private header:header, private footer:footer){}
   Template = (data) => {
     const { FirstName, LastName, address,Email,Mobile,password } = data;
     return `
     <div>
-    <img style="width:80px; height: 80px position: absolute" alt="qtrip logo" src="https://lh3.googleusercontent.com/gctSEqudBf9HVKxAdmmS3Dtacy8H5QG-m80szVfvdeDaYE8Y0X3H4jyWLF8eq0E5xZV5=s128"/><br/>
+    ${this.header.Template()}
     <table style="max-width:600px;margin:auto;border-spacing:0;padding:4px;border-radius:16px;overflow:hidden" align="center" border="0" cellpadding="0" cellspacing="0" width="100%">
     <tbody>
         <tr>
@@ -87,9 +90,7 @@ export class paymentCancelMailTemplate {
         </tr>
     </tbody>
 </table>
-<br/><br/>If you have any query, please reach out to us at <b><supportmailid></b> with feedback and suggestions to improve our service.<br/><br/><b>Warm Regards,</b><br/><b><domain> Team.</b><br/>
-Address: Foo Villa, Bar City, Fizz,<br/>Contact Number: 1234567890,<br/>Email id: test@test.t<br/><br/>
-This is a system generated email. Please do not reply to this email. 
+${this.footer.Template()}
 </div>
 ` ;
   };

@@ -130,5 +130,10 @@ export class EmailController {
 
     return await this.emailService.flightEnquiry(reqBody)
   }
+  @MessagePattern({ cmd: 'flightDetails' })
+  async flightDetails(reqBody: MailReq) {
+
+    return await this.emailService.flightDetails(reqBody)
+  }
 }
 

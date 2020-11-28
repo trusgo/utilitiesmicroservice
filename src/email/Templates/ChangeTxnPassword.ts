@@ -1,16 +1,17 @@
 import { Injectable } from "@nestjs/common";
+import { footer } from "./Footer";
+import { header } from "./Header";
 
 @Injectable()
 export class changeTxnPasswordTemplate {
+  constructor( private header:header, private footer:footer){}
   Template = (data) => {
-    const { FirstName, LastName, address,Email,Mobile,password } = data;
+    const { FirstName, LastName,Email,Mobile,password } = data;
     return `
     <div>
-    <img style="width:80px; height: 80px position: absolute" alt="qtrip logo" src="https://lh3.googleusercontent.com/gctSEqudBf9HVKxAdmmS3Dtacy8H5QG-m80szVfvdeDaYE8Y0X3H4jyWLF8eq0E5xZV5=s128"/><br/>
-    <b>Dear <name>(<role>)</b>,<br/><br/>Your Transaction password has been successfully changed.<br/>URL: <b><loginurl></b><br/>
-    Password: <b><password></b> <br/><br/>If you have any queries, please reach out to us at <b><supportmailid></b><br/><br/><b>With Regards,</b> <br/><b><domain> Team.</b><br/>
-    Address: <address>,<br/>Contact Number:  <contactnumber>,<br/>Email id: <emailid><br/><br/>
-    This is a system generated email. Please do not reply to this email.</div>
+    ${this.header.Template()}
+    <b>Dear  ${FirstName} ${LastName}(<role>)</b>,<br/><br/>Your Transaction password has been successfully changed.<br/>URL: <b><loginurl></b>/b><br/>Email id: <b> ${Email}</b><br/>Password: <b>  ${password}</b>
+      ${this.footer.Template()}</div>
 ` ;
   };
 }
