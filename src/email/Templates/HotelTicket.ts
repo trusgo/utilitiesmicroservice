@@ -8,6 +8,10 @@ import { header } from './Header';
 export class HotelTicket{
   constructor( private header:header, private footer:footer){}
  Template (data){
+  const { BookingDetails,HotelDetails,Guest} = data;
+   console.log(Guest)
+  const {Email,Mobile,FirstName,LastName,PNR,Status,BookingRefNo,BookedDate,BookedTime}=BookingDetails;
+  const {Hotel,FareType,CheckInDate,CheckOutDate}=HotelDetails;
   return `
      <div
            style="
@@ -17,150 +21,227 @@ export class HotelTicket{
              margin: 0 auto;
            "
          >
-           <!-- start -->
-           ${this.header.Template()}
-           <div>
-             <p><b>Passenger Contact: </b><span>9492542988</span></p>
-             <p><b>Passenger Email: </b><span>mc@gmail.com</span></p>
-           </div>
-     
-           <table
-             style="
-               width: 100%;
-               border: 1px solid black;
-               border-collapse: collapse;
-               margin-bottom: 15px;
-             "
-           >
-             <tr style="border-bottom: 1px solid black">
-               <td style="padding: 10px">
-                 <b>Ref number:</b> <span>TSG-B70106580</span>
-               </td>
-               <td></td>
-               <td style="text-align: right; padding: 10px">
-                 <b>Booking Date:</b><span>date here</span>
-               </td>
-             </tr>
-             <tr style="border-bottom: 1px solid black">
-               <td style="padding: 10px">
-                 <b>GDS/Airline PNR:</b>
-               </td>
-               <td style="text-align: center; padding: 10px">
-                 <b>Status:</b><span style="color: #15b615">BOOKED</span>
-               </td>
-               <td style="text-align: right; padding: 10px">
-                 <b>Fare Type:</b>
-               </td>
-             </tr>
-             <tr>
-               <td style="padding: 10px">
-                 <b>Trip Type:</b>
-               </td>
-               <td style="text-align: center; padding: 10px">
-                 <b> Trip Name:</b>
-               </td>
-               <td style="text-align: right; padding: 10px">
-                 <b>Travel Date:</b>
-               </td>
-             </tr>
-           </table>
-     
-           <div style="border: 1px solid black; margin-bottom: 15px">
-             <h4 style="text-align: center; margin-bottom: 0">Hotel Details</h4>
-             <table style="width: 100%">
+         ${this.header.Template()}
+         <div>
+         <h2>Dear ${FirstName} ${LastName}</h2>
+         <br/>Thank you for Booking Hotel through <b>i2Space</b> <br/> We have sended you the HotelTicket which you have Booked for <b>${Hotel}</b>
+         </div>
+         <br/>
+         <table width="600" style="width:600px" cellpadding="0" cellspacing="0" border="0" align="center">
+         <tbody>
+         <tr>
+         <td valign="top" align="center" style="border:1px solid #484848">
+         <center>
+         <table align="center" width="600" cellpadding="0" cellspacing="0" border="0" style="width:600px;margin:0;padding:0">
+         <tbody>
+         <tr>
+         <td align="center" style="width:600px">
+         <table valign="top" align="center" style="width:568px" cellpadding="0" cellspacing="0">
+         <tbody>
+         <tr>
+         <td valign="middle" align="left" style="width:284px;margin:0;border:0;padding:0;line-height:100%;vertical-align:middle">
+         <img src="https://lh3.googleusercontent.com/gctSEqudBf9HVKxAdmmS3Dtacy8H5QG-m80szVfvdeDaYE8Y0X3H4jyWLF8eq0E5xZV5=s128" style="margin:0;border:0;padding:0;display:block;width:85px;height:43px" align="left" width="95" height="43" class="CToWUd">
+         </td>
+         <td valign="middle" align="right" style="width:300px;margin:0;border:0;padding:0;line-height:100%;vertical-align:middle"></td>
+         </tr>
+         <tr>
+         <td colspan="2" height="10" style="line-height:1px;font-size:1px;height:10px">&nbsp;</td>
+         </tr>
+         <tr>
+         <td valign="top" align="left" style="width:284px;margin:0;border:0;padding:0">
+         <table valign="top" align="left" style="width:280px;background-color:#00bfff;border-radius:8px;border-collapse:separate" cellpadding="0" cellspacing="0">
+         <tbody>
+         <tr>
+         <td colspan="2" height="10" style="line-height:1px;font-size:1px;height:11px">&nbsp;</td>
+         </tr>
+         <tr>
+         <td valign="top" style="width:15px">&nbsp;</td>
+         <td valign="top" align="left" style="text-transform:uppercase;width:265px;margin:0;padding:0;font-family:Arial,Helvetica,sans-serif;color:#ffffff;font-weight:bold;line-height:100%;text-align:left;font-size:12px;letter-spacing:0;background-color:#00bfff">mr. ${FirstName}&nbsp;  ${LastName}</td>
+         </tr>
+         <tr>
+         <td colspan="2" height="1" style="line-height:1px;font-size:1px;height:1px">&nbsp;</td>
+         </tr>
+         <tr>
+         <td valign="top" style="width:15px">&nbsp;</td>
+         <td valign="top" align="left" style="width:265px;margin:0;padding:0;font-family:Arial,Helvetica,sans-serif;color:#ffffff;font-weight:normal;line-height:100%;text-align:left;font-size:10px;letter-spacing:0;background-color:#00bfff">  Mob: ${Mobile}</td>
+         </tr>
+         <tr>
+         <td colspan="2" height="1" style="line-height:1px;font-size:1px;height:1px">&nbsp;</td>
+         </tr>
+         <tr>
+         <td valign="top" style="width:15px">&nbsp;</td>
+         <td valign="top" align="left" style="width:265px;margin:0;padding:0;font-family:Arial,Helvetica,sans-serif;color:#ffffff;font-weight:normal;line-height:100%;text-align:left;font-size:10px;letter-spacing:0;background-color:#00bfff">  Email: <a href="#m_-5146331894663962629_" style="color:#ffffff;text-decoration:none;background-color:#00bfff">${Email}</a></td>
+         </tr>
+         
+         <tr>
+         <td colspan="2" height="1" style="line-height:1px;font-size:1px;height:3px">&nbsp;</td>
+         </tr>
+         <tr>
+         <td valign="top" style="width:15px;height:46px">&nbsp;</td>
+         <td valign="top" align="left" style="width:265px;margin:0;padding:0"><table border="0" align="left" cellpadding="0" cellspacing="0" width="105" style="width:105px">
+         <tbody>
+         <tr>
+         <td align="center" style="width:105px;vertical-align:middle;padding-top:8px;padding-bottom:8px;border-radius:4px;color:#ec1c24" valign="middle"></td>
+         </tr>
+         </tbody>
+         </table>
+         </td>
+         </tr>
+         <tr>
+         <td colspan="2" height="10" style="line-height:1px;font-size:1px;height:11px">&nbsp;</td>
+         </tr>
+         </tbody>
+         </table>
+         </td>
+         <td valign="top" align="right" style="width:284px;margin:0;border:0;padding:0">
+         <table valign="top" align="right" style="width:280px;background-color:#00bfff;border-radius:8px;border-collapse:separate" cellpadding="0" cellspacing="0">
+         <tbody>
+         <tr>
+         <td colspan="2" height="10" style="line-height:1px;font-size:1px;height:11px">&nbsp;</td>
+         </tr>
+         <tr>
+         <td colspan="2" height="1" style="line-height:1px;font-size:1px;height:1px">&nbsp;</td>
+         </tr>
+         <tr>
+         <td valign="top" style="width:15px">&nbsp;</td>
+         <td valign="top" align="left" style="width:265px;margin:0;padding:0;font-family:Arial,Helvetica,sans-serif;color:#ffffff;font-weight:normal;line-height:100%;text-align:left;font-size:10px;letter-spacing:1;background-color:#00bfff">  Booking Ref. No: ${BookingRefNo}</td>
+         </tr>
+         <tr>
+         <td colspan="2" height="1" style="line-height:1px;font-size:1px;height:1px">&nbsp;</td>
+         </tr>
+         <tr>
+         <td valign="top" style="width:15px">&nbsp;</td>
+         <td valign="top" align="left" style="width:265px;margin:0;padding:0;font-family:Arial,Helvetica,sans-serif;color:#ffffff;font-weight:normal;line-height:100%;text-align:left;font-size:10px;letter-spacing:1;background-color:#00bfff">  Booked on:  ${BookedDate}, &nbsp;${BookedTime}Hrs
+         </td>
+         </tr>
+         <tr>
+         <td colspan="2" height="1" style="line-height:1px;font-size:1px;height:1px">&nbsp;</td>
+         </tr>
+         <tr>
+         <td valign="top" style="width:15px">&nbsp;</td>
+         <td valign="top" align="left" style="width:265px;margin:0;padding:0;font-family:Arial,Helvetica,sans-serif;color:#ffffff;font-weight:normal;line-height:100%;text-align:left;font-size:10px;letter-spacing:1;background-color:#00bfff">  Status:   ${Status}</td>
+         </tr>
+         <tr>
+         <td colspan="2" height="1" style="line-height:1px;font-size:1px;height:3px">&nbsp;</td>
+         </tr>
+         <tr>
+         <td valign="top" style="width:14px;height:46px">&nbsp;</td>
+         <td valign="top" align="left" style="width:265px;margin:0;padding:0">
+         <table border="0" align="left" cellpadding="0" cellspacing="0" width="100" style="width:100px">
+         <tbody>
+         <tr>
+         <td align="center" style="background-color:#ffffff;width:100px;vertical-align:middle;padding-top:8px;padding-bottom:8px;border-radius:4px;color:#ec1c24" valign="middle"><a href="http://fapp1.spicejet.com/IMUCAULQXW?id=34256=IU9TUgYCB1MCSlMJUlFSBVQBB08=Q15TQlRfTE5TQwtQWwdWIlJbVA9YGABWDx1TA1QHAgMEDwgIBQAACwQFU00KRxcSDxkaAFVGEwhMEhJcB1RdVkEZW19YHnF1Y3InZC5iOzUKX1EaQgQ=&amp;fl=CkcXEg8ZGgRbWQgXERELVgFbUkcbVFddGlBcXFlfSFARQxs=&amp;ext=a2V5PVBIQjE1QnxjaGFuZ2VpdGluZXJhcnl8MjEwQkNFQzg4NzBCN0RDN0ZCODVERERGREM1QUY3OTY4REI0NkZGRDlGMzg4MDg5MkUwREEyRjlDNjI4Q0Y5RiZhbXA7bW9kZT1JUkE=" style="color:#ec1c24;display:block;font-size:11px;font-weight:bold;text-align:center;text-decoration:none;font-family:Arial,Helvetica,sans-serif;line-height:99%" target="_blank" data-saferedirecturl="https://www.google.com/url?q=http://fapp1.spicejet.com/IMUCAULQXW?id%3D34256%3DIU9TUgYCB1MCSlMJUlFSBVQBB08%3DQ15TQlRfTE5TQwtQWwdWIlJbVA9YGABWDx1TA1QHAgMEDwgIBQAACwQFU00KRxcSDxkaAFVGEwhMEhJcB1RdVkEZW19YHnF1Y3InZC5iOzUKX1EaQgQ%3D%26fl%3DCkcXEg8ZGgRbWQgXERELVgFbUkcbVFddGlBcXFlfSFARQxs%3D%26ext%3Da2V5PVBIQjE1QnxjaGFuZ2VpdGluZXJhcnl8MjEwQkNFQzg4NzBCN0RDN0ZCODVERERGREM1QUY3OTY4REI0NkZGRDlGMzg4MDg5MkUwREEyRjlDNjI4Q0Y5RiZhbXA7bW9kZT1JUkE%3D&amp;source=gmail&amp;ust=1606800974734000&amp;usg=AFQjCNHZcS-ZdFv0quCMo197Ihn7f8HAxA">Edit Booking</a>
+         </td>
+         </tr>
+         </tbody>
+         </table>
+         </td>
+         </tr>
+         <tr>
+         <td colspan="2" height="10" style="line-height:1px;font-size:1px;height:11px">&nbsp;</td>
+         </tr>
+         </tbody>
+         </table>
+         </td>
+         </tr>
+         <tr>
+         <td colspan="2" height="10" style="line-height:1px;font-size:1px;height:10px">&nbsp;</td>
+         </tr>
+         </tbody>
+         </table>
+         </td>
+         </tr>
+         <tr>
+    <td align="center" style="width:600px">
+    <table valign="top" align="center" style="width:568px" cellpadding="0" cellspacing="0">
+    <tbody>
+    <tr>
+    <td valign="middle" align="center" style="width:216px;margin:0;border:0;padding:0">
+    <table valign="middle" align="center" style="width:216px" cellpadding="0" cellspacing="0">
+    <tbody>
+    <tr>
+    <td valign="top" align="left" style="margin:0;padding:0;font-family:Arial,Helvetica,sans-serif;color:#000000;font-weight:bold;line-height:100%;text-align:left;font-size:11px;letter-spacing:0">Check_In</td>
+    <td valign="top" style="width:15px">&nbsp;</td>
+    </tr>
+    <tr>
+    <td colspan="2" height="1" style="line-height:1px;font-size:1px;height:1px">&nbsp;</td>
+    </tr>
+    <tr>
+    <td valign="top" align="left" style="margin:0;padding:0;font-family:Arial,Helvetica,sans-serif;color:#000000;font-weight:normal;line-height:100%;text-align:left;font-size:11px;letter-spacing:0">${CheckInDate} </td>
+    <td valign="top" style="width:15px">&nbsp;</td>
+    </tr>
+    </tbody>
+    </table>
+    </td>
+    <td valign="middle" align="center" style="width:136px;margin:0;border:0;padding:0">
+    <table valign="middle" align="center" style="width:136px" cellpadding="0" cellspacing="0"><tbody><tr><td valign="top" align="center" style="margin:0;padding:0;font-family:Arial,Helvetica,sans-serif;color:#000000;font-weight:bold;line-height:100%;text-align:center;font-size:11px;letter-spacing:0">${Hotel}</td>
+    </tr>
+    <tr>
+    <td valign="top" align="center" style="margin:0;border:0;padding:0;line-height:100%;vertical-align:top"><img src="https://ci3.googleusercontent.com/proxy/2fNu97aSB7v-i8k3GvSgkO7se-awWLx0w9d1OLR1GC_iXschwVz3LDzcsJO76VTRV3P_O6fRwwsTyChsCzWk2PTvBoY6MY3IlN5A_60PEQ=s0-d-e1-ft#http://book.spicejet.com/Images/SpiceJet/itinerary/it_10.png" style="margin:0;border:0;padding:0;display:block;width:135px;height:9px" align="center" width="135" height="9" class="CToWUd"></td>
+    </tr>
+    </tbody>
+    </table>
+    </td>
+    <td valign="top" align="center" style="width:216px;margin:0;border:0;padding:0">
+    <table valign="middle" align="center" style="width:216px" cellpadding="0" cellspacing="0">
+    <tbody>
+    <tr>
+    <td valign="top" align="right" style="margin:0;padding:0;font-family:Arial,Helvetica,sans-serif;color:#000000;font-weight:bold;line-height:100%;text-align:right;font-size:11px;letter-spacing:0">Check_Out </td>
+    <td valign="top" style="width:15px">&nbsp;</td>
+    </tr>
+    <tr>
+    <td colspan="2" height="1" style="line-height:1px;font-size:1px;height:1px">&nbsp;</td>
+    </tr>
+    <tr>
+    <td valign="top" align="right" style="margin:0;padding:0;font-family:Arial,Helvetica,sans-serif;color:#000000;font-weight:normal;line-height:100%;text-align:right;font-size:11px;letter-spacing:0">${CheckOutDate}&nbsp;</td>
+    <td valign="top" style="width:15px">&nbsp;</td>
+    </tr>
+    </tbody>
+    </table>
+    </td>
+    </tr>
+    </tbody>
+    </table>
+    </td>
+    </tr>
+         <tr>
+         <td align="center" style="width:600px">
+         <table valign="top" align="center" style="width:568px;border-radius:10px;border-collapse:separate" cellpadding="0" cellspacing="0">
+         <tbody>
+         <tr>
+         <td style="font-family:Arial,Helvetica,sans-serif;color:#ffffff;font-weight:bold;line-height:100%;text-align:left;font-size:11px;letter-spacing:0px;background-color:#333333;padding-left:10px;padding-top:8px;padding-bottom:8px;border-right:1px solid #cccbcb;border-top:1px solid #333333;border-left:1px solid #333333;border-top-left-radius:10px;padding-right:5px;width:100px">Guest Name</td>
+         <td style="font-family:Arial,Helvetica,sans-serif;color:#ffffff;font-weight:bold;line-height:100%;text-align:center;font-size:11px;letter-spacing:0px;background-color:#333333;padding-top:8px;padding-bottom:8px;border-right:1px solid #cccbcb;border-top:1px solid #333333;border-left:1px solid #cccbcb;width:85px">Age</td>
+         <td style="font-family:Arial,Helvetica,sans-serif;color:#ffffff;font-weight:bold;line-height:100%;text-align:center;font-size:11px;letter-spacing:0px;background-color:#333333;padding-top:8px;padding-bottom:8px;border-right:1px solid #cccbcb;border-top:1px solid #333333;border-left:1px solid #cccbcb;border-right:1px solid #333333;border-top-right-radius:10px;width:282px">Add-on Services</td>
+         </tr>
+         ${
+          Guest.map((guest,index)=>{
+             const {FirstName,LastName,Age}=guest;
+             return(
+               `
                <tr>
-                 <td style="padding: 10px; width: 30%">
-                   <b>Operator: </b>Orange Travels
-                 </td>
-     
-                 <td style="padding: 10px; width: 70%">
-                   <b>Bus Type: </b> Sleeper NonAC Mercedes Benz King Size A/C Family
-                   Sleeper (2+2)
-                 </td>
+               <td valign="top" style="color:#000000;font-weight:normal;line-height:100%;letter-spacing:0px;padding-left:10px;padding-top:8px;padding-bottom:8px;font-weight:normal;text-align:center;font-size:10px;padding-left:10px;border:1px solid #cccbcb;padding-right:5px;width:106px">
+               <span style="text-transform:uppercase;line-height:1.6">${FirstName} ${LastName}</span></td>
+               <td style="font-family:'Arial,Helvetica,sans-serif';color:#000000;font-weight:normal;line-height:100%;text-align:left;font-size:10px;letter-spacing:0px;padding-left:10px;padding-top:8px;padding-bottom:8px;border:1px solid #cccbcb;padding-right:5px;width:79px">${Age} </td>
+               <td style="font-family:'Arial,Helvetica,sans-serif';color:#000000;font-weight:normal;line-height:100%;text-align:left;font-size:10px;letter-spacing:0px;padding-left:10px;padding-top:8px;padding-bottom:8px;border:1px solid #cccbcb;padding-right:5px;width:45%;width:287px">  &nbsp; </td>
                </tr>
-             </table>
-             <table style="width: 100%; text-align: center">
-               <tr style="color: #fff; background-color: #1890ff; font-size: 14px">
-                 <th style="width: 18%; padding: 15px 10px">Departure Time</th>
-                 <th width="18%">Arrival Time</th>
-                 <th width="20%">Source</th>
-                 <th width="20%">Destination</th>
-                 <th width="24%">Baggage</th>
-               </tr>
-     
-               <tr style="font-size: 15px">
-                 <td>08:00 PM</td>
-                 <td>09:48 AM</td>
-                 <td>Tolichowki</td>
-                 <td>Yelahanka Upanagar BMTC Bus Stand</td>
-     
-                 <td>
-                   <p>Checkin: 15KG</p>
-     
-                   <p>Hand baggage:7KG</p>
-                 </td>
-               </tr>
-             </table>
-           </div>
-     
-           <div style="border: 1px solid black; margin-bottom: 15px">
-             <h4 style="text-align: center">Travel Details</h4>
-     
-             <table style="text-align: center; width: 100%">
-               <thead>
-                 <tr style="color: #fff; background-color: #1890ff; font-size: 14px">
-                   <th style="width: 40%; padding: 15px 10px">Passenger Name</th>
-                   <th width="13.33%">Age</th>
-                   <th width="20%">Eticket No.</th>
-                   <th width="13.33%">Gender</th>
-                   <th width="13.33%">Seat No.</th>
-                 </tr>
-               </thead>
-               <tbody>
-                 <tr>
-                   <td style="padding: 10px">Mr Mahesh kumar</td>
-                   <td>26</td>
-                   <td>TSG-B70106580</td>
-                   <td>M</td>
-                   <td>34</td>
-                 </tr>
-               </tbody>
-             </table>
-           </div>
-           <table
-             style="
-               width: 100%;
-               border: 1px solid black;
-               border-collapse: collapse;
-               margin-bottom: 15px;
-             "
-           >
-             <tr style="border-bottom: 1px solid black">
-               <td style="padding: 10px">Fare Details:</td>
-               <td style="text-align: right; padding: 10px">INR</td>
-             </tr>
-             <tr style="border-bottom: 1px solid black">
-               <td style="padding: 10px">Base Fare :</td>
-               <td style="text-align: right; padding: 10px">N/A</td>
-             </tr>
-             <tr style="border-bottom: 1px solid black">
-               <td style="padding: 10px">Surge and Taxes: YQ:</td>
-               <td style="text-align: right; padding: 10px">N/A</td>
-             </tr>
-             <tr style="border-bottom: 1px solid black">
-               <td style="padding: 10px">conveneience Fee :</td>
-               <td style="text-align: right; padding: 10px">N/A</td>
-             </tr>
-             <tr style="border-bottom: 1px solid black">
-               <td style="padding: 10px">Net Total:</td>
-               <td style="text-align: right; padding: 10px">N/A</td>
-             </tr>
-             <tr style="border-bottom: 1px solid black">
-               <td style="padding: 10px">Grand Total:</td>
-               <td style="text-align: right; padding: 10px">N/A</td>
-             </tr>
+               `
+             )
+            
+           })
+         }
+           </tbody>
            </table>
-           ${this.footer.Template()} 
+           </td>
+           </tr>
+         </tbody>
+         </table>
+         </center>
+           </td>
+           </tr>
+           </tbody>
+           </table>
+           ${this.footer.Template()}
+         </div>
          </div> `;
 };
 }
