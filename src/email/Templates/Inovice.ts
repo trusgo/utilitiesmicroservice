@@ -7,7 +7,7 @@ import { header } from './Header'
 export class PaymentInvoice{
     constructor( private header:header, private footer:footer){}
  Template (data) {
-     const{FirstName,LastName,Email,Mobile,InvoiceNumber,Date,Amount}=data;
+     const{FirstName,LastName,Email,InvoiceNumber,Date,Amount}=data;
   return `
   ${this.header.Template()}
   <div>

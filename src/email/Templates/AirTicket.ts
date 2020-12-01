@@ -216,7 +216,7 @@ export class AirTicket {
     </tr>
     ${
       Passanger.map((passanger,index)=>{
-        const {FirstName,LastName}=passanger;
+        const {FirstName,LastName,AddOnServices}=passanger;
         return(
           `
           <tr>
@@ -224,7 +224,7 @@ export class AirTicket {
           <span style="text-transform:uppercase;line-height:1.6">${FirstName} ${LastName}</span></td>
           <td style="font-family:Arial,Helvetica,sans-serif;color:#000000;font-weight:normal;line-height:100%;text-align:left;font-size:10px;letter-spacing:0px;padding-left:10px;padding-top:8px;padding-bottom:8px;border:1px solid #cccbcb;padding-right:5px;width:79px">${Flight} </td>
           <td style="font-family:Arial,Helvetica,sans-serif;color:#000000;font-weight:normal;line-height:100%;text-align:left;font-size:10px;letter-spacing:0px;padding-left:10px;padding-top:8px;padding-bottom:8px;border:1px solid #cccbcb;padding-right:2px;width:84px">    ${FareType}    </td>
-          <td style="font-family:Arial,Helvetica,sans-serif;color:#000000;font-weight:normal;line-height:100%;text-align:left;font-size:10px;letter-spacing:0px;padding-left:10px;padding-top:8px;padding-bottom:8px;border:1px solid #cccbcb;padding-right:5px;width:45%;width:287px">  &nbsp; </td>
+          <td style="font-family:Arial,Helvetica,sans-serif;color:#000000;font-weight:normal;line-height:100%;text-align:left;font-size:10px;letter-spacing:0px;padding-left:10px;padding-top:8px;padding-bottom:8px;border:1px solid #cccbcb;padding-right:5px;width:45%;width:287px">  ${AddOnServices} </td>
           </tr>
           `
         )

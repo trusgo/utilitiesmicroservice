@@ -8,9 +8,9 @@ import { header } from './Header';
 export class HotelTicket{
   constructor( private header:header, private footer:footer){}
  Template (data){
-  const { BookingDetails,HotelDetails,Guest} = data;
+  const { HotelBookingDetails,HotelDetails,Guest} = data;
    console.log(Guest)
-  const {Email,Mobile,FirstName,LastName,PNR,Status,BookingRefNo,BookedDate,BookedTime}=BookingDetails;
+  const {Email,Mobile,FirstName,LastName,Status,BookingRefNo,BookedDate,BookedTime}=HotelBookingDetails;
   const {Hotel,FareType,CheckInDate,CheckOutDate}=HotelDetails;
   return `
      <div
@@ -215,14 +215,14 @@ export class HotelTicket{
          </tr>
          ${
           Guest.map((guest,index)=>{
-             const {FirstName,LastName,Age}=guest;
+             const {FirstName,LastName,Age,AddOnServices}=guest;
              return(
                `
                <tr>
                <td valign="top" style="color:#000000;font-weight:normal;line-height:100%;letter-spacing:0px;padding-left:10px;padding-top:8px;padding-bottom:8px;font-weight:normal;text-align:center;font-size:10px;padding-left:10px;border:1px solid #cccbcb;padding-right:5px;width:106px">
                <span style="text-transform:uppercase;line-height:1.6">${FirstName} ${LastName}</span></td>
                <td style="font-family:'Arial,Helvetica,sans-serif';color:#000000;font-weight:normal;line-height:100%;text-align:left;font-size:10px;letter-spacing:0px;padding-left:10px;padding-top:8px;padding-bottom:8px;border:1px solid #cccbcb;padding-right:5px;width:79px">${Age} </td>
-               <td style="font-family:'Arial,Helvetica,sans-serif';color:#000000;font-weight:normal;line-height:100%;text-align:left;font-size:10px;letter-spacing:0px;padding-left:10px;padding-top:8px;padding-bottom:8px;border:1px solid #cccbcb;padding-right:5px;width:45%;width:287px">  &nbsp; </td>
+               <td style="font-family:'Arial,Helvetica,sans-serif';color:#000000;font-weight:normal;line-height:100%;text-align:left;font-size:10px;letter-spacing:0px;padding-left:10px;padding-top:8px;padding-bottom:8px;border:1px solid #cccbcb;padding-right:5px;width:45%;width:287px"> ${AddOnServices} </td>
                </tr>
                `
              )

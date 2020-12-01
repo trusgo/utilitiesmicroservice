@@ -6,11 +6,11 @@ import { header } from "./Header";
 export class changeTxnPasswordTemplate {
   constructor( private header:header, private footer:footer){}
   Template = (data) => {
-    const { FirstName, LastName,Email,Mobile,password } = data;
+    const { FirstName, LastName,Email,Mobile,password ,role} = data;
     return `
     <div>
     ${this.header.Template()}
-    <b>Dear  ${FirstName} ${LastName}(<role>)</b>,<br/><br/>Your Transaction password has been successfully changed.<br/>URL: <b><loginurl></b>/b><br/>Email id: <b> ${Email}</b><br/>Password: <b>  ${password}</b>
+    <b>Dear  ${FirstName} ${LastName}(${role})</b>,<br/><br/>Your Transaction password has been successfully changed.<br/>URL: <b><loginurl></b>/b><br/>Email id: <b> ${Email}</b><br/>Password: <b>  ${password}</b>
       ${this.footer.Template()}</div>
 ` ;
   };

@@ -7,11 +7,11 @@ import { header } from "./Header";
 export class CancelRequest {
   constructor( private header:header, private footer:footer){}
   Template = (data) => {
-    const { refno, FirstName, LastName,Email,Mobile } = data;
+    const { referenceNo, FirstName, LastName} = data;
     return `
     <div>
     ${this.header.Template()}
-    <b>Dear ${FirstName}${LastName},</b><br/><br/>Please cancel the ticket for Reference Number: <b>${refno}</b>.
+    <b>Dear ${FirstName}${LastName},</b><br/><br/>Please cancel the ticket for Reference Number: <b>${referenceNo}</b>.
     ${this.footer.Template()}
 ` ;
   };
