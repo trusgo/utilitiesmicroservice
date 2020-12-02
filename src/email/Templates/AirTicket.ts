@@ -6,7 +6,7 @@ import { Injectable } from '@nestjs/common';
 export class AirTicket {
   constructor( private header:header, private footer:footer){}
   Template = (data) => {
-    const { BookingDetails,FlightDetails,Passanger} = data;
+    const {edit_url, BookingDetails,FlightDetails,Passanger} = data;
    
       const {Email,Mobile,FirstName,LastName,PNR,Status,BookingRefNo,BookedDate,BookedTime}=BookingDetails;
       const {Source,Destination,DepatureDate,DepatureTime,ArrivalDate,ArrivalTime,Flight,FareType}=FlightDetails;
@@ -130,7 +130,7 @@ export class AirTicket {
     <table border="0" align="left" cellpadding="0" cellspacing="0" width="100" style="width:100px">
     <tbody>
     <tr>
-    <td align="center" style="background-color:#ffffff;width:100px;vertical-align:middle;padding-top:8px;padding-bottom:8px;border-radius:4px;color:#ec1c24" valign="middle"><a href="http://fapp1.spicejet.com/IMUCAULQXW?id=34256=IU9TUgYCB1MCSlMJUlFSBVQBB08=Q15TQlRfTE5TQwtQWwdWIlJbVA9YGABWDx1TA1QHAgMEDwgIBQAACwQFU00KRxcSDxkaAFVGEwhMEhJcB1RdVkEZW19YHnF1Y3InZC5iOzUKX1EaQgQ=&amp;fl=CkcXEg8ZGgRbWQgXERELVgFbUkcbVFddGlBcXFlfSFARQxs=&amp;ext=a2V5PVBIQjE1QnxjaGFuZ2VpdGluZXJhcnl8MjEwQkNFQzg4NzBCN0RDN0ZCODVERERGREM1QUY3OTY4REI0NkZGRDlGMzg4MDg5MkUwREEyRjlDNjI4Q0Y5RiZhbXA7bW9kZT1JUkE=" style="color:#ec1c24;display:block;font-size:11px;font-weight:bold;text-align:center;text-decoration:none;font-family:Arial,Helvetica,sans-serif;line-height:99%" target="_blank" data-saferedirecturl="https://www.google.com/url?q=http://fapp1.spicejet.com/IMUCAULQXW?id%3D34256%3DIU9TUgYCB1MCSlMJUlFSBVQBB08%3DQ15TQlRfTE5TQwtQWwdWIlJbVA9YGABWDx1TA1QHAgMEDwgIBQAACwQFU00KRxcSDxkaAFVGEwhMEhJcB1RdVkEZW19YHnF1Y3InZC5iOzUKX1EaQgQ%3D%26fl%3DCkcXEg8ZGgRbWQgXERELVgFbUkcbVFddGlBcXFlfSFARQxs%3D%26ext%3Da2V5PVBIQjE1QnxjaGFuZ2VpdGluZXJhcnl8MjEwQkNFQzg4NzBCN0RDN0ZCODVERERGREM1QUY3OTY4REI0NkZGRDlGMzg4MDg5MkUwREEyRjlDNjI4Q0Y5RiZhbXA7bW9kZT1JUkE%3D&amp;source=gmail&amp;ust=1606800974734000&amp;usg=AFQjCNHZcS-ZdFv0quCMo197Ihn7f8HAxA">Edit Booking</a>
+    <td align="center" style="background-color:#ffffff;width:100px;vertical-align:middle;padding-top:8px;padding-bottom:8px;border-radius:4px;color:#ec1c24" valign="middle"><a href=${edit_url} style="color:#ec1c24;display:block;font-size:11px;font-weight:bold;text-align:center;text-decoration:none;font-family:Arial,Helvetica,sans-serif;line-height:99%" target="_blank">Edit Booking</a>
     </td>
     </tr>
     </tbody>
