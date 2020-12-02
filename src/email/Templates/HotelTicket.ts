@@ -111,7 +111,7 @@ export class HotelTicket{
          </tr>
          <tr>
          <td valign="top" style="width:15px">&nbsp;</td>
-         <td valign="top" align="left" style="width:265px;margin:0;padding:0;font-family:Arial,Helvetica,sans-serif;color:#ffffff;font-weight:normal;line-height:100%;text-align:left;font-size:10px;letter-spacing:1;background-color:#00bfff">  Booked on:  ${BookedDate}, &nbsp;${BookedTime}Hrs
+         <td valign="top" align="left" style="width:265px;margin:0;padding:0;font-family:Arial,Helvetica,sans-serif;color:#ffffff;font-weight:normal;line-height:100%;text-align:left;font-size:10px;letter-spacing:1;background-color:#00bfff">  Booked on:  ${BookedDate}, &nbsp;${BookedTime}
          </td>
          </tr>
          <tr>
