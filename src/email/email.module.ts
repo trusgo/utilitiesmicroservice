@@ -31,8 +31,9 @@ import {ResheduleRequestTemplete} from './Templates/ResheduleRequest';
 import {ContactUsTemplete} from './Templates/ContactUs';
 import {flightEnquiryTemplate} from './Templates/FlightEnquiry';
 import {FlightDetailsTemplete} from './Templates/FlightDetails';
-import { header } from './Templates/Header'
-import { footer } from './Templates/Footer'
+import { header } from './Templates/Header';
+import { footer } from './Templates/Footer';
+import {ticketBlockingTemplate} from './Templates/TicketBlocking'
 @Module({
   imports: [
     HttpModule.registerAsync({
@@ -74,7 +75,7 @@ import { footer } from './Templates/Footer'
     cancelRequestrefNoTemplate,cancelTicketTemplate,changePasswordTemplate,changeTxnPasswordTemplate,
     busInoviceTemplate,feedbackAndComplaintsTemplate,flightSegmentTemplate,groupEnquiryRequestTemplate,hotelInoviceTemplate,
     hotelRoomBookingTemplate,paymentCancelMailTemplate,printTicketTemplate,ticketingSystemtemplate,userActivationTemplate,ResheduleRequestTemplete,
-    ContactUsTemplete,flightEnquiryTemplate,sendMailService,header,footer,FlightDetailsTemplete]
+    ContactUsTemplete,flightEnquiryTemplate,sendMailService,header,footer,FlightDetailsTemplete,ticketBlockingTemplate]
 })
 export class EmailModule { }
 

@@ -6,7 +6,7 @@ import { header } from './Header';
 @Injectable()
 export class BusTicket{
   constructor( private header:header, private footer:footer){}
- Template (data) {
+ Template= async (data)=> {
   return `
      <div
            style="
@@ -159,7 +159,9 @@ export class BusTicket{
                <td style="text-align: right; padding: 10px">N/A</td>
              </tr>
            </table>
-           ${this.footer.Template()}
+           ${await this.footer.Template().then((res)=>{
+            return res
+          })}
          </div> `;
 };
 }

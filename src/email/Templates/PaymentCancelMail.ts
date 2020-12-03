@@ -5,7 +5,7 @@ import { header } from "./Header";
 @Injectable()
 export class paymentCancelMailTemplate {
     constructor( private header:header, private footer:footer){}
-  Template = (data) => {
+  Template = async (data) => {
     const { FirstName, LastName, address,Email,Mobile,password } = data;
     return `
     <div>
@@ -90,7 +90,10 @@ export class paymentCancelMailTemplate {
         </tr>
     </tbody>
 </table>
-${this.footer.Template()}
+${await this.footer.Template().then((res)=>{
+  
+    return res
+  })}
 </div>
 ` ;
   };

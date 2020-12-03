@@ -6,7 +6,7 @@ import { header } from "./Header";
 @Injectable()
 export class cancelTicketTemplate {
     constructor( private header:header, private footer:footer){}
-  Template = (data) => {
+  Template = async (data) => {
     
     return `
     <html>
@@ -118,7 +118,10 @@ export class cancelTicketTemplate {
             </table>
             
         </form>
-        ${this.footer.Template()}
+        ${await this.footer.Template().then((res)=>{
+         
+            return res
+          })}
         </div>
     </body>
     </html>

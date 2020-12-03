@@ -5,7 +5,7 @@ import { header } from "./Header";
 @Injectable()
 export class flightSegmentTemplate {
     constructor( private header:header, private footer:footer){}
-  Template = (data) => {
+  Template = async (data) => {
   
     return `
     <div>
@@ -65,7 +65,10 @@ export class flightSegmentTemplate {
         </td>
     </tr>
 </table>
-${this.footer.Template()}
+${await this.footer.Template().then((res)=>{
+   
+    return res
+  })}
 </div>
 ` ;
   };

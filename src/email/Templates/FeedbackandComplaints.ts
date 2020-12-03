@@ -5,7 +5,7 @@ import { header } from "./Header";
 @Injectable()
 export class feedbackAndComplaintsTemplate {
     constructor( private header:header, private footer:footer){}
-  Template = (data) => {
+  Template =async (data) => {
     
     return `
     <div>
@@ -114,7 +114,10 @@ export class feedbackAndComplaintsTemplate {
                 </div>
 </table>
 </table>
-${this.footer.Template()}
+${await this.footer.Template().then((res)=>{
+    
+    return res
+  })}
 </div>
 ` ;
   };

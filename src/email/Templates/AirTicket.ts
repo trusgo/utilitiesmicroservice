@@ -5,7 +5,7 @@ import { Injectable } from '@nestjs/common';
 @Injectable()
 export class AirTicket {
   constructor( private header:header, private footer:footer){}
-  Template = (data) => {
+  Template = async (data) => {
     const {edit_url, BookingDetails,FlightDetails,Passanger} = data;
    
       const {Email,Mobile,FirstName,LastName,PNR,Status,BookingRefNo,BookedDate,BookedTime}=BookingDetails;
@@ -14,7 +14,7 @@ export class AirTicket {
     <div>
     ${this.header.Template()}
     <div>
-    <h2>Dear ${FirstName} ${LastName}</h2>
+    <b>Dear ${FirstName} ${LastName},</b>
     <br/>Thank you for Booking Flight through<b>i2Space</b> <br/> We have sended you the FlightTicket which you have Booked for <b>${Flight}</b>
     </div><br/>
     <table width="600" style="width:600px" cellpadding="0" cellspacing="0" border="0" align="center">
@@ -242,7 +242,9 @@ export class AirTicket {
       </tr>
       </tbody>
       </table>
-      ${this.footer.Template()}
+      ${await this.footer.Template().then((res)=>{
+        return res
+      })}
     </div>`;
   };
 }

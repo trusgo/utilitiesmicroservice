@@ -26,7 +26,8 @@ import {userActivationTemplate} from './Templates/UserActivation';
 import {ResheduleRequestTemplete} from './Templates/ResheduleRequest';
 import {ContactUsTemplete} from './Templates/ContactUs';
 import {flightEnquiryTemplate} from './Templates/FlightEnquiry';
-import {FlightDetailsTemplete} from './Templates/FlightDetails'
+import {FlightDetailsTemplete} from './Templates/FlightDetails';
+import {ticketBlockingTemplate} from './Templates/TicketBlocking'
 import { from } from 'rxjs';
 
 @Injectable()
@@ -57,11 +58,12 @@ export class EmailService {
     private readonly ResheduleRequestTemp:ResheduleRequestTemplete,
     private readonly ContactUsTemp:ContactUsTemplete,
     private readonly flightEnquiryTemp:flightEnquiryTemplate,
-    private readonly FlightDetailsTemp:FlightDetailsTemplete
+    private readonly FlightDetailsTemp:FlightDetailsTemplete,
+    private readonly ticketBlockingTemp:ticketBlockingTemplate
   ) {}
 
   async flightTicket(reqBody: MailReq) {
-    const result = this.airTicket.Template(reqBody.data);
+    const result = await this.airTicket.Template(reqBody.data);
     const mail = this.mailerService.sendEmail(
       reqBody.to,
       reqBody.subject,
@@ -73,7 +75,7 @@ export class EmailService {
   }
 
   async hotelTicket(reqBody: MailReq) {
-    const result = this.hotelTickets.Template(reqBody.data);
+    const result = await this.hotelTickets.Template(reqBody.data);
     const mail = this.mailerService.sendEmail(
       reqBody.to,
       reqBody.subject,
@@ -84,7 +86,7 @@ export class EmailService {
     return mail;
   }
   async busTicket(reqBody: MailReq) {
-    const result = this.busTickets.Template(reqBody.data);
+    const result = await this.busTickets.Template(reqBody.data);
     const mail = this.mailerService.sendEmail(
       reqBody.to,
       reqBody.subject,
@@ -95,7 +97,7 @@ export class EmailService {
     return mail;
   }
   async forgetPassword(reqBody: MailReq) {
-    const result = this.forgetPasswordTem.Template(reqBody.data);
+    const result = await this.forgetPasswordTem.Template(reqBody.data);
     const mail = this.mailerService.sendEmail(
       reqBody.to,
       reqBody.subject,
@@ -105,12 +107,12 @@ export class EmailService {
     return mail;
   }
   async registration(reqBody: MailReq) {
-    const result = this.registerTem.Template(reqBody.data);
+    const result = await this.registerTem.Template(reqBody.data);
 
     return this.mailerService.sendEmail(reqBody.to, reqBody.subject, result,reqBody.cc,reqBody.bcc);
   }
   async paymentInvoice(reqBody: MailReq) {
-    const result = this.paymentInvoiceTem.Template(reqBody.data);
+    const result = await this.paymentInvoiceTem.Template(reqBody.data);
     const mail = this.mailerService.sendEmail(
       reqBody.to,
       reqBody.subject,
@@ -120,7 +122,7 @@ export class EmailService {
     return mail;
   }
   async cancelRequest(reqBody: MailReq) {
-    const result = this.cancelRequestRefNoTem.Template(reqBody.data);
+    const result = await this.cancelRequestRefNoTem.Template(reqBody.data);
     const mail = this.mailerService.sendEmail(
       reqBody.to,
       reqBody.subject,
@@ -130,7 +132,7 @@ export class EmailService {
     return mail;
   }
   async cancelRequestrefNo(reqBody: MailReq) {
-    const result = this.cancelRequestTem.Template(reqBody.data);
+    const result = await this.cancelRequestTem.Template(reqBody.data);
     const mail = this.mailerService.sendEmail(
       reqBody.to,
       reqBody.subject,
@@ -140,7 +142,7 @@ export class EmailService {
     return mail;
   }
   async cancelTicket(reqBody: MailReq) {
-    const result = this.cancelTicketTemplate.Template(reqBody.data);
+    const result = await this.cancelTicketTemplate.Template(reqBody.data);
     const mail = this.mailerService.sendEmail(
       reqBody.to,
       reqBody.subject,
@@ -150,7 +152,7 @@ export class EmailService {
     return mail;
   }
   async changePassword(reqBody: MailReq) {
-    const result = this.changePasswordTemp.Template(reqBody.data);
+    const result = await this.changePasswordTemp.Template(reqBody.data);
     const mail = this.mailerService.sendEmail(
       reqBody.to,
       reqBody.subject,
@@ -160,7 +162,7 @@ export class EmailService {
     return mail;
   }
   async changeTxnPassword(reqBody: MailReq) {
-    const result = this.changeTxnPasswordTemp.Template(reqBody.data);
+    const result = await this.changeTxnPasswordTemp.Template(reqBody.data);
     const mail = this.mailerService.sendEmail(
       reqBody.to,
       reqBody.subject,
@@ -170,7 +172,7 @@ export class EmailService {
     return mail;
   }
   async busInvoice(reqBody: MailReq) {
-    const result = this.busInvoiceTemp.Template(reqBody.data);
+    const result = await this.busInvoiceTemp.Template(reqBody.data);
     const mail = this.mailerService.sendEmail(
       reqBody.to,
       reqBody.subject,
@@ -180,7 +182,7 @@ export class EmailService {
     return mail;
   }
   async feedbackAndComplaints(reqBody: MailReq) {
-    const result = this.feedbackandCompliantsTemp.Template(reqBody.data);
+    const result = await this.feedbackandCompliantsTemp.Template(reqBody.data);
     const mail = this.mailerService.sendEmail(
       reqBody.to,
       reqBody.subject,
@@ -190,7 +192,7 @@ export class EmailService {
     return mail;
   }
   async flightSegment(reqBody: MailReq) {
-    const result = this.flightSegmentTemp.Template(reqBody.data);
+    const result = await this.flightSegmentTemp.Template(reqBody.data);
     const mail = this.mailerService.sendEmail(
       reqBody.to,
       reqBody.subject,
@@ -200,7 +202,7 @@ export class EmailService {
     return mail;
   }
   async groupEnquiryRequest(reqBody: MailReq) {
-    const result = this.groupEnquiryRequestTemp.Template(reqBody.data);
+    const result = await this.groupEnquiryRequestTemp.Template(reqBody.data);
     const mail = this.mailerService.sendEmail(
       reqBody.to,
       reqBody.subject,
@@ -210,7 +212,7 @@ export class EmailService {
     return mail;
   }
   async hotelInovice(reqBody: MailReq) {
-    const result = this.hotelInoviceTemp.Template(reqBody.data);
+    const result =await this.hotelInoviceTemp.Template(reqBody.data);
     const mail = this.mailerService.sendEmail(
       reqBody.to,
       reqBody.subject,
@@ -220,7 +222,7 @@ export class EmailService {
     return mail;
   }
   async hotelRoomBooking(reqBody: MailReq) {
-    const result = this.hotelRoomBookingTemp.Template(reqBody.data);
+    const result =await this.hotelRoomBookingTemp.Template(reqBody.data);
     const mail = this.mailerService.sendEmail(
       reqBody.to,
       reqBody.subject,
@@ -230,7 +232,7 @@ export class EmailService {
     return mail;
   }
   async paymentCancelMail(reqBody: MailReq) {
-    const result = this.paymentCancelMailTemp.Template(reqBody.data);
+    const result = await this.paymentCancelMailTemp.Template(reqBody.data);
     const mail = this.mailerService.sendEmail(
       reqBody.to,
       reqBody.subject,
@@ -240,7 +242,7 @@ export class EmailService {
     return mail;
   }
   async printTicket(reqBody: MailReq) {
-    const result = this.printTicketTemp.Template(reqBody.data);
+    const result = await this.printTicketTemp.Template(reqBody.data);
     const mail = this.mailerService.sendEmail(
       reqBody.to,
       reqBody.subject,
@@ -250,7 +252,7 @@ export class EmailService {
     return mail;
   }
   async ticketingSystem(reqBody: MailReq) {
-    const result = this.ticketingSystemtemp.Template(reqBody.data);
+    const result = await this.ticketingSystemtemp.Template(reqBody.data);
     const mail = this.mailerService.sendEmail(
       reqBody.to,
       reqBody.subject,
@@ -260,7 +262,7 @@ export class EmailService {
     return mail;
   }
   async userActivation(reqBody: MailReq) {
-    const result = this.userActivationTemp.Template(reqBody.data);
+    const result = await this.userActivationTemp.Template(reqBody.data);
     const mail = this.mailerService.sendEmail(
       reqBody.to,
       reqBody.subject,
@@ -270,7 +272,7 @@ export class EmailService {
     return mail;
   }
   async ResheduleRequest(reqBody: MailReq) {
-    const result = this.ResheduleRequestTemp.Template(reqBody.data);
+    const result = await this.ResheduleRequestTemp.Template(reqBody.data);
     const mail = this.mailerService.sendEmail(
       reqBody.to,
       reqBody.subject,
@@ -280,7 +282,7 @@ export class EmailService {
     return mail;
   }
   async contactUs(reqBody: MailReq) {
-    const result = this.ContactUsTemp.Template(reqBody.data);
+    const result =  await this.ContactUsTemp.Template(reqBody.data);
     const mail = this.mailerService.sendEmail(
       reqBody.to,
       reqBody.subject,
@@ -291,7 +293,7 @@ export class EmailService {
   }
 
   async flightEnquiry(reqBody: MailReq) {
-    const result = this.flightEnquiryTemp.Template(reqBody.data);
+    const result = await this.flightEnquiryTemp.Template(reqBody.data);
     const mail = this.mailerService.sendEmail(
       reqBody.to,
       reqBody.subject,
@@ -301,7 +303,17 @@ export class EmailService {
     return mail;
   }
   async flightDetails(reqBody: MailReq) {
-    const result = this.FlightDetailsTemp.Template(reqBody.data);
+    const result = await this.FlightDetailsTemp.Template(reqBody.data);
+    const mail = this.mailerService.sendEmail(
+      reqBody.to,
+      reqBody.subject,
+      result,
+      reqBody.cc,reqBody.bcc
+    );
+    return mail;
+  }
+  async ticketBlocking(reqBody: MailReq) {
+    const result = await this.ticketBlockingTemp.Template(reqBody.data);
     const mail = this.mailerService.sendEmail(
       reqBody.to,
       reqBody.subject,

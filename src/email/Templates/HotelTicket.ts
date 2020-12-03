@@ -7,7 +7,7 @@ import { header } from './Header';
 @Injectable()
 export class HotelTicket{
   constructor( private header:header, private footer:footer){}
- Template (data){
+ Template = async (data) =>{
   const {edit_url, HotelBookingDetails,HotelDetails,Guest} = data;
    console.log(Guest)
   const {Email,Mobile,FirstName,LastName,Status,BookingRefNo,BookedDate,BookedTime}=HotelBookingDetails;
@@ -23,8 +23,8 @@ export class HotelTicket{
          >
          ${this.header.Template()}
          <div>
-         <h2>Dear ${FirstName} ${LastName}</h2>
-         <br/>Thank you for Booking Hotel through <b>i2Space</b> <br/> We have sended you the HotelTicket which you have Booked for <b>${Hotel}</b>
+         <b>Dear ${FirstName} ${LastName},</b>
+         <br/><br/>Thank you for Booking Hotel through <b>i2Space</b> <br/> We have sended you the HotelTicket which you have Booked for <b>${Hotel}</b>
          </div>
          <br/>
          <table width="600" style="width:600px" cellpadding="0" cellspacing="0" border="0" align="center">
@@ -240,7 +240,10 @@ export class HotelTicket{
            </tr>
            </tbody>
            </table>
-           ${this.footer.Template()}
+           ${await this.footer.Template().then((res)=>{
+            
+            return res
+          })}
          </div>
          </div> `;
 };

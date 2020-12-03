@@ -135,5 +135,10 @@ export class EmailController {
 
     return await this.emailService.flightDetails(reqBody)
   }
+  @MessagePattern({ cmd: 'ticketBlocking' })
+  async ticketBlocking(reqBody: MailReq) {
+
+    return await this.emailService.ticketBlocking(reqBody)
+  }
 }
 
