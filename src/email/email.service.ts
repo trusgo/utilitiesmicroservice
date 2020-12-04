@@ -27,7 +27,9 @@ import {ResheduleRequestTemplete} from './Templates/ResheduleRequest';
 import {ContactUsTemplete} from './Templates/ContactUs';
 import {flightEnquiryTemplate} from './Templates/FlightEnquiry';
 import {FlightDetailsTemplete} from './Templates/FlightDetails';
-import {ticketBlockingTemplate} from './Templates/TicketBlocking'
+import {ticketBlockingTemplate} from './Templates/TicketBlocking';
+import {ticketRefundTemplate} from './Templates/TicketRefund';
+import {flightItineraryTemplate} from './Templates/flightItinerary'
 import { from } from 'rxjs';
 
 @Injectable()
@@ -59,7 +61,9 @@ export class EmailService {
     private readonly ContactUsTemp:ContactUsTemplete,
     private readonly flightEnquiryTemp:flightEnquiryTemplate,
     private readonly FlightDetailsTemp:FlightDetailsTemplete,
-    private readonly ticketBlockingTemp:ticketBlockingTemplate
+    private readonly ticketBlockingTemp:ticketBlockingTemplate,
+    private readonly ticketRefundTemp:ticketRefundTemplate,
+    private readonly flightItineraryTemp:flightItineraryTemplate
   ) {}
 
   async flightTicket(reqBody: MailReq) {
@@ -314,6 +318,26 @@ export class EmailService {
   }
   async ticketBlocking(reqBody: MailReq) {
     const result = await this.ticketBlockingTemp.Template(reqBody.data);
+    const mail = this.mailerService.sendEmail(
+      reqBody.to,
+      reqBody.subject,
+      result,
+      reqBody.cc,reqBody.bcc
+    );
+    return mail;
+  }
+  async ticketRefund(reqBody: MailReq) {
+    const result = await this.ticketRefundTemp.Template(reqBody.data);
+    const mail = this.mailerService.sendEmail(
+      reqBody.to,
+      reqBody.subject,
+      result,
+      reqBody.cc,reqBody.bcc
+    );
+    return mail;
+  }
+  async flightItinerary(reqBody: MailReq) {
+    const result = await this.flightItineraryTemp.Template(reqBody.data);
     const mail = this.mailerService.sendEmail(
       reqBody.to,
       reqBody.subject,

@@ -39,7 +39,8 @@ export class FlightDetailsTemplete {
            <th style="width: 15%; padding: 3px 2px">preferred Class</th>
          </tr>
          ${
-            flightDetails.map((flight,t)=>{
+            flightDetails.map((flight)=>{
+              
                 const{origin,destination,duration,date,amount,Class}=flight
                 return(`
                 <tr style="font-size: 11px">
@@ -51,7 +52,6 @@ export class FlightDetailsTemplete {
                 <td style="width:15%; padding: 4px">${Class}</td>
                 </tr>
                 `
-                   
                 )
             })
          }

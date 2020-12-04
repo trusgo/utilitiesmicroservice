@@ -140,5 +140,15 @@ export class EmailController {
 
     return await this.emailService.ticketBlocking(reqBody)
   }
+  @MessagePattern({ cmd: 'ticketRefund' })
+  async ticketRefund(reqBody: MailReq) {
+
+    return await this.emailService.ticketRefund(reqBody)
+  }
+  @MessagePattern({ cmd: 'flightItinerary' })
+  async flightItinerary(reqBody: MailReq) {
+
+    return await this.emailService.flightItinerary(reqBody)
+  }
 }
 
