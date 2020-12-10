@@ -15,7 +15,7 @@ export class sendMailService {
       const respone = await this.mailerService.sendMail({
         to: to, // list of receivers
         // from: 'trickytop945@gmail.com', // sender address
-        from:'care@qktrip.com',
+        from: process.env.MAIL_USER,
         cc: cc,
         bcc:bcc,
         // from:'contact@trusgo.com',

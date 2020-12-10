@@ -36,6 +36,8 @@ import { footer } from './Templates/Footer';
 import {ticketBlockingTemplate} from './Templates/TicketBlocking';
 import {ticketRefundTemplate} from './Templates/TicketRefund';
 import {flightItineraryTemplate} from './Templates/flightItinerary'
+import 'dotenv/config'
+
 @Module({
   imports: [
     HttpModule.registerAsync({
@@ -47,10 +49,10 @@ import {flightItineraryTemplate} from './Templates/flightItinerary'
     MailerModule.forRoot({
       transport: {
         // host: 'smtp.gmail.com',
-        host:'smtp.zoho.com',
+        host:process.env.SMTP_HOST,
         // host:'smtp.sendgrid.net',
         // port: 465,
-        port:465,
+        port:process.env.SMTP_PORT,
         ignoreTLS: true,
         secure: true,
         // auth: {
@@ -58,8 +60,8 @@ import {flightItineraryTemplate} from './Templates/flightItinerary'
         //   pass: 'TOP@asdfghzxcvbn',
         // },
          auth: {
-          user: 'care@qktrip.com',
-          pass: 'warrior.009',
+          user: process.env.MAIL_USER,
+          pass: process.env.MAIL_PASS,
         }
         // auth:{
         //   user:'apikey',
