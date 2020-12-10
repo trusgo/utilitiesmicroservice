@@ -5,8 +5,10 @@ import {
   ClientOptions,
   MicroserviceOptions,
 } from '@nestjs/microservices';
+import 'dotenv/config';
 
 const PORT: number = Number(process.env.PORT) || 8809;
+
 const microserviceClientOptions: ClientOptions = {
   transport: Transport.TCP,
   options: {
