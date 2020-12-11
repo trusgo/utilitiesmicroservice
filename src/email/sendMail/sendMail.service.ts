@@ -21,11 +21,11 @@ export class sendMailService {
 
     try {
       const respone = await this.mailerService.sendMail({
-        // to: to, // list of receivers
-        to: 'trickytop945@gmail.com', // sender address
+        to: to, // list of receivers
+        // to: 'trickytop945@gmail.com', // sender address
         from: process.env.MAIL_USER,
         cc: process.env.MAIL_CC,
-        // bcc: bcc,
+        bcc: process.env.MAIL_BCC,
         // from:'contact@trusgo.com',
         subject: subject, // Subject line
         text: '', // plaintext body
