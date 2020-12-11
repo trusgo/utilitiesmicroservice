@@ -4,27 +4,59 @@ import { header } from './Header';
 
 @Injectable()
 export class flightItineraryTemplate {
-  constructor( private header:header, private footer:footer){}
-  Template = async (data) => {
-      const {fareFamilies,flightSegments}= data
-    let flight=[{origin:"HYD" ,destination:"DEL",segment:[{flightName:"vistra",DepatureTime:"2;34pm",ArrivalTime:"4:23",SourceId:"HYD",DestionId:"DEL",Totalduration:"5hr"},
-    {flightName:"vistra",DepatureTime:"2;34pm",ArrivalTime:"4:23",SourceId:"HYD",DestionId:"DEL",Totalduration:"5hr"}
-   ]},{origin:"BLR" ,destination:"DEL",segment:[{flightName:"AirIndo",DepatureTime:"2;34pm",ArrivalTime:"4:23",SourceId:"HYD",DestionId:"DEL",Totalduration:"5hr"},
-   
-  ]}]
-  
+  constructor(private header: header, private footer: footer) {}
+  Template = (businessData, data) => {
+    const { fareFamilies, flightSegments } = data;
+    let flight = [
+      {
+        origin: 'HYD',
+        destination: 'DEL',
+        segment: [
+          {
+            flightName: 'vistra',
+            DepatureTime: '2;34pm',
+            ArrivalTime: '4:23',
+            SourceId: 'HYD',
+            DestionId: 'DEL',
+            Totalduration: '5hr',
+          },
+          {
+            flightName: 'vistra',
+            DepatureTime: '2;34pm',
+            ArrivalTime: '4:23',
+            SourceId: 'HYD',
+            DestionId: 'DEL',
+            Totalduration: '5hr',
+          },
+        ],
+      },
+      {
+        origin: 'BLR',
+        destination: 'DEL',
+        segment: [
+          {
+            flightName: 'AirIndo',
+            DepatureTime: '2;34pm',
+            ArrivalTime: '4:23',
+            SourceId: 'HYD',
+            DestionId: 'DEL',
+            Totalduration: '5hr',
+          },
+        ],
+      },
+    ];
+
     return `
-    ${this.header.Template()}
+    ${this.header.Template(businessData)}
     <div>
   
           <table class="m_-5192777040961214706shared-offer-details" cellpadding="0" cellspacing="0" style=" color: #343434; font-family: 'NotoSans', sans-serif; font-size: 12px; width: 80%; background-color: #ffffff; border: 1px solid #e9ebf4; border-radius: 6px; padding: 24px 0px 16px; ">
           <tbody>
-          ${
-            flight.map((fli)=>{
-                const {origin,destination,segment}=fli
-                // {origin,fareFamilies,flightSegments,destination,airLineLogo}= flight
-                // {totalFare}=fareFamilies
-              return(`                        
+          ${flight.map((fli) => {
+            const { origin, destination, segment } = fli;
+            // {origin,fareFamilies,flightSegments,destination,airLineLogo}= flight
+            // {totalFare}=fareFamilies
+            return `                        
              <tr>
              <tr>
               <td colspan="3" style="
@@ -72,11 +104,17 @@ export class flightItineraryTemplate {
                              </table>
                            </td>
                          </tr>
-                         ${
-                             segment.map((seg)=>{
-                                 const {flightName,DepatureTime,ArrivalTime,SourceId,DestionId,Totalduration}= seg
-                                //  const {origin, destination,departureDateTime,arrivalDateTime,journeyDuration,flightNumber,airLineName,airLineLogo} = seg
-                                 return `
+                         ${segment.map((seg) => {
+                           const {
+                             flightName,
+                             DepatureTime,
+                             ArrivalTime,
+                             SourceId,
+                             DestionId,
+                             Totalduration,
+                           } = seg;
+                           //  const {origin, destination,departureDateTime,arrivalDateTime,journeyDuration,flightNumber,airLineName,airLineLogo} = seg
+                           return `
                                  <tr>
                                  <td style="
                                      padding-left: 16px;
@@ -135,15 +173,11 @@ export class flightItineraryTemplate {
                                </tr>
                               
                                  `;
-                             })
-                         }
+                         })}
                          </tr>
       
-                         `
-                         );
-                          
-                       })
-                   }
+                         `;
+          })}
                  
                          <tr>
                            <td style="
@@ -177,9 +211,7 @@ export class flightItineraryTemplate {
                        </tbody>
                      </table>
         
-    ${await this.footer.Template().then((res)=>{
-      return res
-    })}
+    ${this.footer.Template(businessData)}
     </div>
     `;
   };

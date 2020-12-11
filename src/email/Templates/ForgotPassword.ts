@@ -1,21 +1,19 @@
-
-import { Injectable } from '@nestjs/common'
+import { Injectable } from '@nestjs/common';
 import { footer } from './Footer';
 import { header } from './Header';
 
 @Injectable()
-export class ForgetPassword{
-  constructor( private header:header, private footer:footer){}
- Template = async (data)=> {
-  const { Email, FirstName, LastName,Mobile,loginurl,Password ,role} = data;
-  return`<div>
-  ${this.header.Template()}
-    <b>Dear ${FirstName} ${LastName}(${role}),</b><br/><br/>Please find your forgot password information.<br/><br/>Login Url : <b>${loginurl}</b> <br/>Email Id: <b> ${Email}</b> <br/>Password: <b> ${Password}</b> 
-    ${await this.footer.Template().then((res)=>{
-     
-      return res
-    })}
+export class ForgetPassword {
+  constructor(private header: header, private footer: footer) {}
+  Template = (businessData, reqData) => {
+    const { FirstName, LastName, loginurl } = reqData;
+    return `<div>
+  ${this.header.Template(businessData)}
+    <b>Dear ${FirstName} ${LastName},</b><br/><br/>We have found  forgot password Request for your accoount on Our  system if this was not you please change your Password .<br/><br/>Login Url : <b> <a href='${
+      businessData.baseUrl
+    }'>Click here</a></b> <br/>Dated: <b> ${new Date()}</b> <br/>
+    ${this.footer.Template(businessData)}
     </div>
-    ` ;
-};
+    `;
+  };
 }

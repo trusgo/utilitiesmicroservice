@@ -1,15 +1,15 @@
-import { Injectable } from "@nestjs/common";
-import { footer } from "./Footer";
-import { header } from "./Header";
+import { Injectable } from '@nestjs/common';
+import { footer } from './Footer';
+import { header } from './Header';
 
 @Injectable()
 export class paymentCancelMailTemplate {
-    constructor( private header:header, private footer:footer){}
-  Template = async (data) => {
-    const { FirstName, LastName, address,Email,Mobile,password } = data;
+  constructor(private header: header, private footer: footer) {}
+  Template = (businessData, data) => {
+    const { FirstName, LastName, address, Email, Mobile, password } = data;
     return `
     <div>
-    ${this.header.Template()}
+    ${this.header.Template(businessData)}
     <table style="max-width:600px;margin:auto;border-spacing:0;padding:4px;border-radius:16px;overflow:hidden" align="center" border="0" cellpadding="0" cellspacing="0" width="100%">
     <tbody>
         <tr>
@@ -90,11 +90,8 @@ export class paymentCancelMailTemplate {
         </tr>
     </tbody>
 </table>
-${await this.footer.Template().then((res)=>{
-  
-    return res
-  })}
+${this.footer.Template(businessData)}
 </div>
-` ;
+`;
   };
 }

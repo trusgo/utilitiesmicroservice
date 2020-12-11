@@ -1,14 +1,36 @@
-import { Injectable } from "@nestjs/common";
-import { footer } from "./Footer";
-import { header } from "./Header";
+import { Injectable } from '@nestjs/common';
+import { footer } from './Footer';
+import { header } from './Header';
 
 @Injectable()
 export class busInoviceTemplate {
-    constructor( private header:header, private footer:footer){}
-  Template = (data) => {
-    const { inoviceNumber, inoviceDate, bookingStatus,pnr,parentName,parentAddress,parentIsd,
-        parentMobile,parentEmail,address, isd,mobile,email,ticketNumber,sources,destination,
-    opName,paxName,actualFare,tax,inovicetaxes,netfare,agentBreakUp} = data;
+  constructor(private header: header, private footer: footer) {}
+  Template = (businessData, data) => {
+    const {
+      inoviceNumber,
+      inoviceDate,
+      bookingStatus,
+      pnr,
+      parentName,
+      parentAddress,
+      parentIsd,
+      parentMobile,
+      parentEmail,
+      address,
+      isd,
+      mobile,
+      email,
+      ticketNumber,
+      sources,
+      destination,
+      opName,
+      paxName,
+      actualFare,
+      tax,
+      inovicetaxes,
+      netfare,
+      agentBreakUp,
+    } = data;
     return `
     <!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
     <html xmlns="http://www.w3.org/1999/xhtml">
@@ -17,7 +39,7 @@ export class busInoviceTemplate {
     </head>
     <body>
     <div>
-    ${this.header.Template()}
+    ${this.header.Template(businessData)}
         <table align="center" style="border-collapse:collapse;border:1px solid #d7dadb;width:90%">
             <tr>
                 <td>
@@ -302,10 +324,10 @@ export class busInoviceTemplate {
                 </td>
             </tr>
         </table>
-        ${this.footer.Template()}
+        ${this.footer.Template(businessData)}
     </div>
     </body>
     </html>
-` ;
+`;
   };
 }

@@ -1,21 +1,17 @@
-import { Injectable } from "@nestjs/common";
-import { footer } from "./Footer";
-import { header } from "./Header";
-
+import { Injectable } from '@nestjs/common';
+import { footer } from './Footer';
+import { header } from './Header';
 
 @Injectable()
 export class CancelRequest {
-  constructor( private header:header, private footer:footer){}
-  Template = async (data) => {
-    const { referenceNo, FirstName, LastName} = data;
+  constructor(private header: header, private footer: footer) {}
+  Template = (businessData, data) => {
+    const { referenceNo, FirstName, LastName } = data;
     return `
     <div>
-    ${this.header.Template()}
+    ${this.header.Template(businessData)}
     <b>Dear ${FirstName}${LastName},</b><br/><br/>Please cancel the ticket for Reference Number: <b>${referenceNo}</b>.
-    ${await this.footer.Template().then((res)=>{
-     
-      return res
-    })}
-` ;
+    ${this.footer.Template(businessData)})}
+`;
   };
 }

@@ -1,13 +1,12 @@
-
-import { Injectable } from '@nestjs/common'
+import { Injectable } from '@nestjs/common';
 import { footer } from './Footer';
 import { header } from './Header';
 
 @Injectable()
-export class BusTicket{
-  constructor( private header:header, private footer:footer){}
- Template= async (data)=> {
-  return `
+export class BusTicket {
+  constructor(private header: header, private footer: footer) {}
+  Template = (businessData, data) => {
+    return `
      <div
            style="
              border: 1px solid #d9d9d9;
@@ -17,7 +16,7 @@ export class BusTicket{
            "
          >
            <!-- start -->
-           ${this.header.Template()}
+           ${this.header.Template(businessData)}
            <div>
              <p><b>Passenger Contact: </b><span>9492542988</span></p>
              <p><b>Passenger Email: </b><span>mc@gmail.com</span></p>
@@ -159,9 +158,7 @@ export class BusTicket{
                <td style="text-align: right; padding: 10px">N/A</td>
              </tr>
            </table>
-           ${await this.footer.Template().then((res)=>{
-            return res
-          })}
+           ${this.footer.Template(businessData)}
          </div> `;
-};
+  };
 }

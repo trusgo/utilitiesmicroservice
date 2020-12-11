@@ -1,12 +1,12 @@
-import { Injectable } from "@nestjs/common";
-import { footer } from "./Footer";
-import { header } from "./Header";
+import { Injectable } from '@nestjs/common';
+import { footer } from './Footer';
+import { header } from './Header';
 
 @Injectable()
 export class hotelInoviceTemplate {
-    constructor( private header:header, private footer:footer){}
-  Template = (data) => {
-    const { FirstName, LastName, address,Email,Mobile,password } = data;
+  constructor(private header: header, private footer: footer) {}
+  Template = (businessData, data) => {
+    const { FirstName, LastName, address, Email, Mobile, password } = data;
     return `
     <!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
     <html xmlns="http://www.w3.org/1999/xhtml">
@@ -15,7 +15,7 @@ export class hotelInoviceTemplate {
     </head>
     <body>
     <div>
-    ${this.header.Template()}
+    ${this.header.Template(businessData)}
         <table align="center" style="border-collapse:collapse;border:1px solid #d7dadb;width:90%">
             <tr>
                 <td>
@@ -294,10 +294,10 @@ export class hotelInoviceTemplate {
                 </td>
             </tr>
         </table>
-        ${this.footer.Template()}
+        ${this.footer.Template(businessData)}
         </div>
     </body>
     </html>
-` ;
+`;
   };
 }

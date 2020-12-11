@@ -4,15 +4,34 @@ import { Injectable } from '@nestjs/common';
 
 @Injectable()
 export class AirTicket {
-  constructor( private header:header, private footer:footer){}
-  Template = async (data) => {
-    const {edit_url, BookingDetails,FlightDetails,Passanger} = data;
-   
-      const {Email,Mobile,FirstName,LastName,PNR,Status,BookingRefNo,BookedDate,BookedTime}=BookingDetails;
-      const {Source,Destination,DepatureDate,DepatureTime,ArrivalDate,ArrivalTime,Flight,FareType}=FlightDetails;
+  constructor(private header: header, private footer: footer) {}
+  Template = (businessData, data) => {
+    const { edit_url, BookingDetails, FlightDetails, Passanger } = data;
+
+    const {
+      Email,
+      Mobile,
+      FirstName,
+      LastName,
+      PNR,
+      Status,
+      BookingRefNo,
+      BookedDate,
+      BookedTime,
+    } = BookingDetails;
+    const {
+      Source,
+      Destination,
+      DepatureDate,
+      DepatureTime,
+      ArrivalDate,
+      ArrivalTime,
+      Flight,
+      FareType,
+    } = FlightDetails;
     return `
     <div>
-    ${this.header.Template()}
+    ${this.header.Template(businessData)}
     <div>
     <b>Dear ${FirstName} ${LastName},</b>
     <br/>Thank you for Booking Flight through<b>i2Space</b> <br/> We have sended you the FlightTicket which you have Booked for <b>${Flight}</b>
@@ -214,11 +233,9 @@ export class AirTicket {
     <td style="font-family:Arial,Helvetica,sans-serif;color:#ffffff;font-weight:bold;line-height:100%;text-align:center;font-size:11px;letter-spacing:0px;background-color:#333333;padding-top:8px;padding-bottom:8px;border-right:1px solid #cccbcb;border-top:1px solid #333333;border-left:1px solid #cccbcb;width:90px">Fare Type</td>
     <td style="font-family:Arial,Helvetica,sans-serif;color:#ffffff;font-weight:bold;line-height:100%;text-align:center;font-size:11px;letter-spacing:0px;background-color:#333333;padding-top:8px;padding-bottom:8px;border-right:1px solid #cccbcb;border-top:1px solid #333333;border-left:1px solid #cccbcb;border-right:1px solid #333333;border-top-right-radius:10px;width:282px">Add-on Services</td>
     </tr>
-    ${
-      Passanger.map((passanger,index)=>{
-        const {FirstName,LastName,AddOnServices}=passanger;
-        return(
-          `
+    ${Passanger.map((passanger, index) => {
+      const { FirstName, LastName, AddOnServices } = passanger;
+      return `
           <tr>
           <td valign="top" style="color:#000000;font-weight:normal;line-height:100%;letter-spacing:0px;padding-left:10px;padding-top:8px;padding-bottom:8px;font-weight:normal;text-align:center;font-size:10px;padding-left:10px;border:1px solid #cccbcb;padding-right:5px;width:106px">
           <span style="text-transform:uppercase;line-height:1.6">${FirstName} ${LastName}</span></td>
@@ -226,11 +243,8 @@ export class AirTicket {
           <td style="font-family:Arial,Helvetica,sans-serif;color:#000000;font-weight:normal;line-height:100%;text-align:left;font-size:10px;letter-spacing:0px;padding-left:10px;padding-top:8px;padding-bottom:8px;border:1px solid #cccbcb;padding-right:2px;width:84px">    ${FareType}    </td>
           <td style="font-family:Arial,Helvetica,sans-serif;color:#000000;font-weight:normal;line-height:100%;text-align:left;font-size:10px;letter-spacing:0px;padding-left:10px;padding-top:8px;padding-bottom:8px;border:1px solid #cccbcb;padding-right:5px;width:45%;width:287px">  ${AddOnServices} </td>
           </tr>
-          `
-        )
-       
-      })
-    }
+          `;
+    })}
       </tbody>
       </table>
       </td>
@@ -242,9 +256,7 @@ export class AirTicket {
       </tr>
       </tbody>
       </table>
-      ${await this.footer.Template().then((res)=>{
-        return res
-      })}
+      ${this.footer.Template(businessData)}
     </div>`;
   };
 }

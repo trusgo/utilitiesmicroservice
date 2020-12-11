@@ -1,15 +1,14 @@
-import { Injectable } from "@nestjs/common";
-import { footer } from "./Footer";
-import { header } from "./Header";
+import { Injectable } from '@nestjs/common';
+import { footer } from './Footer';
+import { header } from './Header';
 
 @Injectable()
 export class hotelRoomBookingTemplate {
-    constructor( private header:header, private footer:footer){}
-  Template = (data) => {
-    
+  constructor(private header: header, private footer: footer) {}
+  Template = (businessData, data) => {
     return `
     <div>
-    ${this.header.Template()}
+    ${this.header.Template(businessData)}
     <table>
     <tr>
         <td style="padding-top: 0px" align="center" valign="top">
@@ -238,8 +237,8 @@ export class hotelRoomBookingTemplate {
         </td>
     </tr>
 </table>
-${this.footer.Template()}
+${this.footer.Template(businessData)}
 </div>
-` ;
+`;
   };
 }

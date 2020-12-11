@@ -1,18 +1,27 @@
 //const { footer } = require("./Footer");
 //const { header } = require("./Header");
-import { Injectable } from '@nestjs/common'
+import { Injectable } from '@nestjs/common';
 import { footer } from './Footer';
 import { header } from './Header';
 
 @Injectable()
-export class HotelTicket{
-  constructor( private header:header, private footer:footer){}
- Template = async (data) =>{
-  const {edit_url, HotelBookingDetails,HotelDetails,Guest} = data;
-   console.log(Guest)
-  const {Email,Mobile,FirstName,LastName,Status,BookingRefNo,BookedDate,BookedTime}=HotelBookingDetails;
-  const {Hotel,FareType,CheckInDate,CheckOutDate}=HotelDetails;
-  return `
+export class HotelTicket {
+  constructor(private header: header, private footer: footer) {}
+  Template = (businessData, data) => {
+    const { edit_url, HotelBookingDetails, HotelDetails, Guest } = data;
+    console.log(Guest);
+    const {
+      Email,
+      Mobile,
+      FirstName,
+      LastName,
+      Status,
+      BookingRefNo,
+      BookedDate,
+      BookedTime,
+    } = HotelBookingDetails;
+    const { Hotel, FareType, CheckInDate, CheckOutDate } = HotelDetails;
+    return `
      <div
            style="
              border: 1px solid #d9d9d9;
@@ -21,7 +30,7 @@ export class HotelTicket{
              margin: 0 auto;
            "
          >
-         ${this.header.Template()}
+         ${this.header.Template(businessData)}
          <div>
          <b>Dear ${FirstName} ${LastName},</b>
          <br/><br/>Thank you for Booking Hotel through <b>i2Space</b> <br/> We have sended you the HotelTicket which you have Booked for <b>${Hotel}</b>
@@ -213,22 +222,17 @@ export class HotelTicket{
          <td style="font-family:Arial,Helvetica,sans-serif;color:#ffffff;font-weight:bold;line-height:100%;text-align:center;font-size:11px;letter-spacing:0px;background-color:#333333;padding-top:8px;padding-bottom:8px;border-right:1px solid #cccbcb;border-top:1px solid #333333;border-left:1px solid #cccbcb;width:85px">Age</td>
          <td style="font-family:Arial,Helvetica,sans-serif;color:#ffffff;font-weight:bold;line-height:100%;text-align:center;font-size:11px;letter-spacing:0px;background-color:#333333;padding-top:8px;padding-bottom:8px;border-right:1px solid #cccbcb;border-top:1px solid #333333;border-left:1px solid #cccbcb;border-right:1px solid #333333;border-top-right-radius:10px;width:282px">Add-on Services</td>
          </tr>
-         ${
-          Guest.map((guest,index)=>{
-             const {FirstName,LastName,Age,AddOnServices}=guest;
-             return(
-               `
+         ${Guest.map((guest, index) => {
+           const { FirstName, LastName, Age, AddOnServices } = guest;
+           return `
                <tr>
                <td valign="top" style="color:#000000;font-weight:normal;line-height:100%;letter-spacing:0px;padding-left:10px;padding-top:8px;padding-bottom:8px;font-weight:normal;text-align:center;font-size:10px;padding-left:10px;border:1px solid #cccbcb;padding-right:5px;width:106px">
                <span style="text-transform:uppercase;line-height:1.6">${FirstName} ${LastName}</span></td>
                <td style="font-family:'Arial,Helvetica,sans-serif';color:#000000;font-weight:normal;line-height:100%;text-align:left;font-size:10px;letter-spacing:0px;padding-left:10px;padding-top:8px;padding-bottom:8px;border:1px solid #cccbcb;padding-right:5px;width:79px">${Age} </td>
                <td style="font-family:'Arial,Helvetica,sans-serif';color:#000000;font-weight:normal;line-height:100%;text-align:left;font-size:10px;letter-spacing:0px;padding-left:10px;padding-top:8px;padding-bottom:8px;border:1px solid #cccbcb;padding-right:5px;width:45%;width:287px"> ${AddOnServices} </td>
                </tr>
-               `
-             )
-            
-           })
-         }
+               `;
+         })}
            </tbody>
            </table>
            </td>
@@ -240,11 +244,8 @@ export class HotelTicket{
            </tr>
            </tbody>
            </table>
-           ${await this.footer.Template().then((res)=>{
-            
-            return res
-          })}
+           ${this.footer.Template(businessData)}
          </div>
          </div> `;
-};
+  };
 }

@@ -1,14 +1,26 @@
-import { Injectable } from "@nestjs/common";
-import { footer } from "./Footer";
-import { header } from "./Header";
-
+import { Injectable } from '@nestjs/common';
+import { footer } from './Footer';
+import { header } from './Header';
 
 @Injectable()
 export class cancelTicketTemplate {
-    constructor( private header:header, private footer:footer){}
-  Template = async (data) => {
-    const { FirstName, LastName,Email,CancellationID,CancellationStatus ,RefundStatus,CancellationAmount,CancelRequestDateTime,CanceledDateTime,RefundDateTime,
-    RefundAmount,TicketNumber,processedRemark} = data;
+  constructor(private header: header, private footer: footer) {}
+  Template = (businessData, data) => {
+    const {
+      FirstName,
+      LastName,
+      Email,
+      CancellationID,
+      CancellationStatus,
+      RefundStatus,
+      CancellationAmount,
+      CancelRequestDateTime,
+      CanceledDateTime,
+      RefundDateTime,
+      RefundAmount,
+      TicketNumber,
+      processedRemark,
+    } = data;
     return `
     <html>
     <head>
@@ -19,7 +31,7 @@ export class cancelTicketTemplate {
     </head>
     <body>
     <div>
-    ${this.header.Template()}
+    ${this.header.Template(businessData)}
     <b>Dear ${FirstName} ${LastName},</b><br/><br/> We have received your Cancellation Reuest . We have listed  Details below for the cancellation according our policy.
     <form id="PrintTicket">
     <style>
@@ -117,13 +129,10 @@ export class cancelTicketTemplate {
     </table>
     
 </form>
-        ${await this.footer.Template().then((res)=>{
-         
-            return res
-          })}
+        ${this.footer.Template(businessData)}
         </div>
     </body>
     </html>
-` ;
+`;
   };
 }

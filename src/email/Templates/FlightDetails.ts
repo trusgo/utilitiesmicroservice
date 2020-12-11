@@ -4,10 +4,9 @@ import { header } from './Header';
 
 @Injectable()
 export class FlightDetailsTemplete {
-  constructor( private header:header, private footer:footer){}
-  Template = async (data) => {
-
-    const { Email, FirstName, LastName, Mobile,flightDetails} = data;
+  constructor(private header: header, private footer: footer) {}
+  Template = (businessData, data) => {
+    const { Email, FirstName, LastName, Mobile, flightDetails } = data;
 
     return `
     
@@ -20,7 +19,7 @@ export class FlightDetailsTemplete {
      "
    >
      <!-- start -->
-     ${this.header.Template()}
+     ${this.header.Template(businessData)}
      <div>
      <b>Dear ${FirstName} ${LastName},</b>
       <br/><br/>Thank you for Contacting  <b>i2Space</b> <br/> We have List Out the Flight Details below that match to your journey
@@ -38,11 +37,16 @@ export class FlightDetailsTemplete {
            <th style="width: 13%; padding: 3px 2px">Price</th>
            <th style="width: 15%; padding: 3px 2px">preferred Class</th>
          </tr>
-         ${
-            flightDetails.map((flight)=>{
-              
-                const{origin,destination,duration,date,amount,Class}=flight
-                return(`
+         ${flightDetails.map((flight) => {
+           const {
+             origin,
+             destination,
+             duration,
+             date,
+             amount,
+             Class,
+           } = flight;
+           return `
                 <tr style="font-size: 11px">
                 <td style="width:15%; padding: 4px">${origin}</td>
                 <td style="width:15%; padding: 4px">${destination}</td>
@@ -51,17 +55,12 @@ export class FlightDetailsTemplete {
                 <td style="width:13%; padding: 4px">${amount}</td>
                 <td style="width:15%; padding: 4px">${Class}</td>
                 </tr>
-                `
-                )
-            })
-         }
+                `;
+         })}
         
        </table>
       </div>
-      ${await this.footer.Template().then((res)=>{
-        
-        return res
-      })}
+      ${this.footer.Template(businessData)}
    </div> 
   
     `;
