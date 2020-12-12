@@ -8,23 +8,49 @@ export class ticketBlockingTemplate {
   Template = (businessData, data) => {
     const {
       Email,
+      Mobile,
       FirstName,
       LastName,
-      TripType,
-      Source,
-      Destination,
-      Class,
-      DepatureDate,
-      FlightNo,
-      role,
+      bookingDate,
+      flightDetails,
     } = data;
-    let tripType = TripType == 1 ? 'One Way' : 'Return';
+    let rows = '';
+    flightDetails.forEach((flight) => {
+      rows += `
+                <tr>
+                  <td style="padding: 10px">${flight.flightNo}</td>
+                  <td>${flight.origin}</td>
+                  <td>${flight.destination}</td>
+                  <td>${flight.date}</td>
+                </tr>
+                 `;
+    });
     return `
-    ${this.header.Template(businessData)}
-    <div>
-    <b>Dear ${FirstName} ${LastName}(${role}),</b>
-    <br/><br/>the ${Class} ticket have been blocked  for <b>${tripType}</b> Trip for the Flight Number : <b>${FlightNo}</b> onbording from <b>${Source}</b> to <b>${Destination}</b> on Date: <b>${DepatureDate}</b>.
-    </div>
+ ${this.header.Template(businessData)}
+ <div>
+      <div>
+        <b>Dear ${FirstName} ${LastName},</b>
+        <br /><br />Your Ticket For Following Flight Details has Been Blocked<br />
+        We will Update you with Further Notice on the Ticket Updates <br />
+        <b>Booking Date : </b> ${bookingDate}<br />
+        <b>Mobile :  </b> ${Mobile}<br />
+        <br />
+      </div>
+  
+      <table style="text-align: center; width: 100%">
+        <thead>
+          <tr style="color: #fff; background-color: #1890ff; font-size: 14px">
+            <th style="padding: 15px 10px">Flight No</th>
+            <th >Origin</th>
+            <th >Destination</th>
+            <th >Date</th>
+          </tr>
+        </thead>
+        <tbody>
+        ${rows}
+         </tbody>
+      </table>
+    </div> 
     ${this.footer.Template(businessData)}
     `;
   };

@@ -456,10 +456,8 @@ export class EmailService {
     );
     const mail = this.mailerService.sendEmail(
       reqBody.to,
-      reqBody.subject,
+      'Your Ticket is Blocked , Pending For Confirmation',
       htmlData,
-      reqBody.cc,
-      reqBody.bcc,
     );
     return mail;
   }
