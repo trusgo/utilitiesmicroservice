@@ -5,7 +5,6 @@ import { ForgetPassword } from './Templates/ForgotPassword';
 import { HotelTicket } from './Templates/HotelTicket';
 import { PaymentInvoice } from './Templates/Inovice';
 import { RegisterTemplate } from './Templates/RegisterTemplate';
-import { MailerService } from '@nestjs-modules/mailer';
 import { MailReq } from './dto/mailreq.dto';
 import { sendMailService } from './sendMail/sendMail.service';
 import { CancelRequest } from './Templates/CancelRequest';
@@ -158,10 +157,8 @@ export class EmailService {
     );
     const mail = this.mailerService.sendEmail(
       reqBody.to,
-      reqBody.subject,
+      `Payment Invoice ${businessData.companyName}`,
       htmlData,
-      reqBody.cc,
-      reqBody.bcc,
     );
     return mail;
   }
@@ -206,10 +203,8 @@ export class EmailService {
     );
     const mail = this.mailerService.sendEmail(
       reqBody.to,
-      reqBody.subject,
+      'Ticket Cancellation Request Recived',
       htmlData,
-      reqBody.cc,
-      reqBody.bcc,
     );
     return mail;
   }
@@ -399,10 +394,8 @@ export class EmailService {
     );
     const mail = this.mailerService.sendEmail(
       reqBody.to,
-      reqBody.subject,
+      'Flight Ticket Reshedule Request ',
       htmlData,
-      reqBody.cc,
-      reqBody.bcc,
     );
     return mail;
   }
@@ -484,10 +477,8 @@ export class EmailService {
     );
     const mail = this.mailerService.sendEmail(
       reqBody.to,
-      reqBody.subject,
+      'Recived a Flight Ticket Details',
       htmlData,
-      reqBody.cc,
-      reqBody.bcc,
     );
     return mail;
   }

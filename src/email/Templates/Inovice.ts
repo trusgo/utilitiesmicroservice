@@ -10,9 +10,12 @@ export class PaymentInvoice {
     return `
   ${this.header.Template(businessData)}
   <div>
-  <b>Dear ${FirstName} ${LastName},</b>
-  <br/><br/>Thank you for using <b>i2Space</b> service. Please see attached invoice number <b>${InvoiceNumber}</b> for the service you have used <br/><br/>
-  <b>Invoice Overview :</b> <br/><b>Invoice Number :</b>  ${InvoiceNumber} <br/><b>Date :</b>  ${Date} <br/> <b>Amount :</b>  ${Amount}
+  <p><b>Dear ${FirstName} ${LastName},</b>
+  Thankyou for using <b>${businessData.companyName}</b> service.</p>
+  <p>Your Payment is Successfull Please Find payment Details Below</p>
+  <b>Invoice Number :</b>  ${InvoiceNumber} <br/>
+  <b>Date :</b>  ${Date} <br/>
+  <b>Amount :</b>  ${Amount}
   </div>
   ${this.footer.Template(businessData)}
     `;

@@ -49,8 +49,8 @@ export class flightItineraryTemplate {
     return `
     ${this.header.Template(businessData)}
     <div>
-  
-          <table class="m_-5192777040961214706shared-offer-details" cellpadding="0" cellspacing="0" style=" color: #343434; font-family: 'NotoSans', sans-serif; font-size: 12px; width: 80%; background-color: #ffffff; border: 1px solid #e9ebf4; border-radius: 6px; padding: 24px 0px 16px; ">
+      <center>
+          <table  cellpadding="0" cellspacing="0" style="max-width:550px; color: #343434; font-family: 'NotoSans', sans-serif; font-size: 12px; width: 80%; background-color: #ffffff; border: 1px solid #e9ebf4; border-radius: 6px; padding: 24px 0px 16px; ">
           <tbody>
           ${flight.map((fli) => {
             const { origin, destination, segment } = fli;
@@ -210,9 +210,10 @@ export class flightItineraryTemplate {
                          </tr>
                        </tbody>
                      </table>
-        
+                     </center>
+         </div>
     ${this.footer.Template(businessData)}
-    </div>
+   
     `;
   };
 }

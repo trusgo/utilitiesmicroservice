@@ -12,44 +12,71 @@ export class ticketBlockingTemplate {
       FirstName,
       LastName,
       bookingDate,
-      flightDetails,
+      RefNo,
+      Status,
     } = data;
-    let rows = '';
-    flightDetails.forEach((flight) => {
-      rows += `
-                <tr>
-                  <td style="padding: 10px">${flight.flightNo}</td>
-                  <td>${flight.origin}</td>
-                  <td>${flight.destination}</td>
-                  <td>${flight.date}</td>
-                </tr>
-                 `;
-    });
+
     return `
  ${this.header.Template(businessData)}
  <div>
-      <div>
-        <b>Dear ${FirstName} ${LastName},</b>
-        <br /><br />Your Ticket For Following Flight Details has Been Blocked<br />
-        We will Update you with Further Notice on the Ticket Updates <br />
-        <b>Booking Date : </b> ${bookingDate}<br />
-        <b>Mobile :  </b> ${Mobile}<br />
-        <br />
-      </div>
-  
-      <table style="text-align: center; width: 100%">
-        <thead>
-          <tr style="color: #fff; background-color: #1890ff; font-size: 14px">
-            <th style="padding: 15px 10px">Flight No</th>
-            <th >Origin</th>
-            <th >Destination</th>
-            <th >Date</th>
-          </tr>
-        </thead>
-        <tbody>
-        ${rows}
-         </tbody>
-      </table>
+      <p> Dear <b>${FirstName} ${LastName}<b>,</p>
+      <p>Your Ticket For Following Flight Details has Been Blocked and is pending For payment and Confirmation</p>
+      <p>We will Update you with Further Notice on the Ticket Updates</p>
+        <div
+        style="
+          min-width: 200px;
+          max-width: 500px;
+          box-sizing: border-box;
+          border: black solid 1px;
+          padding: 16px;
+        "
+        >
+        <div
+          style="
+            width: 100%;
+            box-sizing: border-box;
+            border-radius: 5px;
+            padding: 16px 8px;
+            border: black solid 1px;
+          "
+        >
+          <h2 style="padding: 0px; margin: 0px; margin-bottom: 8px">
+            Contact Information
+          </h2>
+          <b>${FirstName} ${LastName} </b><br />
+          <b>Email : </b> ${Email}<br />
+          <b>Mobile : </b> ${Mobile}<br />
+        </div>
+        <div
+          style="
+            width: 100%;
+            box-sizing: border-box;
+            border-radius: 5px;
+            padding: 16px;
+            margin-top: 8px;
+            border: black solid 1px;
+          "
+        >
+          <b>Booking Ref No : </b> ${RefNo}<br />
+          <b>Booked On : </b> ${bookingDate}<br />
+          <b>Status: </b> ${Status}<br />
+          <a
+            target="_blank"
+            href="${businessData.baseUrl}/flight_ticket?ref=${RefNo}"
+            style="
+              display: block;
+              margin-top: 16px;
+              padding: 4px 8px;
+              width: max-content;
+              text-decoration: none;
+              background-color: black;
+              color: white;
+              border-radius: 4px;
+            "
+            >Edit / View Booking Details</a
+          >
+        </div>
+        </div>
     </div> 
     ${this.footer.Template(businessData)}
     `;
