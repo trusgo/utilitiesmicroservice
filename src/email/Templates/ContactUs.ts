@@ -21,7 +21,9 @@ export class ContactUsTemplete {
      ${this.header.Template(businessData)}
     <div>
     <b>Dear ${FirstName} ${LastName},</b>
-    <br/><br/>Thank you for Contacting <b>i2Space</b>.<br/><br/> we have received your query on <b> ${Category}</b> for <b>${MessageTopic}</b> .<br/>We understand your requirements, therefore we will Get Back to you shortly with Updated<br/><br/>
+    <br/><br/>Thank you for Contacting <b>${
+      businessData.companyName
+    }</b>.<br/><br/> we have received your query on <b> ${Category}</b> for <b>${MessageTopic}</b> .<br/>We understand your requirements, therefore we will Get Back to you shortly with Updated<br/><br/>
     <b>FirstName :</b>  ${FirstName}<br/><b>LastName :</b>  ${LastName}<br/><b>Mobile :</b>  ${Mobile}<br/><b>Email :</b>  ${Email}<br/><b>Order Number:</b>  ${OrderNo}<br/><b>Depature Date:</b>  ${DepatureDate}<br/><b>Message:</b>  ${Message}
     </div>
     ${this.footer.Template(businessData)}

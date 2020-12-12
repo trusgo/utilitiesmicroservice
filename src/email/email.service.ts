@@ -414,10 +414,8 @@ export class EmailService {
     );
     const mail = this.mailerService.sendEmail(
       reqBody.to,
-      reqBody.subject,
+      'New Contact us Form Enquiry ',
       htmlData,
-      reqBody.cc,
-      reqBody.bcc,
     );
     return mail;
   }
@@ -430,10 +428,8 @@ export class EmailService {
     );
     const mail = this.mailerService.sendEmail(
       reqBody.to,
-      reqBody.subject,
+      `New Flight Enquiry on ${businessData.companyName}`,
       htmlData,
-      reqBody.cc,
-      reqBody.bcc,
     );
     return mail;
   }
