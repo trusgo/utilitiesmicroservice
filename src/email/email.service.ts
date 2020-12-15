@@ -67,13 +67,13 @@ export class EmailService {
 
   async getAllBusinessData() {
     return {
-      logoUrl: 'http://qktrip.i2space.in/favicon.png',
-      baseUrl: 'http://qktrip.i2space.in',
-      supportEmail: 'info@qktrip.com',
+      logoUrl: 'http://trusgo.i2space.in/favicon.png',
+      baseUrl: 'http://trsugo.i2space.in',
+      supportEmail: 'info@trsusgo.com',
       address: '16-A Mohali phase 8-B',
       mobile: '+91- 8886216947',
-      contactEmail: 'contact@qktrip.com',
-      companyName: 'Qk trip',
+      contactEmail: 'help@trusgo.com',
+      companyName: 'Trusgo',
     };
   }
 
