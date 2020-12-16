@@ -75,12 +75,11 @@ export class EmailService {
     }).then((r)=>{
       return r.data.settings
     })
-    .catch(err=> console.log(err));
+    .catch((err)=>{return err} );
     const BusinessAddress = data.BusinessAddress[0]
     const {Address,PostalCode,CityID,CountryID}=BusinessAddress
     const {CompanyName,Email,MobileNumber,CountryCode} = data.userBusinessDetails
-    // const{ProfilePic}=data.userDetails
-   console.log(process.env.LOGO_URL)
+    
     return {
       logoUrl: process.env.LOGO_URL,
       baseUrl: process.env.BASE_URL,
