@@ -1,4 +1,4 @@
-import { Injectable, HttpStatus } from '@nestjs/common';
+import { Injectable, HttpStatus, HttpService } from '@nestjs/common';
 import { AirTicket } from './Templates/AirTicket';
 import { BusTicket } from './Templates/BusTicket';
 import { ForgetPassword } from './Templates/ForgotPassword';
@@ -63,19 +63,46 @@ export class EmailService {
     private readonly ticketBlockingTemp: ticketBlockingTemplate,
     private readonly ticketRefundTemp: ticketRefundTemplate,
     private readonly flightItineraryTemp: flightItineraryTemplate,
+    private httpService: HttpService
   ) {}
 
+ 
   async getAllBusinessData() {
+    const data= await this.httpService.get('http://156.238.16.26/api/v1/admin/settings/1')
+    .toPromise()
+    .then((res)=>{
+     return res.data
+    }).then((r)=>{
+      return r.data.settings
+    })
+    .catch(err=> console.log(err));
+    const BusinessAddress = data.BusinessAddress[0]
+    const {Address,PostalCode,CityID,CountryID}=BusinessAddress
+    const {CompanyName,Email,MobileNumber,CountryCode} = data.userBusinessDetails
+    // const{ProfilePic}=data.userDetails
+   console.log(process.env.LOGO_URL)
     return {
-      logoUrl: 'http://trusgo.i2space.in/favicon.png',
-      baseUrl: 'http://trsugo.i2space.in',
-      supportEmail: 'info@trsusgo.com',
-      address: '16-A Mohali phase 8-B',
-      mobile: '+91- 8886216947',
-      contactEmail: 'help@trusgo.com',
-      companyName: 'Trusgo',
+      logoUrl: process.env.LOGO_URL,
+      baseUrl: process.env.BASE_URL,
+      supportEmail: Email,
+      address: Address,
+      mobile: `+${CountryCode}- ${MobileNumber}`,
+      contactEmail: Email,
+      companyName: CompanyName,
     };
   }
+
+  // async getAllBusinessData() {
+  //   return {
+  //     logoUrl: 'http://trusgo.i2space.in/favicon.png',
+  //     baseUrl: 'http://trsugo.i2space.in',
+  //     supportEmail: 'info@trsusgo.com',
+  //     address: '16-A Mohali phase 8-B',
+  //     mobile: '+91- 8886216947',
+  //     contactEmail: 'help@trusgo.com',
+  //     companyName: 'Trusgo',
+  //   };
+  // }
 
   async flightTicket(reqBody: MailReq) {
     const businessData = await this.getAllBusinessData();

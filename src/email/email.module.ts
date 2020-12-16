@@ -48,25 +48,15 @@ import 'dotenv/config'
     }),
     MailerModule.forRoot({
       transport: {
-        // host: 'smtp.gmail.com',
         host:process.env.SMTP_HOST,
-        // host:'smtp.sendgrid.net',
-        // port: 465,
         port:process.env.SMTP_PORT,
         ignoreTLS: true,
         secure: true,
-        // auth: {
-        //   user: 'trickytop945@gmail.com',
-        //   pass: 'TOP@asdfghzxcvbn',
-        // },
          auth: {
-          user: process.env.MAIL_USER,
-          pass: process.env.MAIL_PASS,
+          user: process.env.AUTH,
+          pass: process.env.AUTH_TOKEN,
         }
-        // auth:{
-        //   user:'apikey',
-        //   pass:'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'
-        // }
+       
       },
       defaults: {
         from: '"No Reply" <no-reply@localhost>',
