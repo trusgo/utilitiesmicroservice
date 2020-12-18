@@ -433,7 +433,7 @@ export class EmailService {
     );
     const mail = this.mailerService.sendEmail(
       reqBody.to,
-      'New Contact us Form Enquiry ',
+      'Customer Enquiry Details',
       htmlData,
     );
     return mail;
