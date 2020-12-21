@@ -29,6 +29,7 @@ import { FlightDetailsTemplete } from './Templates/FlightDetails';
 import { ticketBlockingTemplate } from './Templates/TicketBlocking';
 import { ticketRefundTemplate } from './Templates/TicketRefund';
 import { flightItineraryTemplate } from './Templates/flightItinerary';
+import {TicketBookingTemplete} from './Templates/TicketBooking'
 import { from } from 'rxjs';
 
 @Injectable()
@@ -63,6 +64,7 @@ export class EmailService {
     private readonly ticketBlockingTemp: ticketBlockingTemplate,
     private readonly ticketRefundTemp: ticketRefundTemplate,
     private readonly flightItineraryTemp: flightItineraryTemplate,
+    private readonly TicketBookingTemp:TicketBookingTemplete,
     private httpService: HttpService
   ) {}
 
@@ -504,6 +506,19 @@ export class EmailService {
     const mail = this.mailerService.sendEmail(
       reqBody.to,
       'Recived a Flight Ticket Details',
+      htmlData,
+    );
+    return mail;
+  }
+  async ticketBooking(reqBody: MailReq) {
+    const businessData = await this.getAllBusinessData();
+    const htmlData = await this.TicketBookingTemp.Template(
+      businessData,
+      reqBody.data,
+    );
+    const mail = this.mailerService.sendEmail(
+      reqBody.to,
+      'Your Ticket is Booked Successfully',
       htmlData,
     );
     return mail;

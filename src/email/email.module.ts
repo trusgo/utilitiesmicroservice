@@ -36,7 +36,10 @@ import { footer } from './Templates/Footer';
 import {ticketBlockingTemplate} from './Templates/TicketBlocking';
 import {ticketRefundTemplate} from './Templates/TicketRefund';
 import {flightItineraryTemplate} from './Templates/flightItinerary'
+import {TicketBookingTemplete} from './Templates/TicketBooking'
 import 'dotenv/config'
+import { timeStamp } from 'console'
+import { getMaxListeners } from 'process'
 
 @Module({
   imports: [
@@ -48,13 +51,19 @@ import 'dotenv/config'
     }),
     MailerModule.forRoot({
       transport: {
-        host:process.env.SMTP_HOST,
-        port:process.env.SMTP_PORT,
+        // host:process.env.SMTP_HOST,
+        host:"smtp.gmail.com",
+        // port:process.env.SMTP_PORT,
+        port:465,
         ignoreTLS: true,
         secure: true,
-         auth: {
-          user: process.env.AUTH,
-          pass: process.env.AUTH_TOKEN,
+        //  auth: {
+        //   user: process.env.AUTH,
+        //   pass: process.env.AUTH_TOKEN,
+        // }
+          auth: {
+          user: process.env.TEMPMAIL_USER,
+          pass: process.env.TEMPMAIL_PASS,
         }
        
       },
@@ -69,7 +78,7 @@ import 'dotenv/config'
     cancelRequestrefNoTemplate,cancelTicketTemplate,changePasswordTemplate,changeTxnPasswordTemplate,
     busInoviceTemplate,feedbackAndComplaintsTemplate,flightSegmentTemplate,groupEnquiryRequestTemplate,hotelInoviceTemplate,
     hotelRoomBookingTemplate,paymentCancelMailTemplate,printTicketTemplate,ticketingSystemtemplate,userActivationTemplate,ResheduleRequestTemplete,
-    ContactUsTemplete,flightEnquiryTemplate,sendMailService,header,footer,FlightDetailsTemplete,ticketBlockingTemplate,ticketRefundTemplate,flightItineraryTemplate]
+    ContactUsTemplete,flightEnquiryTemplate,sendMailService,header,footer,FlightDetailsTemplete,ticketBlockingTemplate,ticketRefundTemplate,flightItineraryTemplate,TicketBookingTemplete]
 })
 export class EmailModule { }
 
