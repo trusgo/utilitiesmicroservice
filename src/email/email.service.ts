@@ -139,15 +139,40 @@ export class EmailService {
     const businessData = await this.getAllBusinessData();
 
     const htmlData = await this.busTickets.Template(businessData, reqBody.data);
-    const mail = this.mailerService.sendEmail(
-      reqBody.to,
-      reqBody.subject,
-      htmlData,
-      reqBody.cc,
-      reqBody.bcc,
-      reqBody.data.attachment,
-    );
-    return mail;
+    // const mail = this.mailerService.sendEmail(
+    //   reqBody.to,
+    //   reqBody.subject,
+    //   htmlData,
+    //   reqBody.cc,
+    //   reqBody.bcc,
+    //   reqBody.data.attachment,
+    // );
+    // return mail;
+    var Busfares= 0
+    var BusserviceTax =0
+    var BusserviceCharge =0
+    console.log(reqBody.data.passengerInfo)
+    const pass= reqBody.data.passengerInfo.map((passinfo)=>{
+      Busfares+= parseInt(passinfo.fares,10)
+        BusserviceTax+=parseInt(passinfo.serviceTax,10)
+        BusserviceCharge+=parseInt(passinfo.serviceCharge,10)
+
+    })
+   
+    const TempID=process.env.BUSTICKET_TEMP_ID
+    const reqObj={
+         header:{
+          logoUrl:process.env.LOGO_URL
+         },
+         businessdetails:businessData,
+         reqBody: {...reqBody.data,fares:Busfares,serviceTax:BusserviceTax,serviceCharge:BusserviceCharge}
+    }
+   
+    const mail = await this.mailerService.sengridMil(reqBody.to,TempID,reqObj)
+    return {
+      status:200,
+      message:"success"
+    };
   }
   async forgetPassword(reqBody: MailReq) {
     const businessData = await this.getAllBusinessData();
