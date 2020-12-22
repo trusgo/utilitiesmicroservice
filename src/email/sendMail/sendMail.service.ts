@@ -1,9 +1,10 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable,HttpService } from '@nestjs/common';
 import { MailerService } from '@nestjs-modules/mailer';
-
+import { header } from '../Templates/Header';
+// import {MailService} from '@sendgrid/mail'
 @Injectable()
 export class sendMailService {
-  constructor(private readonly mailerService: MailerService) {}
+  constructor(private readonly mailerService: MailerService, private readonly httpservice:HttpService) {}
 
   async sendEmail(
     to: string,
@@ -38,6 +39,42 @@ export class sendMailService {
       return {
         status: 202,
         erro: e,
+        message: 'Error Sending Email',
+      };
+    }
+  }
+  async sengridMil(to:string,TempID:string,ReqBody:any){
+    const req ={
+      from:{
+          email:process.env.MAIL_USER
+      },
+      personalizations:[{
+           to:[
+               {
+                 email:to
+              }
+          ],
+           dynamic_template_data:ReqBody
+      }   
+      ],
+      template_id:TempID
+  }
+  const postheader = {
+    'Content-Type':'application/json',
+    'Accept':'application/json',
+     'Authorization':'Bearer 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'
+  }
+  // const requestOptions={
+  //   headers: new Headers(postheader)
+  // }
+    try{
+       const respone = await this.httpservice.post("https://api.sendgrid.com/v3/mail/send",req,{headers:postheader}).toPromise()
+       return { ...respone, status: 200 };
+    }
+    catch(error){
+      return {
+        status: 202,
+        erro: error,
         message: 'Error Sending Email',
       };
     }
