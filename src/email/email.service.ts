@@ -511,12 +511,26 @@ export class EmailService {
       businessData,
       reqBody.data,
     );
-    const mail = this.mailerService.sendEmail(
-      reqBody.to,
-      `New Flight Enquiry on ${businessData.companyName}`,
-      htmlData,
-    );
-    return mail;
+    // const mail = this.mailerService.sendEmail(
+    //   reqBody.to,
+    //   `New Flight Enquiry on ${businessData.companyName}`,
+    //   htmlData,
+    // );
+    // return mail;
+    let Trip= reqBody.data.TripType == 1 ? 'One Way' : 'Return';
+    const TempID=process.env.FLIGHTENQUIRY_TEMP_ID
+    const reqObj={
+         header:{
+          logoUrl:process.env.LOGO_URL
+         },
+         businessdetails:businessData,
+         reqBody: {...reqBody.data,TripTypeName:Trip}
+    }
+    const mail = await this.mailerService.sengridMil(reqBody.to,TempID,reqObj)
+    return {
+      status:200,
+      message:"success"
+    };
   }
   async flightDetails(reqBody: MailReq) {
     const businessData = await this.getAllBusinessData();
