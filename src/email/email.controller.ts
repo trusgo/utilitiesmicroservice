@@ -160,5 +160,10 @@ export class EmailController {
 
     return await this.emailService.busBooking(reqBody)
   }
+  @MessagePattern({ cmd: 'subscribe' })
+  async subscribe(reqBody: MailReq) {
+     
+    return await this.emailService.subscribe(reqBody)
+  }
 }
 

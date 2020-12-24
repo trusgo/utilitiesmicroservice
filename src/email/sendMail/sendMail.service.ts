@@ -43,7 +43,7 @@ export class sendMailService {
       };
     }
   }
-  async sengridMil(to:string,TempID:string,ReqBody:any){
+  async sendGridEMail(to:string,TempID:string,ReqBody:any){
     const req ={
       from:{
           email:process.env.MAIL_USER
@@ -62,13 +62,11 @@ export class sendMailService {
   const postheader = {
     'Content-Type':'application/json',
     'Accept':'application/json',
-     'Authorization':'Bearer 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'
+    'Authorization':`Bearer ${process.env.SENDGRID_TOKEN}`
   }
-  // const requestOptions={
-  //   headers: new Headers(postheader)
-  // }
+
     try{
-       const respone = await this.httpservice.post("https://api.sendgrid.com/v3/mail/send",req,{headers:postheader}).toPromise()
+       const respone = await this.httpservice.post(process.env.SENDGRID_EMAIL_URL,req,{headers:postheader}).toPromise()
        return { ...respone, status: 200 };
     }
     catch(error){

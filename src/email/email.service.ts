@@ -108,14 +108,28 @@ export class EmailService {
   async flightTicket(reqBody: MailReq) {
     const businessData = await this.getAllBusinessData();
 
-    const htmlData = this.airTicket.Template(businessData, reqBody.data);
-    const mail = this.mailerService.sendEmail(
-      reqBody.to,
-      'Flight Ticket Recived',
-      htmlData,
-      reqBody.data.attachment,
-    );
-    return mail;
+    // const htmlData = this.airTicket.Template(businessData, reqBody.data);
+    // const mail = this.mailerService.sendEmail(
+    //   reqBody.to,
+    //   'Flight Ticket Recived',
+    //   htmlData,
+    //   reqBody.data.attachment,
+    // );
+    // return mail;
+   
+    const TempID=process.env.AIRTICKET_TEMP_ID
+    const reqObj={
+         header:{
+          logoUrl:process.env.LOGO_URL
+         },
+         businessdetails:businessData,
+         reqBody: reqBody.data
+    }
+    const mail = await this.mailerService.sendGridEMail(reqBody.to,TempID,reqObj)
+    return {
+      status:200,
+      message:"success"
+    };
   }
 
   async hotelTicket(reqBody: MailReq) {
@@ -168,7 +182,7 @@ export class EmailService {
          reqBody: {...reqBody.data,fares:Busfares,serviceTax:BusserviceTax,serviceCharge:BusserviceCharge}
     }
    
-    const mail = await this.mailerService.sengridMil(reqBody.to,TempID,reqObj)
+    const mail = await this.mailerService.sendGridEMail(reqBody.to,TempID,reqObj)
     return {
       status:200,
       message:"success"
@@ -189,7 +203,7 @@ export class EmailService {
   }
   async registration(reqBody: MailReq) {
     const businessData = await this.getAllBusinessData();
-        // const data = await this.mailerService.sengridMil();
+        // const data = await this.mailerService.sendGridEMail();
        
     const htmlData = await this.registerTem.Template(
       businessData,
@@ -269,7 +283,7 @@ export class EmailService {
          businessdetails:businessData,
          reqBody: reqBody.data
     }
-    const mail = await this.mailerService.sengridMil(reqBody.to,TempID,reqObj)
+    const mail = await this.mailerService.sendGridEMail(reqBody.to,TempID,reqObj)
     return {
       status:200,
       message:"success"
@@ -473,7 +487,7 @@ export class EmailService {
          businessdetails:businessData,
          reqBody: reqBody.data
     }
-    const mail = await this.mailerService.sengridMil(reqBody.to,TempID,reqObj)
+    const mail = await this.mailerService.sendGridEMail(reqBody.to,TempID,reqObj)
     return {
       status:200,
       message:"success"
@@ -498,7 +512,7 @@ export class EmailService {
          businessdetails:businessData,
          reqBody: reqBody.data
     }
-    const mail = await this.mailerService.sengridMil(reqBody.to,TempID,reqObj)
+    const mail = await this.mailerService.sendGridEMail(reqBody.to,TempID,reqObj)
     return {
       status:200,
       message:"success"
@@ -526,7 +540,7 @@ export class EmailService {
          businessdetails:businessData,
          reqBody: {...reqBody.data,TripTypeName:Trip}
     }
-    const mail = await this.mailerService.sengridMil(reqBody.to,TempID,reqObj)
+    const mail = await this.mailerService.sendGridEMail(reqBody.to,TempID,reqObj)
     return {
       status:200,
       message:"success"
@@ -538,14 +552,27 @@ export class EmailService {
       businessData,
       reqBody.data,
     );
-    const mail = this.mailerService.sendEmail(
-      reqBody.to,
-      reqBody.subject,
-      htmlData,
-      reqBody.cc,
-      reqBody.bcc,
-    );
-    return mail;
+    // const mail = this.mailerService.sendEmail(
+    //   reqBody.to,
+    //   reqBody.subject,
+    //   htmlData,
+    //   reqBody.cc,
+    //   reqBody.bcc,
+    // );
+    // return mail;
+    const TempID=process.env.FLIGHTDETAILS_TEMP_ID
+    const reqObj={
+         header:{
+          logoUrl:process.env.LOGO_URL
+         },
+         businessdetails:businessData,
+         reqBody: reqBody.data
+    }
+    const mail = await this.mailerService.sendGridEMail(reqBody.to,TempID,reqObj)
+    return {
+      status:200,
+      message:"success"
+    };
   }
   async ticketBlocking(reqBody: MailReq) {
     const businessData = await this.getAllBusinessData();
@@ -567,7 +594,7 @@ export class EmailService {
          businessdetails:businessData,
          reqBody: reqBody.data
     }
-    const mail = await this.mailerService.sengridMil(reqBody.to,TempID,reqObj)
+    const mail = await this.mailerService.sendGridEMail(reqBody.to,TempID,reqObj)
     return {
       status:200,
       message:"success"
@@ -621,7 +648,7 @@ export class EmailService {
          businessdetails:businessData,
          reqBody: reqBody.data
     }
-    const mail = await this.mailerService.sengridMil(reqBody.to,TempID,reqObj)
+    const mail = await this.mailerService.sendGridEMail(reqBody.to,TempID,reqObj)
     return {
       status:200,
       message:"success"
@@ -643,7 +670,23 @@ export class EmailService {
          businessdetails:businessData,
          reqBody: reqBody.data
     }
-    const mail = await this.mailerService.sengridMil(reqBody.to,TempID,reqObj)
+    const mail = await this.mailerService.sendGridEMail(reqBody.to,TempID,reqObj)
+    return {
+      status:200,
+      message:"success"
+    };
+  }
+  async subscribe(reqBody: MailReq) {
+    const businessData = await this.getAllBusinessData();
+    const TempID=process.env.SUBSCRIBE_TEMP_ID
+    const reqObj={
+         header:{
+          logoUrl:process.env.LOGO_URL
+         },
+         businessdetails:businessData,
+         reqBody: reqBody.data
+    }
+    const mail = await this.mailerService.sendGridEMail(reqBody.data.Email,TempID,reqObj)
     return {
       status:200,
       message:"success"
