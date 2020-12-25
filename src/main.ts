@@ -1,3 +1,4 @@
+require('dotenv').config({ path: '.env' })
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import {
@@ -7,7 +8,7 @@ import {
 } from '@nestjs/microservices';
 import 'dotenv/config';
 
-const PORT: number = Number(process.env.PORT) || 8809;
+const PORT: number = parseInt(process.env.PORT, 10)
 
 const microserviceClientOptions: ClientOptions = {
   transport: Transport.TCP,
