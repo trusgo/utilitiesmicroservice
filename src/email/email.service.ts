@@ -661,7 +661,7 @@ export class EmailService {
     //   businessData,
     //   reqBody.data,
     // );
-
+        
     const TempID=process.env.BUSBOOKING_TEMP_ID
     const reqObj={
          header:{
