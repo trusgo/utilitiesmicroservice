@@ -2,6 +2,8 @@
 /dist
 /node_modules
 /path to npmrc folder
+*.env
+.env
 # Logs
 logs
 *.log
