@@ -81,4 +81,13 @@ export class SMSService{
        }
        return this.sendsmsservice.sendSMS(send)
     }
+    async LoginSMS(reqBody){
+        const send= {
+            From:"TFACTR",
+            To:reqBody.mobile,
+            TemplateName:process.env.LOGIN_SMS_TEMP,
+            VAR1:reqBody.data.mobile
+        }
+        return this.sendsmsservice.sendSMS(send)
+     }
 }

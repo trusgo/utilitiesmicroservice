@@ -23,4 +23,8 @@ export class SMSController{
    async busCancel(reqBody:smsDto){
          return await this.smsservice.busCancel(reqBody)
    }
+   @MessagePattern({cmd:'LoginSMS'})
+   async LoginSMS(reqBody:smsDto){
+         return await this.smsservice.LoginSMS(reqBody)
+   }
 }
