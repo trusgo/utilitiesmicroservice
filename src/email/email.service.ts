@@ -587,6 +587,7 @@ export class EmailService {
     // );
     // return mail;
     const TempID=process.env.BLOCKING_TEMP_ID
+    const adminEmail= process.env.ADMIN_EMAIL
     const reqObj={
          header:{
           logoUrl:process.env.LOGO_URL
@@ -594,7 +595,7 @@ export class EmailService {
          businessdetails:businessData,
          reqBody: reqBody.data
     }
-    const mail = await this.mailerService.sendGridEMail(reqBody.to,TempID,reqObj)
+    const mail = await this.mailerService.sendGridEMail(adminEmail,TempID,reqObj)
     return {
       status:200,
       message:"success"
