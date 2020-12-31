@@ -85,6 +85,7 @@ export class EmailService {
     return {
       logoUrl: process.env.LOGO_URL,
       baseUrl: process.env.BASE_URL,
+      domainurl:process.env.Domain_URL,
       supportEmail: Email,
       address: Address,
       mobile: `+${CountryCode}- ${MobileNumber}`,
