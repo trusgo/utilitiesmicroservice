@@ -78,16 +78,16 @@ export class EmailService {
       return r.data.settings
     })
     .catch((err)=>{return err} );
-    const BusinessAddress = data.BusinessAddress[0]
-    const {Address,PostalCode,CityID,CountryID}=BusinessAddress
-    const {CompanyName,Email,MobileNumber,CountryCode} = data.userBusinessDetails
+    const BusinessAddress = data.BusinessAddress[0].Address
     
+    // const {Address='',PostalCode,CityID,CountryID}=BusinessAddress
+    const {CompanyName='',Email='',MobileNumber='',CountryCode=''} = data.userBusinessDetails
     return {
       logoUrl: process.env.LOGO_URL,
       baseUrl: process.env.BASE_URL,
       domainurl:process.env.Domain_URL,
       supportEmail: Email,
-      address: Address,
+      address: BusinessAddress!=undefined?BusinessAddress:'',
       mobile: `+${CountryCode}- ${MobileNumber}`,
       contactEmail: Email,
       companyName: CompanyName,
