@@ -160,6 +160,16 @@ export class EmailController {
 
     return await this.emailService.busBooking(reqBody)
   }
+  @MessagePattern({ cmd: 'busBookingFailed' })
+  async busBookingFailed(reqBody: MailReq) {
+
+    return await this.emailService.busBookingFailed(reqBody)
+  }
+  @MessagePattern({ cmd: 'airBookingFailed' })
+  async AirBookingFailed(reqBody: MailReq) {
+
+    return await this.emailService.AirBookingFailed(reqBody)
+  }
   @MessagePattern({ cmd: 'subscribe' })
   async subscribe(reqBody: MailReq) {
      

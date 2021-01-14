@@ -78,16 +78,19 @@ export class EmailService {
       return r.data.settings
     })
     .catch((err)=>{return err} );
-    const BusinessAddress = data.BusinessAddress[0].Address
-    
+    const BusinessAddress = data.BusinessAddress[0]
+    let Address =''
+    if(BusinessAddress!=undefined){
+      Address=data.BusinessAddress[0].Address
+    }
     // const {Address='',PostalCode,CityID,CountryID}=BusinessAddress
     const {CompanyName='',Email='',MobileNumber='',CountryCode=''} = data.userBusinessDetails
     return {
       logoUrl: process.env.LOGO_URL,
       baseUrl: process.env.BASE_URL,
-      domainurl:process.env.Domain_URL,
+      domainurl:process.env.DOMAIN_URL,
       supportEmail: Email,
-      address: BusinessAddress!=undefined?BusinessAddress:'',
+      address: Address,
       mobile: `+${CountryCode}- ${MobileNumber}`,
       contactEmail: Email,
       companyName: CompanyName,
@@ -664,6 +667,40 @@ export class EmailService {
     //   reqBody.data,
     // );
         
+    const TempID=process.env.BUSBOOKING_TEMP_ID
+    const reqObj={
+         header:{
+          logoUrl:process.env.LOGO_URL
+         },
+         businessdetails:businessData,
+         reqBody: reqBody.data
+    }
+    const mail = await this.mailerService.sendGridEMail(reqBody.to,TempID,reqObj)
+    return {
+      status:200,
+      message:"success"
+    };
+  }
+  async busBookingFailed(reqBody: MailReq){
+    const businessData = await this.getAllBusinessData();
+   
+    const TempID=process.env.BUSBOOKING_TEMP_ID
+    const reqObj={
+         header:{
+          logoUrl:process.env.LOGO_URL
+         },
+         businessdetails:businessData,
+         reqBody: reqBody.data
+    }
+    const mail = await this.mailerService.sendGridEMail(reqBody.to,TempID,reqObj)
+    return {
+      status:200,
+      message:"success"
+    };
+  }
+  async AirBookingFailed(reqBody: MailReq){
+    const businessData = await this.getAllBusinessData();
+   
     const TempID=process.env.BUSBOOKING_TEMP_ID
     const reqObj={
          header:{
