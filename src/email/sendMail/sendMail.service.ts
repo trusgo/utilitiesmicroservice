@@ -59,7 +59,7 @@ export class sendMailService {
       ],
       template_id:TempID
   }
-  console.log(ReqBody.reqBody)
+  // console.log(ReqBody.reqBody)
   const postheader = {
     'Content-Type':'application/json',
     'Accept':'application/json',
