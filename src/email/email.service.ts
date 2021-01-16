@@ -353,18 +353,25 @@ export class EmailService {
   }
   async flightSegment(reqBody: MailReq) {
     const businessData = await this.getAllBusinessData();
-    const htmlData = await this.flightSegmentTemp.Template(
+    const htmlData = await this.ContactUsTemp.Template(
       businessData,
       reqBody.data,
     );
-    const mail = this.mailerService.sendEmail(
-      reqBody.to,
-      reqBody.subject,
-      htmlData,
-      reqBody.cc,
-      reqBody.bcc,
-    );
-    return mail;
+   
+    const TempID=process.env.FLIGHTSEGMENT_TEMP_ID
+    const reqObj={
+         header:{
+          logoUrl:process.env.LOGO_URL
+         },
+         businessdetails:businessData,
+         reqBody: reqBody.data
+    }
+  
+    const mail = await this.mailerService.sendGridEMail(reqBody.to,TempID,reqObj)
+    return {
+      status:200,
+      message:"success"
+    };
   }
   async groupEnquiryRequest(reqBody: MailReq) {
     const businessData = await this.getAllBusinessData();
