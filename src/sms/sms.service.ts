@@ -14,7 +14,7 @@ export class SMSService{
     async flightDetails(reqBody:any){
       // const htmlData = await this.flightDetailsSMSTemp.Template(reqBody.data)
       const send= {
-        From:"TFACTR",
+        From:process.env.SENDER_ID,
         To:reqBody.mobile,
         TemplateName:process.env.FLIGHTDETAILS_SMS_TEMP,
         VAR1:reqBody.data.FirstName + reqBody.data.LastName,
@@ -30,7 +30,7 @@ export class SMSService{
     async flightBooking(reqBody:any){
         //const htmlData = this.FlightBookingSMSTemp.Template(reqBody.data)
           const send= {
-            From:"TFACTR",
+            From:process.env.SENDER_ID,
             To:reqBody.mobile,
             TemplateName:process.env.AIRBOOK_SMS_TEMP,
             VAR1:"",
@@ -50,7 +50,7 @@ export class SMSService{
         let Seat=`${reqBody.data.SeatNos.split(",")}`
         const Date= reqBody.data.JourneyDate + reqBody.data.DepartureTime
         const send= {
-            From:"TFACTR",
+            From:process.env.SENDER_ID,
             To:reqBody.mobile,
             TemplateName:process.env.BUSBOOK_SMS_TEMP,
             VAR1:reqBody.data.pnr,
@@ -68,7 +68,7 @@ export class SMSService{
        let Seat=`${reqBody.data.SeatNos.split(",")}`
        const Date= reqBody.data.JourneyDate + reqBody.data.DepartureTime
        const send= {
-           From:"TFACTR",
+           From:process.env.SENDER_ID,
            To:reqBody.mobile,
            TemplateName:process.env.BUSCANCEL_SMS,
            VAR1:reqBody.data.pnr,
@@ -83,7 +83,7 @@ export class SMSService{
     }
     async LoginSMS(reqBody){
         const send= {
-            From:"TFACTR",
+            From:process.env.SENDER_ID,
             To:reqBody.mobile,
             TemplateName:process.env.LOGIN_SMS_TEMP,
             VAR1:reqBody.data.mobile
