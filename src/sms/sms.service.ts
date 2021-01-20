@@ -53,7 +53,7 @@ export class SMSService{
             From:process.env.SENDER_ID,
             To:reqBody.mobile,
             TemplateName:process.env.BUSBOOK_SMS_TEMP,
-            VAR1:reqBody.data.pnr,
+            VAR1:reqBody.data.ProviderBookingId,
             VAR2:reqBody.data.GuestName,
             VAR3:reqBody.data.SourceName,
             VAR4:reqBody.data.DestinationName,
