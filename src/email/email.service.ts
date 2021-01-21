@@ -353,10 +353,10 @@ export class EmailService {
   }
   async flightSegment(reqBody: MailReq) {
     const businessData = await this.getAllBusinessData();
-    const htmlData = await this.ContactUsTemp.Template(
-      businessData,
-      reqBody.data,
-    );
+    // const htmlData = await this.ContactUsTemp.Template(
+    //   businessData,
+    //   reqBody.data,
+    // );
    
     const TempID=process.env.FLIGHTSEGMENT_TEMP_ID
     const reqObj={
@@ -433,20 +433,63 @@ export class EmailService {
     );
     return mail;
   }
-  async printTicket(reqBody: MailReq) {
+  async AirTicket(reqBody: MailReq) {
+    let bookingDate = reqBody.data.bookingDate
+   
+    const oneWayflightFare= reqBody.data.oneWayflightFare
+    const returnflightFare=(reqBody.data.returnflightFare != undefined)?reqBody.data.returnflightFare:{ baseFare:0,tax:0,
+      otherCharges: 0,
+      totalFare: 0}
+      const conviencefee=reqBody.data.convienenceData.type==0?((parseFloat(reqBody.data.convienenceData.amount)/100)*(oneWayflightFare.baseFare + returnflightFare.baseFare)):parseFloat(reqBody.data.convienenceData.amount)
+    const Fare={
+      baseFare:oneWayflightFare.baseFare + (returnflightFare.baseFare),
+      tax: oneWayflightFare.tax + (returnflightFare.tax),
+      otherCharges: oneWayflightFare.otherCharges + (returnflightFare.otherCharges),
+      Discount:reqBody.data.promoData.Discount,
+      ConveneienceFee: conviencefee.toFixed(2),
+      totalFare: oneWayflightFare.totalFare + (returnflightFare.totalFare)+conviencefee,
+    }
+    // console.log(reqBody)
+    const airticket = {
+      id:reqBody.data.id,
+      type:reqBody.data.type,
+      bookingDate:reqBody.data.bookingDate,
+      provider:reqBody.data.provider,
+      tripType:reqBody.data.tripType,
+      fareType:reqBody.data.fareType,
+      pnr:reqBody.data.pnr,
+     BookingStatus:reqBody.data.BookingStatus,
+     pax:reqBody.data.pax,
+     promoData:reqBody.data.promoData,
+     convienenceData: reqBody.data.convienenceData,
+     operatorName: reqBody.data.operatorName,
+     description: reqBody.data.description,
+     pickUpLocation: reqBody.data.pickUpLocation,
+     dropLocation: reqBody.data.dropLocation,
+     guestName: reqBody.data.guestName,
+     guestemaiid: reqBody.data.guestemaiid,
+     guestmobileno: reqBody.data.guestmobileno,
+     promoid: reqBody.data.promoid,
+     passengers: reqBody.data.passengers,
+     Segment:[...reqBody.data.oneWaySegment,...reqBody.data.returnSegment],
+     FlightFare:Fare
+    }
+    // console.log(airticket)
     const businessData = await this.getAllBusinessData();
-    const htmlData = await this.printTicketTemp.Template(
-      businessData,
-      reqBody.data,
-    );
-    const mail = this.mailerService.sendEmail(
-      reqBody.to,
-      reqBody.subject,
-      htmlData,
-      reqBody.cc,
-      reqBody.bcc,
-    );
-    return mail;
+    const TempID=process.env.AIRTICKET_TEMP_ID
+    const reqObj={
+         header:{
+          logoUrl:process.env.LOGO_URL
+         },
+         businessdetails:businessData,
+         reqBody: airticket
+    }
+  
+    const mail = await this.mailerService.sendGridEMail(reqBody.to,TempID,reqObj)
+    return {
+      status:200,
+      message:"success"
+    };
   }
   async ticketingSystem(reqBody: MailReq) {
     const businessData = await this.getAllBusinessData();

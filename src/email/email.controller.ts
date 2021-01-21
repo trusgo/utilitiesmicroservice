@@ -100,10 +100,10 @@ export class EmailController {
 
     return await this.emailService.paymentCancelMail(reqBody)
   }
-  @MessagePattern({ cmd: 'printTicket' })
-  async printTicket(reqBody: MailReq) {
+  @MessagePattern({ cmd: 'AirTicket' })
+  async AirTicket(reqBody: MailReq) {
 
-    return await this.emailService.printTicket(reqBody)
+    return await this.emailService.AirTicket(reqBody)
   }
   @MessagePattern({ cmd: 'ticketingSystem' })
   async ticketingSystem(reqBody: MailReq) {
