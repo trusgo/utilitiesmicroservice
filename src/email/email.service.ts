@@ -155,21 +155,13 @@ export class EmailService {
   }
   async busTicket(reqBody: MailReq) {
     const businessData = await this.getAllBusinessData();
-
-    const htmlData = await this.busTickets.Template(businessData, reqBody.data);
-    // const mail = this.mailerService.sendEmail(
-    //   reqBody.to,
-    //   reqBody.subject,
-    //   htmlData,
-    //   reqBody.cc,
-    //   reqBody.bcc,
-    //   reqBody.data.attachment,
-    // );
-    // return mail;
+    
+    const htmlData = await this.busTickets.Template(reqBody.data.cancellationpolicy);
+   
     var Busfares= 0
     var BusserviceTax =0
     var BusserviceCharge =0
-    console.log(reqBody.data.passengerInfo)
+    
     const pass= reqBody.data.passengerInfo.map((passinfo)=>{
       Busfares+= parseInt(passinfo.fares,10)
         BusserviceTax+=parseInt(passinfo.serviceTax,10)
@@ -183,7 +175,7 @@ export class EmailService {
           logoUrl:process.env.LOGO_URL
          },
          businessdetails:businessData,
-         reqBody: {...reqBody.data,fares:Busfares,serviceTax:BusserviceTax,serviceCharge:BusserviceCharge}
+         reqBody: {...reqBody.data,fares:Busfares,serviceTax:BusserviceTax,serviceCharge:BusserviceCharge,cancellationpolicy:htmlData}
     }
    
     const mail = await this.mailerService.sendGridEMail(reqBody.to,TempID,reqObj)
