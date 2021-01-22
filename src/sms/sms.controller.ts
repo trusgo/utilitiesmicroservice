@@ -27,4 +27,9 @@ export class SMSController{
    async LoginSMS(reqBody:smsDto){
          return await this.smsservice.LoginSMS(reqBody)
    }
+
+   @MessagePattern({cmd:'AirTicket'})
+   async AirTicketSMS(reqBody:smsDto){
+    return await this.smsservice.AirTicket(reqBody)
+   }
 }
