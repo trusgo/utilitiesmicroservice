@@ -90,4 +90,40 @@ export class SMSService{
         }
         return this.sendsmsservice.sendSMS(send)
      }
+
+     async AirTicket(reqBody){
+         const date = reqBody.data.bookingDate
+         const send= {
+            From:process.env.SENDER_ID,
+            To:reqBody.mobile,
+            TemplateName:process.env.AIRTICKET_SMS_TEMP,
+            VAR1:reqBody.data.guestName,
+            VAR2:reqBody.data.id,
+            VAR3:'',
+            VAR4:'',
+            VAR5:'',
+            VAR6:reqBody.data.id,
+            VAR7:reqBody.data.pnr,
+            VAR8:reqBody.data.tripType,
+            VAR9:reqBody.data.pax.adults,
+            VAR10:reqBody.data.pax.childCount,
+            VAR11:reqBody.data.pax.infantCount
+         }
+         return this.sendsmsservice.sendSMS(send)
+     }
+
+     async BsTicket(reqBody){
+              const send={
+                From:process.env.SENDER_ID,
+                To:reqBody.mobile,
+                TemplateName:process.env.BUSBOOK_SMS_TEMP,
+                VAR1:reqBody.data.pnr,
+                VAR2:'',
+                VAR3:reqBody.data.sourcename,
+                VAR4:reqBody.data.destinationname,
+                VAR5:reqBody.data.busTypeName,
+                VAR6:reqBody.data.noOfSeats,VAR7:reqBody.data.collectedFare,
+                VAR8:reqBody.data.journeydate
+              }
+     }
 }
