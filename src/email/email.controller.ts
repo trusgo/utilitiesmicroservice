@@ -21,7 +21,6 @@ export class EmailController {
   }
   @MessagePattern({ cmd: 'busTicket' })
   async busTicket(reqBody: MailReq) {
-
     return await this.emailService.busTicket(reqBody)
   }
   @MessagePattern({ cmd: 'forgetPassword' })
