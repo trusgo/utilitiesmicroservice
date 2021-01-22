@@ -125,5 +125,6 @@ export class SMSService{
                 VAR6:reqBody.data.noOfSeats,VAR7:reqBody.data.collectedFare,
                 VAR8:reqBody.data.journeydate
               }
+              return this.sendsmsservice.sendSMS(send)
      }
 }

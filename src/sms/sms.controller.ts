@@ -32,4 +32,8 @@ export class SMSController{
    async AirTicketSMS(reqBody:smsDto){
     return await this.smsservice.AirTicket(reqBody)
    }
+   @MessagePattern({cmd:'busTicket'})
+   async busTicket(reqBody:smsDto){
+    return await this.smsservice.BsTicket(reqBody)
+   }
 }
