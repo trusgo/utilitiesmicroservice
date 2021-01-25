@@ -30,7 +30,12 @@ export class SMSController{
 
    @MessagePattern({cmd:'AirTicket'})
    async AirTicketSMS(reqBody:smsDto){
-    return await this.smsservice.AirTicket(reqBody)
+         if(reqBody.data.tripType=="TwoWay"){
+            return await this.smsservice.RoundTripAirTicket(reqBody)
+         }else{
+            return await this.smsservice.AirTicket(reqBody)
+         }
+   
    }
    @MessagePattern({cmd:'busTicket'})
    async busTicket(reqBody:smsDto){
