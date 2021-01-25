@@ -19,7 +19,7 @@ export class EmailController {
 
     return await this.emailService.hotelTicket(reqBody)
   }
-  @MessagePattern({ cmd: 'busTicket' })
+  @MessagePattern({ cmd: 'busBookingTicket' })
   async busTicket(reqBody: MailReq) {
     return await this.emailService.busTicket(reqBody)
   }
@@ -99,9 +99,8 @@ export class EmailController {
 
     return await this.emailService.paymentCancelMail(reqBody)
   }
-  @MessagePattern({ cmd: 'AirTicket' })
+  @MessagePattern({ cmd: 'FlightTicket' })
   async AirTicket(reqBody: MailReq) {
-
     return await this.emailService.AirTicket(reqBody)
   }
   @MessagePattern({ cmd: 'ticketingSystem' })

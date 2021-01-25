@@ -158,6 +158,7 @@ export class EmailService {
     
     const htmlData = await this.busTickets.Template(reqBody.data.cancellationpolicy);
    
+     
     var Busfares= 0
     var BusserviceTax =0
     var BusserviceCharge =0
