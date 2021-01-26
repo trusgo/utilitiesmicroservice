@@ -156,7 +156,7 @@ export class EmailService {
   async busTicket(reqBody: MailReq) {
     const businessData = await this.getAllBusinessData();
     
-    const htmlData = await this.busTickets.Template(reqBody.data.cancellationpolicy);
+    const htmlData = await this.busTickets.Template(reqBody.data.cancellationPolicy);
    
     var Busfares= 0
     var BusserviceTax =0
