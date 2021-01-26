@@ -161,21 +161,22 @@ export class EmailService {
     var Busfares= 0
     var BusserviceTax =0
     var BusserviceCharge =0
-    
+    var discount =reqBody.data.promoData.Discount
     const pass= reqBody.data.passengerInfo.map((passinfo)=>{
-      Busfares+= parseInt(passinfo.fares,10)
-        BusserviceTax+=parseInt(passinfo.serviceTax,10)
-        BusserviceCharge+=parseInt(passinfo.serviceCharge,10)
+      Busfares+= parseFloat(passinfo.fares)
+        BusserviceTax+=parseFloat(passinfo.serviceTax)
+        BusserviceCharge+=parseFloat(passinfo.serviceCharge)
 
     })
-   
+    const conviencefee=reqBody.data.convienenceData.type==0?((parseFloat(reqBody.data.convienenceData.amount)/100)*(Busfares)):parseFloat(reqBody.data.convienenceData.amount)
+    var GrandTotal = conviencefee+Busfares+BusserviceCharge+discount +BusserviceTax
     const TempID=process.env.BUSTICKET_TEMP_ID
     const reqObj={
          header:{
           logoUrl:process.env.LOGO_URL
          },
          businessdetails:businessData,
-         reqBody: {...reqBody.data,fares:Busfares,serviceTax:BusserviceTax,serviceCharge:BusserviceCharge,cancellationpolicy:htmlData}
+         reqBody: {...reqBody.data,fares:Busfares,serviceTax:BusserviceTax,serviceCharge:BusserviceCharge,cancellationpolicy:htmlData,Total:GrandTotal,ConvenienceFee:conviencefee,Discount:discount }
     }
    
     const mail = await this.mailerService.sendGridEMail(reqBody.to,TempID,reqObj)
