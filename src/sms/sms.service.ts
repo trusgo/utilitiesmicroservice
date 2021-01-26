@@ -59,7 +59,7 @@ export class SMSService{
             VAR4:reqBody.data.DestinationName,
             VAR5:reqBody.data.Operator,
             VAR6:reqBody.data.BusTypeName,
-            VAR7:Seat,VAR:reqBody.data.Fares,
+            VAR7:Seat,VAR:reqBody.data.GrandTotal,
             VAR9:Date
         }
         return this.sendsmsservice.sendSMS(send)
@@ -159,12 +159,12 @@ export class SMSService{
                 TemplateName:process.env.BUSBOOK_SMS_TEMP,
                 VAR1:reqBody.data.pnr,
                 VAR2:name,
-                VAR3:reqBody.data.sourcename,
-                VAR4:reqBody.data.destinationname, 
+                VAR3:reqBody.data.sourceName,
+                VAR4:reqBody.data.destinationName, 
                 VAR5:reqBody.data.operator,
                 VAR6:reqBody.data.busTypeName,
                 VAR7:seat,VAR8:fares,
-                VAR9:reqBody.data.journeydate
+                VAR9:reqBody.data.JourneyDate
               }
               return this.sendsmsservice.sendSMS(send)
      }
