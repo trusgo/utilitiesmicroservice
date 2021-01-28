@@ -76,7 +76,7 @@ export class EmailController {
   }
   @MessagePattern({ cmd: 'flightSegment' })
   async flightSegment(reqBody: MailReq) {
-
+       console.log("i m in utility")
     return await this.emailService.flightSegment(reqBody)
   }
   @MessagePattern({ cmd: 'groupEnquiryRequest' })
