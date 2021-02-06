@@ -586,8 +586,15 @@ export class EmailService {
     //   htmlData,
     // );
     // return mail;
+    let TempID=""
     let Trip= reqBody.data.TripType == 1 ? 'One Way' : 'Return';
-    const TempID=process.env.FLIGHTENQUIRY_TEMP_ID
+    if(Trip =="One Way"){
+   
+      TempID=process.env.FLIGHTENQUIRY_TEMP_ID
+    }
+   else{
+      TempID=process.env.RETURNFLIGHTENQUIRY_TEMP_ID
+     }
     const reqObj={
          header:{
           logoUrl:process.env.LOGO_URL
