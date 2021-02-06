@@ -351,6 +351,14 @@ export class EmailService {
     //   reqBody.data,
     // );
    
+    reqBody.data.originName = reqBody.data.originName.split(' ')[0]
+    reqBody.data.destiantionName = reqBody.data.destiantionName.split(' ')[0]
+   reqBody.data.flightSegments.forEach(flight =>{
+     flight.departureDateTime = flight.departureDateTime.split('T')[1]
+     flight.arrivalDateTime = flight.arrivalDateTime.split('T')[1]
+   })
+   console.log( reqBody.data)
+
     const TempID=process.env.FLIGHTSEGMENT_TEMP_ID
     const reqObj={
          header:{
