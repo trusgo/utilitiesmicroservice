@@ -59,7 +59,7 @@ export class SMSService{
             VAR4:reqBody.data.DestinationName,
             VAR5:reqBody.data.Operator,
             VAR6:reqBody.data.BusTypeName,
-            VAR7:Seat,VAR:reqBody.data.GrandTotal,
+            VAR7:Seat,VAR8:reqBody.data.GrandTotal,
             VAR9:Date
         }
         return this.sendsmsservice.sendSMS(send)
