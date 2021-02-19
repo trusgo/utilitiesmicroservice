@@ -33,13 +33,12 @@ export class SMSService{
             From:process.env.SENDER_ID,
             To:reqBody.mobile,
             TemplateName:process.env.AIRBOOK_SMS_TEMP,
-            VAR1:"",
-            VAR2:reqBody.data.pnr,
-            VAR3:reqBody.data.flightSegments[0].depatureDateTime,
-            VAR4:reqBody.data.flightSegments[0].origin,
-            VAR5:reqBody.data.flightSegments[0].destination,
-            VAR6:reqBody.data.adult,VAR7:reqBody.data.child,
-            VAR8:reqBody.data.infant
+            VAR1: `${reqBody.data.FirstName}  ${reqBody.data.LastName}` ,
+            VAR2:reqBody.data.RefNo,
+            VAR3:reqBody.data.Status,
+            VAR4:reqBody.data.pnr,
+            VAR5:reqBody.data.JourneyDate,
+            VRR6:reqBody.data.Amount
         }
     
         return this.sendsmsservice.sendSMS(send)
