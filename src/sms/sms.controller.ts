@@ -15,6 +15,10 @@ export class SMSController{
    async flightBooking(reqBody:smsDto){
          return await this.smsservice.flightBooking(reqBody)
    }
+   @MessagePattern({cmd:'CombinedflightBookingSMS'})
+   async CpmbinedflightBooking(reqBody:smsDto){
+         return await this.smsservice.CpmbinedflightBooking(reqBody)
+   }
    @MessagePattern({cmd:'busBookingSMS'})
    async busBookingDetails(reqBody:smsDto){
          return await this.smsservice.busBookingDetails(reqBody)

@@ -43,7 +43,24 @@ export class SMSService {
 
         return this.sendsmsservice.sendSMS(send)
     }
+    async CpmbinedflightBooking(reqBody: any) {
+        //const htmlData = this.FlightBookingSMSTemp.Template(reqBody.data)
+        const send = {
+            From: process.env.SENDER_ID,
+            To: reqBody.mobile,
+            TemplateName: process.env.COMBINEDAIRBOOK_SMS_TEMP,
+            VAR1: `${reqBody.data.FirstName}  ${reqBody.data.LastName}`,
+            VAR2: reqBody.data.RefNo,
+            VAR3: reqBody.data.Status,
+            VAR4: reqBody.data.pnr,
+            VAR5: reqBody.data.returnPnr,
+            VAR6: reqBody.data.JourneyDate,
+            VAR7: reqBody.data.ReturnDate,
+            VAR8: reqBody.data.CombinedAmount
+        }
 
+        return this.sendsmsservice.sendSMS(send)
+    }
     async busBookingDetails(reqBody) {
         //const htmlData= await this.BusBookingDetailsSMSTemp.Template(reqBody.data)
         let Seat = `${reqBody.data.SeatNos.split('~').join(',')}`

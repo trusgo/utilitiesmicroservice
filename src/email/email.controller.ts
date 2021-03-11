@@ -153,6 +153,11 @@ export class EmailController {
 
     return await this.emailService.ticketBooking(reqBody)
   }
+  @MessagePattern({ cmd: 'CombinedticketBooking' })
+  async CombinedticketBooking(reqBody: MailReq) {
+
+    return await this.emailService.CombinedticketBooking(reqBody)
+  }
   @MessagePattern({ cmd: 'busBooking' })
   async busBooking(reqBody: MailReq) {
 

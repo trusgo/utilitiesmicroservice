@@ -718,6 +718,32 @@ export class EmailService {
     };
   }
 
+  async CombinedticketBooking(reqBody: MailReq) {
+    const businessData = await this.getAllBusinessData();
+    const htmlData = await this.TicketBookingTemp.Template(
+      businessData,
+      reqBody.data,
+    );
+    // const mail = this.mailerService.sendEmail(
+    //   reqBody.to,
+    //   'Your Ticket is Booked Successfully',
+    //   htmlData,
+    // );
+    // return mail;
+    const TempID=process.env.COMBINEDBOOKING_TEMP_ID
+    const reqObj={
+         header:{
+          logoUrl:process.env.LOGO_URL
+         },
+         businessdetails:businessData,
+         reqBody: reqBody.data
+    }
+    const mail = await this.mailerService.sendGridEMail(reqBody.to,TempID,reqObj)
+    return {
+      status:200,
+      message:"success"
+    };
+  }
   async busBooking(reqBody: MailReq) {
     const businessData = await this.getAllBusinessData();
     // const htmlData = await this.ContactUsTemp.Template(
