@@ -587,7 +587,7 @@ export class EmailService {
     // );
     // return mail;
     let TempID=""
-    let Trip= reqBody.data.TripType == 1 ? 'One Way' : 'Return';
+    let Trip= reqBody.data.TripType == "false" ? 'One Way' : 'Return';
     if(Trip =="One Way"){
    
       TempID=process.env.FLIGHTENQUIRY_TEMP_ID
