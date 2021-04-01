@@ -815,4 +815,55 @@ export class EmailService {
       message:"success"
     };
   }
+
+  async AirCanCelRequest(reqBody: MailReq) {
+    const businessData = await this.getAllBusinessData();
+    const TempID=process.env.AIRCANCELREQUEST_TEMP_ID
+    const reqObj={
+         header:{
+          logoUrl:process.env.LOGO_URL
+         },
+         businessdetails:businessData,
+         reqBody: reqBody.data
+    }
+    const mail = await this.mailerService.sendGridEMail(reqBody.data.Email,TempID,reqObj)
+    return {
+      status:200,
+      message:"success"
+    };
+  }
+
+  async AirRefundCancellation(reqBody: MailReq) {
+    const businessData = await this.getAllBusinessData();
+    const TempID=process.env.AIRREFUNDCANCELLATION_TEMP_ID
+    const reqObj={
+         header:{
+          logoUrl:process.env.LOGO_URL
+         },
+         businessdetails:businessData,
+         reqBody: reqBody.data
+    }
+    const mail = await this.mailerService.sendGridEMail(reqBody.data.Email,TempID,reqObj)
+    return {
+      status:200,
+      message:"success"
+    };
+  }
+
+  async AirRefundedTicket(reqBody: MailReq) {
+    const businessData = await this.getAllBusinessData();
+    const TempID=process.env.AIRREFUNDEDTICKET_TEMP_ID
+    const reqObj={
+         header:{
+          logoUrl:process.env.LOGO_URL
+         },
+         businessdetails:businessData,
+         reqBody: reqBody.data
+    }
+    const mail = await this.mailerService.sendGridEMail(reqBody.data.Email,TempID,reqObj)
+    return {
+      status:200,
+      message:"success"
+    };
+  }
 }

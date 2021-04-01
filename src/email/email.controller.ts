@@ -178,5 +178,21 @@ export class EmailController {
      
     return await this.emailService.subscribe(reqBody)
   }
+
+  @MessagePattern({ cmd: 'AirCanCelRequest' })
+  async AirCanCelRequest(reqBody: MailReq) {
+     
+    return await this.emailService.AirCanCelRequest(reqBody)
+  }
+  @MessagePattern({ cmd: 'AirRefundCancellation' })
+  async AirRefundCancellation(reqBody: MailReq) {
+     
+    return await this.emailService.AirRefundCancellation(reqBody)
+  }
+  @MessagePattern({ cmd: 'AirRefundedTicket' })
+  async AirRefundedTicket(reqBody: MailReq) {
+     
+    return await this.emailService.AirRefundedTicket(reqBody)
+  }
 }
 
